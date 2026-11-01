@@ -7,8 +7,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
 import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
 
-// The graph library draws on a canvas and needs the browser, so it loads only on the client. The placeholder has
-// the graph's exact size, so nothing moves when it arrives. This whole section mounts only near the screen
+// The graph measures its box before laying out the dots, so it loads only on the client. The placeholder has the
+// graph's exact size, so nothing moves when it arrives. This whole section mounts only near the screen
 // (LazySection.tsx).
 const NetworkGraph = dynamic(() => import("@/components/network/NetworkGraph").then((m) => m.NetworkGraph), {
   ssr: false,
@@ -41,7 +41,6 @@ export function NetworkView({ investigations }: { investigations: Investigation[
         </p>
       </Reveal>
 
-      {/* Opacity only: a transform on the graph or any parent would shift where a drag lands. */}
       <Reveal fadeOnly index={1}>
         <div className="glow mt-6 overflow-hidden rounded-2xl bg-card">
           <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
