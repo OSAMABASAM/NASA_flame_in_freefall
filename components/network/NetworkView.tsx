@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DetailDrawer } from "@/components/detail/DetailDrawer";
 import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
@@ -25,6 +25,7 @@ const other = (l: NetLink, id: string) => (l.source === id ? l.target : l.source
 export function NetworkView({ investigations }: { investigations: Investigation[] }) {
   const [detail, setDetail] = useState<Investigation | null>(null);
   const [hover, setHover] = useState<{ node: NetNode; links: NetLink[] } | null>(null);
+  const onHover = useCallback((node: NetNode | null, links: NetLink[]) => setHover(node ? { node, links } : null), []);
   const list = buildNetwork(investigations);
   // Load and start the graph only when the section comes near the screen.
   const box = useRef<HTMLDivElement>(null);
@@ -66,7 +67,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
             <NetworkGraph
               investigations={investigations}
               onOpen={setDetail}
-              onHover={(node, links) => setHover(node ? { node, links } : null)}
+              onHover={onHover}
             />
           ) : (
             <div className="h-[560px] sm:h-[520px]" />
