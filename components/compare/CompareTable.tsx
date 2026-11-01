@@ -15,17 +15,17 @@ export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; o
       className="m-auto max-h-[90dvh] w-[min(68rem,100%-1rem)] rounded-2xl open:duration-200 open:animate-in open:fade-in open:slide-in-from-bottom-2"
     >
       <p className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
-        <span className="inline-block size-3 shrink-0 rounded-sm border border-primary/30 bg-accent" />
+        <span className="inline-block size-3 shrink-0 rounded-full bg-sun" />
         Tinted rows differ between the investigations. Plain rows are the same.
       </p>
-      <div className="overflow-x-auto rounded-xl border">
+      <div className="overflow-x-auto rounded-2xl bg-card">
         <table className="w-full min-w-[40rem] border-collapse text-sm">
-          <thead className="bg-raised">
+          <thead className="bg-charcoal text-charcoal-foreground">
             <tr>
-              <th className="w-28 border-b sm:w-36 p-3 text-left text-xs font-medium text-muted-foreground">Field</th>
+              <th className="card-label w-28 p-3 text-left text-charcoal-muted sm:w-36">Field</th>
               {invs.map((i) => (
-                <th key={i.id} className="border-b border-l p-3 text-left align-bottom font-semibold">
-                  <span className="block font-mono text-xs font-normal text-accent-foreground">{i.id}</span>
+                <th key={i.id} className="border-l border-charcoal-raised p-3 text-left align-bottom font-bold">
+                  <span className="block font-mono text-xs font-semibold text-fire">{i.id}</span>
                   {i.name}
                 </th>
               ))}
@@ -36,7 +36,7 @@ export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; o
               const diff = differs(f, invs);
               return (
                 <tr key={f.label} data-differs={diff || undefined} className="group border-b">
-                  <th className="p-3 text-left align-top text-xs font-medium text-muted-foreground group-data-differs:text-accent-foreground">
+                  <th className="card-label p-3 text-left align-top text-muted-foreground group-data-differs:bg-accent group-data-differs:text-sun-muted">
                     {f.label}
                   </th>
                   {invs.map((i) => {
@@ -57,7 +57,7 @@ export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; o
               );
             })}
             <tr>
-              <th className="p-3 text-left align-top text-xs font-medium text-muted-foreground">Source</th>
+              <th className="card-label p-3 text-left align-top text-muted-foreground">Source</th>
               {invs.map((i) => (
                 <td key={i.id} className="border-l p-3 align-top text-xs">
                   <Sources urls={i.source_url} />

@@ -33,18 +33,18 @@ export function Modal({
       aria-label={title}
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
-      className={cn("bg-card p-0 text-card-foreground shadow-lift backdrop:bg-black/25 backdrop:backdrop-blur-sm open:backdrop:duration-200 open:backdrop:animate-in open:backdrop:fade-in", className)}
+      className={cn("bg-background p-0 text-card-foreground shadow-lift backdrop:bg-charcoal/40 backdrop:backdrop-blur-sm open:backdrop:duration-200 open:backdrop:animate-in open:backdrop:fade-in", className)}
     >
-      <div className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b bg-card/90 px-4 py-4 sm:px-6 backdrop-blur">
+      <div className="sticky top-0 z-10 flex items-center justify-between gap-4 bg-background/90 px-4 py-4 backdrop-blur sm:px-6">
         <div className="min-w-0">
-          {eyebrow && <p className="font-mono text-xs text-accent-foreground">{eyebrow}</p>}
-          <h2 className="font-semibold leading-snug">{title}</h2>
+          {eyebrow && <p className="pill mb-1.5 bg-charcoal font-mono text-charcoal-foreground">{eyebrow}</p>}
+          <h2 className="text-lg leading-snug font-bold tracking-tight">{title}</h2>
         </div>
-        <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close" className="-mr-2 shrink-0">
+        <Button variant="outline" size="sm" onClick={onClose} aria-label="Close" className="shrink-0">
           Close ✕
         </Button>
       </div>
-      {open && <div className="p-4 sm:p-6">{children}</div>}
+      {open && <div className="px-4 pb-4 sm:px-6 sm:pb-6">{children}</div>}
     </dialog>
   );
 }
