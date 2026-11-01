@@ -19,9 +19,10 @@ Either way, upload the final video to YouTube as unlisted (backup and usually th
 | 38–58 s | Rank view: habitat Moon Base, drag oxygen from 21% to 30%, cards reorder, open "How the score works" | "The ranking is transparent, not a black box. A Moon base will likely run at thirty percent oxygen or more. As I raise it, the experiments reorder, and every card says why." |
 | 58–74 s | Open one card, then compare three investigations | "I can open any investigation to see its fuel, oxygen, airflow and sensors, and compare experiments side by side to spot what changed." |
 | (optional, +8 s) | Scroll to "How the experiments connect", hover SAME (its neighbors light up), click it to open the drawer | "And this map shows how the experiments connect: same fuel, same hardware, same project. Hover one and you see its family; click it for the details." |
+| (optional, +8 s) | Scroll to "Research gaps": the "0 of 20" headline card, then the orange Moon grid with the ringed "Moon base conditions" cell | "And this shows what nobody has tested yet. Orange means no experiment ran at that oxygen, pressure and gravity. A Moon base sits right in that gap, and that is what the next missions will fill." |
 | 74–86 s | Footer: Back on Earth, Coming next: LUCI and FM2 | "It also shows what this research means for fire safety on Earth, and it's ready for partial-gravity data from future missions." |
 | 86–90 s | End card: "Flame in Freefall · Osama Saleh · NASA Space Apps 2026" + live link | "Flame in Freefall. Making the next giant leap a safer one." |
 
-The network scene is optional: keep it only if the official limit allows the extra 8 seconds; otherwise skip it and the timings above stay as they are.
+The network and research gaps scenes are optional: keep each only if the official limit allows the extra 8 seconds; otherwise skip it and the timings above stay as they are. If you keep the gaps scene, the footer line about partial gravity can be shortened.
 
 Facts used in the voice-over come from the challenge text: Apollo 1 (1967), Moon Base oxygen likely 30% or more, LUCI and FM2 partial-gravity experiments.

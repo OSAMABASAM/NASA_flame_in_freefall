@@ -33,6 +33,7 @@
 | `fuel_type` | `solid` ، `liquid` ، `gas` |
 | `habitats` | `spacecraft` ، `station` ، `moon_base` ، `mars_base` ، `rover` |
 | `data_status` | `challenge_text` ، `verified` ، `resources` |
+| `gravity` | `microgravity` ، `moon` ، `mars` (آخر خانة بالجدول. مثلاً LUCI و FM2 = `moon` إذا المصدر بيقول هيك. مش مكتوب؟ خليها فاضية) |
 
 الوحدات: الأكسجين بالنسبة المئوية، الضغط بالـ kPa، سرعة الهواء بالـ cm/s. إذا المصدر بيستخدم psi: اضرب بـ 6.895 عشان تحوّلها لـ kPa.
 

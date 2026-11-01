@@ -25,6 +25,7 @@ export const FIELDS: Field[] = [
   { label: "Sensors", value: (i) => i.sensors.join("; ") },
   { label: "Hardware", value: (i) => i.hardware.join("; ") },
   { label: "What was varied", value: (i) => i.variables },
+  { label: "Gravity", value: (i) => list(i.gravity) },
   { label: "Habitats named by NASA", value: (i) => list(i.habitats) },
   { label: "Back on Earth", value: (i) => i.earth_application },
   { label: "Why it matters", value: (i) => i.relevance_note },
