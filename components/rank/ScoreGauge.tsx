@@ -1,5 +1,4 @@
-
-// Half-circle gauge for the 0 to 100 score. The needle turns with a CSS transform (off with reduced motion).
+// Half-circle gauge for the 0 to 100 score.
 export function ScoreGauge({ score, onSun }: { score: number; onSun?: boolean }) {
   return (
     <div className="flex w-20 shrink-0 flex-col items-center" role="img" aria-label={`Score ${score} of 100`}>

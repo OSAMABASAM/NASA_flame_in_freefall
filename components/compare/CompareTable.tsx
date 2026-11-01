@@ -6,7 +6,6 @@ import type { Investigation } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { EMPTY, FIELDS, differs } from "@/lib/fields";
 
-// Loaded and mounted only when Compare is pressed (see RankView).
 export function CompareTable({ invs, onClose }: { invs: Investigation[]; onClose: () => void }) {
   return (
     <Modal

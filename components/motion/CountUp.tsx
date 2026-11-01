@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 
-// Counts from 0 to the real value as the page appears, in pure CSS (see count-up in globals.css), so it needs
-// no JavaScript and never shows a wrong number. Screen readers get the final value at once.
+// Pure CSS (count-up in globals.css), so it runs before JavaScript loads and never shows a wrong final number.
 export function CountUp({ value }: { value: number }) {
   return (
     <>

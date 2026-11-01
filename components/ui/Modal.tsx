@@ -4,9 +4,8 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Native <dialog>, mounted only while open: it opens on mount. Esc, focus trap, backdrop and putting focus back
-// where it was come from the browser. Close button and backdrop click close it the same native way, then onClose
-// lets the parent unmount it.
+// Native <dialog>, mounted only while open, so the browser handles Esc, the focus trap and returning focus.
+// Every way of closing goes through dialog.close(), whose close event tells the parent to unmount it.
 export function Modal({
   onClose,
   title,

@@ -2,9 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-// Thin orange bar at the top of the page that fills as you scroll, plus the hero parallax (.drift).
-// globals.css runs both on the compositor where scroll-driven animations exist; this script is the fallback
-// for other browsers: one passive scroll listener, at most one update per frame, transforms only.
+// Scroll progress bar and hero parallax. globals.css drives both with scroll-driven animations; this is the
+// fallback for browsers without them.
 export function ScrollEffects() {
   const bar = useRef<HTMLDivElement>(null);
   useEffect(() => {

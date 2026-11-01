@@ -31,7 +31,7 @@ async function openGraph(browser, opts) {
   });
   await page.goto(URL, { waitUntil: "load" });
   await page.locator("#network").scrollIntoViewIfNeeded();
-  await page.waitForFunction(() => window.__networkGraph?.ready);
+  await page.locator("#network svg g[data-id]").first().waitFor();
   await page.locator("#network svg").scrollIntoViewIfNeeded();
   await page.waitForTimeout(300);
   await page.evaluate(() => (window.__longTasks = [])); // count freezes from here on, not page load

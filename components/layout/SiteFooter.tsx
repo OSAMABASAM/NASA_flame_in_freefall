@@ -1,11 +1,8 @@
 import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
+import { CHALLENGE_URL, PSI_URL } from "@/lib/links";
 import { SpaceAppsLogo } from "./SpaceAppsLogo";
 
-const PSI = "https://science.nasa.gov/physical-sciences-informatics-psi/";
-const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/";
-
-// Demo step 6: "Back on Earth" from the data, and the partial-gravity data NASA has not published yet.
 export function SiteFooter({ investigations }: { investigations: Investigation[] }) {
   const earth = investigations.filter((i) => i.earth_application);
   return (
@@ -43,19 +40,19 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
               (Flammability of Materials on the Moon) publish, they become new rows in the same table, and Moon Base can be
               ranked by real results from lunar gravity.
             </p>
-            <a href={CHALLENGE} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-fire underline decoration-fire/40 underline-offset-4 hover:decoration-fire">
+            <a href={CHALLENGE_URL} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-fire underline decoration-fire/40 underline-offset-4 hover:decoration-fire">
               Source: NASA challenge brief
             </a>
           </section>
         </Reveal>
       </div>
       <div className="mx-auto mt-10 flex max-w-6xl flex-col gap-2 px-4 pb-10 text-xs text-muted-foreground sm:flex-row sm:items-center sm:gap-4 sm:px-6">
-        <a href={CHALLENGE} target="_blank" rel="noreferrer" className="-ml-4 shrink-0 self-start sm:self-auto">
+        <a href={CHALLENGE_URL} target="_blank" rel="noreferrer" className="-ml-4 shrink-0 self-start sm:self-auto">
           <SpaceAppsLogo height={40} />
         </a>
         <p className="leading-relaxed">
           Built for the NASA Space Apps Challenge 2026. Data from NASA&apos;s{" "}
-          <a href={PSI} target="_blank" rel="noreferrer" className="underline decoration-input underline-offset-4 hover:text-foreground">
+          <a href={PSI_URL} target="_blank" rel="noreferrer" className="underline decoration-input underline-offset-4 hover:text-foreground">
             Physical Sciences Informatics (PSI)
           </a>{" "}
           system. Not affiliated with or endorsed by NASA. Empty cells mean the source does not state the value.

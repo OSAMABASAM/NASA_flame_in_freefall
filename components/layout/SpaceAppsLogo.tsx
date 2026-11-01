@@ -1,7 +1,5 @@
-// Official NASA Space Apps Challenge 2026 Default logo, "Color and Black" colorway, file unchanged from
-// https://assets.spaceappschallenge.org/media/documents/NASA_Space_Apps_Logos_2026.zip (brand guide: spaceappschallenge.org/brand).
-// Clear space: the guide asks for 1U on every side, about 0.39 of the logo height, so it is built in as padding.
-// Fixed width and height mean no layout shift while the file loads.
+// Official logo, unchanged, from https://assets.spaceappschallenge.org/media/documents/NASA_Space_Apps_Logos_2026.zip.
+// The brand guide asks for 1U of clear space on every side, about 0.39 of the logo height, built in as padding.
 const RATIO = 561 / 221;
 
 export function SpaceAppsLogo({ height, className }: { height: number; className?: string }) {

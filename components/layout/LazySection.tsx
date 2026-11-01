@@ -5,16 +5,12 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { Investigation } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
-// Sections below the first screen download and mount only when the reader scrolls near them.
 const NetworkView = dynamic(() => import("@/components/network/NetworkView").then((m) => m.NetworkView));
 const GapsView = dynamic(() => import("@/components/gaps/GapsView").then((m) => m.GapsView));
 
-// Mounts its children once the spot comes within 800px of the screen. Until then an empty box of the measured
-// section height (--h, per screen width) holds the place, so nothing jumps, and the id keeps the header links
-// working. Once mounted, the browser still skips layout and paint for the section while it is off screen
-// (content-visibility), so moving the slider far above it does not redraw it; it keeps its last real size.
-// content-visibility also clips what is drawn outside the box, so 4rem of empty room at the bottom (padding,
-// taken back with a negative margin) keeps the hover glow of the last cards whole.
+// Downloads and mounts the section only when it comes within 800px of the screen. Until then a box of the measured
+// height (--h, per breakpoint) holds its place so nothing jumps. content-visibility skips rendering it while off
+// screen, but also clips at the box edge, so pb-16/-mb-16 leaves room for the hover glow of the last cards.
 function LazySection({ id, height, children }: { id: string; height: string; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);

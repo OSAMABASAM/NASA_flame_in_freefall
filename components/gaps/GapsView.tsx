@@ -1,13 +1,12 @@
 import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
 import { coverage, GRAVITY, OXYGEN, PRESSURE, type Cell } from "@/lib/gaps";
+import { CHALLENGE_URL } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
-const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/";
 const card = "glow h-full rounded-2xl bg-card p-6 sm:p-7";
 const eyebrow = "card-label text-muted-foreground";
 
-// Moon gravity + Moon base oxygen + low pressure: the real conditions of a Moon base.
 const isMoonBase = (c: Cell) => c.gravity === "moon" && c.oxygen === "moon" && c.pressure === "low";
 
 export function GapsView({ investigations }: { investigations: Investigation[] }) {
@@ -49,7 +48,7 @@ export function GapsView({ investigations }: { investigations: Investigation[] }
                   FM2 (Flammability of Materials on the Moon)
                 </a>{" "}
                 will fill the Moon column.{" "}
-                <a href={CHALLENGE} target="_blank" rel="noreferrer" className="whitespace-nowrap text-charcoal-muted underline decoration-charcoal-muted/40 underline-offset-4 hover:text-charcoal-foreground">
+                <a href={CHALLENGE_URL} target="_blank" rel="noreferrer" className="whitespace-nowrap text-charcoal-muted underline decoration-charcoal-muted/40 underline-offset-4 hover:text-charcoal-foreground">
                   Source: NASA challenge brief
                 </a>
               </p>
