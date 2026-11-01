@@ -1,19 +1,19 @@
 const PSI = "https://science.nasa.gov/physical-sciences-informatics-psi/";
 
-// A spherical microgravity flame: blue core, warm rim.
+// A spherical microgravity flame.
 export function FlameMark() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden className="size-6">
-      <circle cx="12" cy="12" r="10" fill="none" stroke="var(--primary)" strokeOpacity="0.55" strokeWidth="1.5" />
-      <circle cx="12" cy="12" r="6.5" fill="var(--cool)" fillOpacity="0.35" />
-      <circle cx="12" cy="12" r="3" fill="var(--cool)" />
+      <circle cx="12" cy="12" r="10" fill="none" stroke="var(--primary)" strokeOpacity="0.35" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="6.5" fill="var(--primary)" fillOpacity="0.2" />
+      <circle cx="12" cy="12" r="3" fill="var(--primary)" />
     </svg>
   );
 }
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-30 border-b bg-background/75 backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <a href="#" className="flex items-center gap-2.5 font-semibold tracking-tight">
           <FlameMark />

@@ -6,7 +6,7 @@ export function Sources({ urls }: { urls: string[] }) {
     <ul className="space-y-1">
       {urls.map((u) => (
         <li key={u}>
-          <a href={u} target="_blank" rel="noreferrer" className="break-all text-cool underline decoration-cool/40 underline-offset-2 hover:decoration-cool">
+          <a href={u} target="_blank" rel="noreferrer" className="break-all text-accent-foreground underline decoration-primary/30 underline-offset-2 hover:decoration-primary">
             {u.replace(/^https?:\/\//, "")} ↗
           </a>
         </li>

@@ -21,7 +21,7 @@ export function HowItWorks() {
       <div
         id="how-score"
         popover="auto"
-        className="m-auto w-[min(32rem,100%-2rem)] rounded-xl border bg-card p-6 text-sm leading-relaxed text-card-foreground shadow-2xl shadow-black/50 backdrop:bg-black/50"
+        className="m-auto w-[min(32rem,100%-2rem)] rounded-2xl bg-card p-7 text-sm leading-relaxed text-card-foreground shadow-lift backdrop:bg-black/20"
       >
         <p className="font-semibold">Score out of 100, a plain sum</p>
         <ul className="mt-3 space-y-2">

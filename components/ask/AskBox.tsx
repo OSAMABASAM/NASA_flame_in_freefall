@@ -16,7 +16,7 @@ function AnswerText({ text }: { text: string }) {
           <a
             key={i}
             href={`#inv-${id}`}
-            className="mx-0.5 inline-block rounded-md border border-primary/30 bg-accent px-1.5 py-px font-mono text-xs text-accent-foreground hover:bg-primary hover:text-primary-foreground"
+            className="mx-0.5 inline-block rounded-md bg-accent px-1.5 py-px font-mono text-xs text-accent-foreground hover:bg-primary hover:text-primary-foreground"
           >
             {id}
           </a>
@@ -59,13 +59,13 @@ export function AskBox({ cache }: Props) {
   }
 
   return (
-    <section className="mt-8 max-w-3xl" aria-label="Ask the fire data">
+    <section className="mt-10 max-w-3xl" aria-label="Ask the fire data">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           ask(question);
         }}
-        className="flex gap-2 rounded-xl border border-input bg-card p-2 shadow-lg shadow-black/20 focus-within:border-primary/60"
+        className="flex gap-2 rounded-full bg-card p-2 pl-3 shadow-lift ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/60"
       >
         <input
           value={question}
@@ -92,9 +92,9 @@ export function AskBox({ cache }: Props) {
             <span className="size-2 animate-pulse rounded-full bg-primary" /> Reading NASA&apos;s fire data…
           </p>
         )}
-        {error && <p className="rounded-xl border border-destructive/40 bg-destructive/10 p-4 text-destructive">{error}</p>}
+        {error && <p className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-destructive">{error}</p>}
         {result && (
-          <div className="rounded-xl border bg-card p-5">
+          <div className="rounded-2xl bg-card p-6 shadow-card">
             <p className="mb-2 text-xs font-medium text-muted-foreground">
 AI answer</p>
             <AnswerText text={result.answer} />

@@ -6,9 +6,9 @@ const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-f
 export function SiteFooter({ investigations }: { investigations: Investigation[] }) {
   const earth = investigations.filter((i) => i.earth_application);
   return (
-    <footer className="mt-20 border-t bg-card/40">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-12 sm:px-6 items-start md:grid-cols-[3fr_2fr]">
-        <section aria-labelledby="earth" className="rounded-xl border bg-card p-6">
+    <footer className="mt-24 border-t">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-14 sm:px-6 items-start md:grid-cols-[3fr_2fr]">
+        <section aria-labelledby="earth" className="rounded-2xl bg-card p-7 shadow-card">
           <h2 id="earth" className="text-lg font-semibold">Back on Earth</h2>
           <p className="mt-1 text-sm text-muted-foreground">What these space experiments help with on the ground, as NASA states it.</p>
           <ul className="mt-5 divide-y text-sm">
@@ -22,8 +22,8 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
             ))}
           </ul>
         </section>
-        <section aria-labelledby="next" className="rounded-xl border border-dashed bg-card/60 p-6">
-          <p className="text-xs font-medium text-cool">Coming next</p>
+        <section aria-labelledby="next" className="rounded-2xl border border-dashed border-input p-7">
+          <p className="text-xs font-medium text-accent-foreground">Coming next</p>
           <h2 id="next" className="mt-1 text-lg font-semibold">LUCI and FM2 partial-gravity data</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             NASA&apos;s PSI has no partial-gravity fire data yet. When LUCI (Lunar-g Combustion Investigation) and FM2

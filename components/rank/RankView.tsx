@@ -23,7 +23,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
 
   return (
-    <section id="rank" className="mx-auto max-w-6xl scroll-mt-14 px-4 pt-14 sm:px-6">
+    <section id="rank" className="mx-auto max-w-6xl scroll-mt-14 px-4 pt-20 sm:px-6">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Rank for your habitat</h2>
@@ -34,14 +34,14 @@ export function RankView({ investigations }: { investigations: Investigation[] }
         <HowItWorks />
       </div>
 
-      <div className="mt-6 grid items-start gap-6 lg:grid-cols-[17rem_1fr]">
-        <div className="space-y-6 rounded-xl border bg-card p-5 lg:sticky lg:top-20">
+      <div className="mt-8 grid items-start gap-6 lg:grid-cols-[17rem_1fr]">
+        <div className="space-y-7 rounded-2xl bg-card p-6 shadow-card lg:sticky lg:top-20">
           <label className="block">
             <span className={label}>Habitat</span>
             <select
               value={habitat}
               onChange={(e) => setHabitat(e.target.value as Habitat)}
-              className="mt-2 block h-10 w-full rounded-md border border-input bg-raised px-3 text-sm"
+              className="mt-2 block h-10 w-full rounded-xl border border-input bg-card px-3 text-sm"
             >
               {HABITATS.map((h) => (
                 <option key={h.value} value={h.value}>
@@ -58,7 +58,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
           <label className="block">
             <span className="flex items-baseline justify-between">
               <span className={label}>Oxygen in the cabin air</span>
-              <span className="font-mono text-lg font-medium text-accent-foreground tabular-nums">{oxygen}%</span>
+              <span className="text-xl font-semibold tracking-tight text-accent-foreground tabular-nums">{oxygen}%</span>
             </span>
             <input
               type="range"
@@ -76,7 +76,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
           </label>
           <div role="group" aria-label="Safety area">
             <span className={label}>Safety area</span>
-            <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-raised p-1 text-sm">
+            <div className="mt-2 grid grid-cols-2 gap-1 rounded-xl bg-raised p-1 text-sm">
               {AREAS.map((a) => (
                 <Button
                   key={a}
@@ -84,7 +84,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
                   size="sm"
                   aria-pressed={area === a}
                   onClick={() => setArea(a)}
-                  className="font-normal capitalize aria-pressed:bg-card aria-pressed:text-foreground aria-pressed:shadow-sm aria-pressed:ring-1 aria-pressed:ring-border"
+                  className="font-normal capitalize aria-pressed:bg-card aria-pressed:text-foreground aria-pressed:shadow-card"
                 >
                   {a}
                 </Button>
@@ -93,7 +93,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
           </div>
         </div>
 
-        <ol className="grid gap-4 md:grid-cols-2">
+        <ol className="grid gap-5 md:grid-cols-2">
           {ranked.map((item, i) => (
             <RankCard
               key={item.inv.id}
@@ -109,7 +109,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
       </div>
 
       {picked.length > 0 && (
-        <div className="sticky bottom-4 z-20 mx-auto mt-6 flex max-w-3xl flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/40 bg-card/95 p-3 pl-4 text-sm shadow-2xl shadow-black/50 backdrop-blur">
+        <div className="sticky bottom-4 z-20 mx-auto mt-6 flex max-w-3xl flex-wrap items-center justify-between gap-3 rounded-3xl bg-card/90 p-3 pl-5 text-sm shadow-lift sm:rounded-full sm:p-2 sm:pl-5 ring-1 ring-border backdrop-blur-xl">
           <span>
             <span className="font-medium">{picked.length} of 3 picked:</span>{" "}
             <span className="font-mono text-xs text-accent-foreground">{picked.join(", ")}</span>

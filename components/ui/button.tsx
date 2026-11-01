@@ -10,10 +10,10 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-        outline: "border border-input bg-card hover:border-muted-foreground/50 hover:bg-raised",
+        primary: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90",
+        outline: "rounded-full border border-input bg-card hover:bg-raised",
         ghost: "text-muted-foreground hover:bg-raised hover:text-foreground",
-        chip: "rounded-full border border-border bg-card/60 text-left font-normal text-secondary-foreground hover:border-primary/50 hover:bg-accent hover:text-accent-foreground",
+        chip: "rounded-full bg-card text-left font-normal text-secondary-foreground shadow-card hover:bg-accent hover:text-accent-foreground",
       },
       size: {
         sm: "h-8 px-3",

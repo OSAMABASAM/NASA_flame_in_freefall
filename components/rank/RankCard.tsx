@@ -18,7 +18,7 @@ export function RankCard({ item: { inv, score, reasons }, place, picked, pickDis
       layout="position"
       transition={{ duration: 0.22 }}
       id={`inv-${inv.id}`}
-      className="flex scroll-mt-20 flex-col rounded-xl border bg-card p-5 transition-colors hover:border-muted-foreground/40 target:border-primary target:ring-2 target:ring-primary/40 has-checked:border-primary/60"
+      className="flex scroll-mt-20 flex-col rounded-2xl bg-card p-6 shadow-card transition-shadow hover:shadow-lift target:ring-2 target:ring-primary/50 has-checked:ring-2 has-checked:ring-primary/40"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -28,7 +28,7 @@ export function RankCard({ item: { inv, score, reasons }, place, picked, pickDis
           <h3 className="mt-1 font-semibold leading-snug text-balance">{inv.name}</h3>
         </div>
         <div className="shrink-0 text-right" aria-label={`Score ${score} of 100`}>
-          <p className="font-mono text-2xl leading-none font-medium tabular-nums">{score}</p>
+          <p className="text-[28px] leading-none font-semibold tracking-tight tabular-nums">{score}</p>
           <div className="mt-2 h-1 w-14 overflow-hidden rounded-full bg-muted">
             <div className="h-full rounded-full bg-primary" style={{ width: `${score}%` }} />
           </div>
@@ -41,12 +41,12 @@ export function RankCard({ item: { inv, score, reasons }, place, picked, pickDis
       </p>
       <ul className="mt-3 mb-4 flex flex-wrap gap-1.5 text-xs">
         {tags.map((t) => (
-          <li key={t} className="rounded-md border bg-raised px-2 py-0.5 text-secondary-foreground">
+          <li key={t} className="rounded-full bg-raised px-2.5 py-0.5 text-secondary-foreground">
             {t}
           </li>
         ))}
         {inv.data_status === "challenge_text" && (
-          <li className="rounded-md border border-dashed px-2 py-0.5 text-muted-foreground">From challenge text only</li>
+          <li className="rounded-full border border-dashed px-2.5 py-0.5 text-muted-foreground">From challenge text only</li>
         )}
       </ul>
       <div className="mt-auto flex items-center justify-between gap-3 border-t pt-3 text-sm">
