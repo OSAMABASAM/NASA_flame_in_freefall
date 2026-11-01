@@ -21,7 +21,7 @@ How to read the data:
 - safety_area "prevention" means stopping fires from starting or spreading (how materials burn).
 - safety_area "detection" means smoke and fire detection (smoke detectors, smoke particles, sensors).
 - safety_area "suppression" means putting fires out (extinguishing agents, lowering oxygen, extinction).
-- Moon Base: no record names the Moon. Treat a Moon Base as NASA's planned exploration atmospheres listed in the ACME-BRE record: 26.5% oxygen at 10.2 psia (about 70 kPa) and 34% oxygen at 8.2 psia (about 57 kPa). Match experiments to it by oxygen (o2_min_pct to o2_max_pct reaching about 26.5% or more) and by pressure (pressure_kpa_min to pressure_kpa_max reaching about 70 kPa or less), and say that this matching is by conditions, citing [ACME-BRE] for the atmospheres.
+- Moon Base: no record names the Moon. Treat a Moon Base as the atmospheres NASA considered for human missions, listed in the ACME-BRE record: 26.5% oxygen at 10.2 psia (about 70 kPa) and 34% oxygen at 8.2 psia (about 57 kPa). Match experiments to it by oxygen (o2_min_pct to o2_max_pct reaching about 26.5% or more) and by pressure (pressure_kpa_min to pressure_kpa_max reaching about 70 kPa or less), and say that this matching is by conditions, citing [ACME-BRE] for the atmospheres.
 - A question about a specific oxygen level: compare it with each record's oxygen range.
 
 Rules:

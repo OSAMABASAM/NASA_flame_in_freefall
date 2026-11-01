@@ -98,7 +98,7 @@ export function GapsView({ investigations }: { investigations: Investigation[] }
               <li>A tested range counts in every band it touches. If only one end is stated, only that value counts.</li>
               <li>Gravity is the &quot;Project Type&quot; on each NASA PSI record. All say microgravity.</li>
               <li>
-                26.5 to 34% oxygen and below 71 kPa (10.2 psia) are NASA&apos;s planned exploration atmospheres, from the
+                26.5 to 34% oxygen and below 71 kPa (10.2 psia) are the atmospheres NASA considered for human missions, from the
                 ACME-BRE PSI record. 101 kPa is sea level.
               </li>
             </ul>

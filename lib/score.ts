@@ -14,7 +14,7 @@ export const HABITATS: { value: Habitat; label: string }[] = [
 ];
 export const AREAS: Area[] = ["all", "prevention", "detection", "suppression"];
 
-// NASA's planned exploration atmospheres, as listed in the ACME-BRE PSI record:
+// Atmospheres NASA considered for human missions, as listed in the ACME-BRE PSI record:
 // 21% O2 at 14.7 psia, 26.5% at 10.2 psia, 34% at 8.2 psia.
 // No PSI record names the Moon, so Moon Base is scored by these conditions (decision of 1 Nov).
 export const MOON_O2_PCT = 26.5;

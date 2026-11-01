@@ -6,7 +6,7 @@ import type { Investigation } from "./data.ts";
 
 type Band = { id: string; label: string; words: string; lo: number; hi: number; hiIn?: boolean; loOut?: boolean };
 
-// Oxygen in % by volume. 26.5% and 34% are NASA's planned exploration atmospheres (ACME-BRE PSI record).
+// Oxygen in % by volume. 26.5% and 34% are atmospheres NASA considered for human missions (ACME-BRE PSI record).
 export const OXYGEN: Band[] = [
   { id: "below", label: "Below 21%", words: "less oxygen than air", lo: -Infinity, hi: 21 },
   { id: "air", label: "21 to 26%", words: "oxygen like air", lo: 21, hi: 26.5 },
@@ -14,7 +14,7 @@ export const OXYGEN: Band[] = [
   { id: "above", label: "Above 34%", words: "very high oxygen", lo: 34, hi: Infinity, loOut: true },
 ];
 
-// Pressure in kPa. 10.2 psia (70.3 kPa) and 8.2 psia are the planned Moon base pressures; 101 kPa is sea level.
+// Pressure in kPa. 10.2 psia (70.3 kPa) and 8.2 psia are the pressures NASA considered with them; 101 kPa is sea level.
 export const PRESSURE: Band[] = [
   { id: "low", label: "Below 71 kPa", words: "low pressure", lo: -Infinity, hi: 71 },
   { id: "sea", label: "71 to 102 kPa", words: "normal air pressure", lo: 71, hi: 102, hiIn: true },
