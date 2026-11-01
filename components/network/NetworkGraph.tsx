@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { forceCollide, forceX, type ForceLink } from "d3-force";
 import ForceGraph2D, { type ForceGraphMethods, type LinkObject, type NodeObject } from "react-force-graph-2d";
 import type { Investigation } from "@/lib/data";
@@ -38,6 +38,35 @@ function paintHitArea(n: N, color: string, ctx: CanvasRenderingContext2D, scale:
   ctx.fill();
 }
 
+// The visible frame in graph units, and the zoom (k) to turn screen pixels into graph units.
+type Frame = { x0: number; y0: number; x1: number; y1: number; k: number };
+
+// Keeps a dot and its id label inside the frame, so it never slides out of sight.
+function clampToFrame(n: N, f: Frame | null) {
+  if (!f) return;
+  const r = radius(n), pad = 4 / f.k;
+  const side = Math.max(r, (n.id.length * 3.4) / f.k) + pad; // half the label width (11px monospace)
+  const x = Math.min(f.x1 - side, Math.max(f.x0 + side, n.x!));
+  const y = Math.min(f.y1 - r - 16 / f.k - pad, Math.max(f.y0 + r + pad, n.y!)); // label sits below the dot
+  if (x !== n.x) [n.x, n.vx] = [x, 0];
+  if (y !== n.y) [n.y, n.vy] = [y, 0];
+}
+
+// A dot dropped onto a pinned dot would hide it (only the top one can be grabbed), so move it to the nearest
+// free spot inside the frame, searching outward from the drop point in a spiral.
+function moveOffPinned(n: N, nodes: N[], f: Frame | null) {
+  if (!f) return;
+  const [x, y] = [n.x!, n.y!];
+  const pinned = nodes.filter((o) => o !== n && o.fx != null);
+  for (let i = 0; i < 200; i++) {
+    const d = (Math.sqrt(i) * 6) / f.k, a = i * 2.4;
+    [n.x, n.y] = [x + d * Math.cos(a), y + d * Math.sin(a)];
+    clampToFrame(n, f);
+    if (pinned.every((o) => Math.hypot(o.x! - n.x!, o.y! - n.y!) >= radius(n) + radius(o) + 4 / f.k)) return;
+  }
+  [n.x, n.y] = [x, y];
+}
+
 export function NetworkGraph({
   investigations,
   onOpen,
@@ -55,6 +84,13 @@ export function NetworkGraph({
   const [ready, setReady] = useState(false);
   const [visible, setVisible] = useState(false);
   const fitted = useRef(false); // fit once after each layout, so later drags never rescale the view
+  const frame = useRef<Frame | null>(null);
+  // The library finds the dot under the pointer on a hidden "hit map" that it repaints at most every 800 ms, so
+  // right after dots move it can point at old positions. A new hit painter makes it repaint now; we do that on
+  // every press, just before the drag starts looking for the dot under the pointer.
+  const [hitVersion, refreshHitMap] = useReducer((v: number) => v + 1, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- a new function identity is the point
+  const hitPainter = useMemo(() => paintHitArea.bind(null), [hitVersion]);
   const [reduced] = useState(() => matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [tokens] = useState(readTokens);
 
@@ -76,7 +112,7 @@ export function NetworkGraph({
     return () => ro.disconnect();
   }, []);
 
-  // While the graph is on screen, the library redraws every frame, so its hidden click map always matches the dots.
+  // While the graph is on screen, the library keeps redrawing (and keeps its hit map catching up with the dots).
   // Off screen, it pauses redrawing once the layout is still.
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting));
@@ -93,22 +129,36 @@ export function NetworkGraph({
     g.d3Force("collide", forceCollide<N>((n) => radius(n) + GAP / 2));
     // On a narrow screen, pull dots toward the vertical middle line so the graph grows tall instead of wide.
     g.d3Force("narrow", size.w < 640 ? forceX<N>(0).strength(0.12) : null);
+    // Dots that are not pinned stay inside the frame; a dragged dot is kept inside by onNodeDrag.
+    let nodes: N[] = [];
+    const inFrame = Object.assign(() => nodes.forEach((n) => n.fx == null && clampToFrame(n, frame.current)), {
+      initialize: (ns: N[]) => (nodes = ns),
+    });
+    g.d3Force("frame", inFrame);
     fitted.current = false;
+    frame.current = null;
     g.d3ReheatSimulation();
     // Hand over the data only now, so the layout (computed before the first paint) already uses these forces.
     setReady(true);
   }, [size.w]);
 
-  // The browser test (tests/e2e/network-drag.cjs) reads node positions through this.
   useEffect(() => {
-    if (ready) Object.assign(window, { __networkGraph: { graph: fg.current, nodes: data.nodes } });
+    if (!ready) return;
+    // The drag library blocks page scrolling on the whole graph (touch-action: none), which traps a phone user.
+    // pan-y lets a finger on empty space scroll the page; a finger on a dot still drags it.
+    wrap.current?.querySelector("canvas")?.style.setProperty("touch-action", "pan-y");
+    // The browser test (tests/e2e/network-drag.cjs) reads node positions through this.
+    Object.assign(window, { __networkGraph: { graph: fg.current, nodes: data.nodes } });
   }, [ready, data]);
 
   const onEngineStop = useCallback(() => {
-    if (fitted.current || !ready) return;
+    const g = fg.current;
+    if (fitted.current || !ready || !g) return;
     fitted.current = true;
-    fg.current?.zoomToFit(0, 36);
-  }, [ready]);
+    g.zoomToFit(0, 48);
+    const a = g.screen2GraphCoords(0, 0), b = g.screen2GraphCoords(size.w, size.h);
+    frame.current = { x0: a.x, y0: a.y, x1: b.x, y1: b.y, k: g.zoom() };
+  }, [ready, size]);
 
   const onNodeHover = useCallback(
     (n: N | null) => {
@@ -119,11 +169,20 @@ export function NetworkGraph({
     [data, onHover],
   );
   const onNodeClick = useCallback((n: N) => onOpen(n.inv), [onOpen]);
-  // Pin a dot where it is dropped, so it stays there and the cluster does not pull it back.
-  const onNodeDragEnd = useCallback((n: N) => {
-    n.fx = n.x;
-    n.fy = n.y;
+  // While dragging, keep the dot inside the frame.
+  const onNodeDrag = useCallback((n: N) => {
+    clampToFrame(n, frame.current);
+    [n.fx, n.fy] = [n.x, n.y];
   }, []);
+  // On drop, pin the dot (off any other pinned dot), so the cluster does not pull it back.
+  const onNodeDragEnd = useCallback(
+    (n: N) => {
+      clampToFrame(n, frame.current);
+      moveOffPinned(n, data.nodes, frame.current);
+      [n.fx, n.fy] = [n.x, n.y];
+    },
+    [data],
+  );
 
   const hot = useCallback((l: L) => hover !== null && (endId(l.source) === hover || endId(l.target) === hover), [hover]);
   const linkWidth = useCallback((l: L) => (hot(l) ? 1.5 + l.reasons.length : 0.5 + l.reasons.length * 0.5), [hot]);
@@ -163,7 +222,7 @@ export function NetworkGraph({
   );
 
   return (
-    <div ref={wrap} className="w-full touch-pan-y" aria-hidden>
+    <div ref={wrap} className="w-full" onPointerDownCapture={() => refreshHitMap()} aria-hidden>
       {size.w > 0 && (
         <ForceGraph2D<NetNode, NetLink>
           ref={fg}
@@ -184,10 +243,11 @@ export function NetworkGraph({
           nodeLabel={noLabel}
           onNodeHover={onNodeHover}
           onNodeClick={onNodeClick}
+          onNodeDrag={onNodeDrag}
           onNodeDragEnd={onNodeDragEnd}
           linkWidth={linkWidth}
           linkColor={linkColor}
-          nodePointerAreaPaint={paintHitArea}
+          nodePointerAreaPaint={hitPainter}
           nodeCanvasObject={drawNode}
         />
       )}
