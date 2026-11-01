@@ -1,80 +1,72 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
-import { forceCollide, forceX, type ForceLink } from "d3-force";
-import ForceGraph2D, { type ForceGraphMethods, type LinkObject, type NodeObject } from "react-force-graph-2d";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY, type SimulationNodeDatum } from "d3-force";
 import type { Investigation } from "@/lib/data";
 import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
 
-type N = NodeObject<NetNode>;
-type L = LinkObject<NetNode, NetLink>;
+type Pt = { x: number; y: number };
+type Box = { w: number; h: number };
 
-const EMPTY = { nodes: [], links: [] };
-const endId = (end: L["source"]) => (typeof end === "object" ? (end as N).id : end) as string;
 const radius = (n: NetNode) => 4 + Math.sqrt(n.degree) * 1.8;
-const GAP = 14; // room between two dots for the id label
-const noLabel = () => "";
+const PAD = 4;
+const CLICK_SLOP = 4; // a press that moves less than this (in px) is a click, not a drag
 
-// The graph library sizes its canvas by window.devicePixelRatio. A 3x phone screen would make it paint 9 canvas
-// pixels per CSS pixel on every frame; capped at 2 it paints 4 and still looks sharp. Only scripts read this
-// value: the browser keeps drawing the rest of the page at the screen's full density.
-const dpr = Object.getOwnPropertyDescriptor(window, "devicePixelRatio");
-if (dpr?.get && dpr.configurable) {
-  const real = dpr.get;
-  Object.defineProperty(window, "devicePixelRatio", { ...dpr, get: () => Math.min(2, real.call(window)) });
-}
-
-// Canvas cannot read CSS variables, so read the tokens from globals.css once.
-function readTokens() {
-  const css = getComputedStyle(document.documentElement);
-  const t = (name: string) => css.getPropertyValue(`--${name}`).trim();
+// Keeps a dot and its id label (below the dot) inside the frame.
+function clamp(p: Pt, n: NetNode, box: Box): Pt {
+  const r = radius(n);
+  const side = Math.max(r, n.id.length * 3.4) + PAD; // half the label width (11px monospace)
   return {
-    area: { prevention: t("area-prevention"), detection: t("area-detection"), suppression: t("area-suppression") } as Record<string, string>,
-    none: t("area-none"),
-    card: t("card"),
-    text: t("foreground"),
-    muted: t("muted-foreground"),
-    link: t("input"),
-    linkHot: t("primary"),
+    x: Math.min(box.w - side, Math.max(side, p.x)),
+    y: Math.min(box.h - r - 16 - PAD, Math.max(r + PAD, p.y)),
   };
 }
 
-// Click and drag area = the drawn dot plus 3 screen pixels.
-function paintHitArea(n: N, color: string, ctx: CanvasRenderingContext2D, scale: number) {
-  ctx.fillStyle = color;
-  ctx.beginPath();
-  ctx.arc(n.x!, n.y!, radius(n) + 3 / scale, 0, 2 * Math.PI);
-  ctx.fill();
-}
-
-// The visible frame in graph units, and the zoom (k) to turn screen pixels into graph units.
-type Frame = { x0: number; y0: number; x1: number; y1: number; k: number };
-
-// Keeps a dot and its id label inside the frame, so it never slides out of sight.
-function clampToFrame(n: N, f: Frame | null) {
-  if (!f) return;
-  const r = radius(n), pad = 4 / f.k;
-  const side = Math.max(r, (n.id.length * 3.4) / f.k) + pad; // half the label width (11px monospace)
-  const x = Math.min(f.x1 - side, Math.max(f.x0 + side, n.x!));
-  const y = Math.min(f.y1 - r - 16 / f.k - pad, Math.max(f.y0 + r + pad, n.y!)); // label sits below the dot
-  if (x !== n.x) [n.x, n.vx] = [x, 0];
-  if (y !== n.y) [n.y, n.vy] = [y, 0];
-}
-
-// A dot dropped onto a pinned dot would hide it (only the top one can be grabbed), so move it to the nearest
-// free spot inside the frame, searching outward from the drop point in a spiral.
-function moveOffPinned(n: N, nodes: N[], f: Frame | null) {
-  if (!f) return;
-  const [x, y] = [n.x!, n.y!];
-  const pinned = nodes.filter((o) => o !== n && o.fx != null);
-  for (let i = 0; i < 200; i++) {
-    const d = (Math.sqrt(i) * 6) / f.k, a = i * 2.4;
-    [n.x, n.y] = [x + d * Math.cos(a), y + d * Math.sin(a)];
-    clampToFrame(n, f);
-    if (pinned.every((o) => Math.hypot(o.x! - n.x!, o.y! - n.y!) >= radius(n) + radius(o) + 4 / f.k)) return;
+// Runs the force layout to the end once, then stops. Nothing moves after this unless a dot is dragged.
+function layout(nodes: NetNode[], links: NetLink[], box: Box): Pt[] {
+  type S = SimulationNodeDatum & { n: NetNode };
+  const sim: S[] = nodes.map((n, i) => ({ n, x: box.w / 2 + Math.cos(i) * 40, y: box.h / 2 + Math.sin(i) * 40 }));
+  const simulation = forceSimulation(sim)
+    .force("charge", forceManyBody().strength(-140))
+    .force("link", forceLink(links.map((l) => ({ ...l }))).id((d) => (d as S).n.id).distance(55).strength(0.15))
+    .force("collide", forceCollide<S>((d) => radius(d.n) + 7))
+    // On a narrow screen, pull harder toward the vertical middle line so the graph grows tall instead of wide.
+    .force("x", forceX(box.w / 2).strength(box.w < 640 ? 0.12 : 0.04))
+    .force("y", forceY(box.h / 2).strength(0.06))
+    .stop();
+  for (let i = 0; i < 300; i++) {
+    simulation.tick();
+    for (const d of sim) Object.assign(d, clamp({ x: d.x!, y: d.y! }, d.n, box));
   }
-  [n.x, n.y] = [x, y];
+  // Spread the finished layout to fill the frame, keeping dots and text at their pixel size. Each axis stretches on
+  // its own (at most 1.5x more than the other), so a tall phone frame is used top to bottom.
+  const xs = sim.map((d) => d.x!), ys = sim.map((d) => d.y!);
+  const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+  const [mx, my] = [70, 40]; // room for the widest label and the label under a dot
+  const [fx, fy] = [(box.w - 2 * mx) / (x1 - x0 || 1), (box.h - 2 * my) / (y1 - y0 || 1)];
+  const [kx, ky] = [Math.min(fx, fy * 1.5), Math.min(fy, fx * 1.5)];
+  return sim.map((d) =>
+    clamp({ x: box.w / 2 + (d.x! - (x0 + x1) / 2) * kx, y: box.h / 2 + (d.y! - (y0 + y1) / 2) * ky }, d.n, box),
+  );
 }
+
+// A dot dropped onto another would hide it, so slide it to the nearest free spot (spiral out from the drop point).
+function freeSpot(i: number, p: Pt, nodes: NetNode[], pos: Pt[], box: Box): Pt {
+  for (let k = 0; k < 200; k++) {
+    const d = Math.sqrt(k) * 6, a = k * 2.4;
+    const q = clamp({ x: p.x + d * Math.cos(a), y: p.y + d * Math.sin(a) }, nodes[i], box);
+    if (pos.every((o, j) => j === i || Math.hypot(o.x - q.x, o.y - q.y) >= radius(nodes[i]) + radius(nodes[j]) + 4)) return q;
+  }
+  return p;
+}
+
+// One wedge of a dot: a full circle for one safety area, half and half for two.
+function wedge(r: number, i: number, count: number) {
+  const a0 = -Math.PI / 2 + (i * 2 * Math.PI) / count, a1 = a0 + (2 * Math.PI) / count;
+  const [x0, y0, x1, y1] = [r * Math.cos(a0), r * Math.sin(a0), r * Math.cos(a1), r * Math.sin(a1)];
+  return `M0 0L${x0} ${y0}A${r} ${r} 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1} ${y1}Z`;
+}
+const areaColor = (a: string) => (["prevention", "detection", "suppression"].includes(a) ? `var(--area-${a})` : "var(--area-none)");
 
 export function NetworkGraph({
   investigations,
@@ -85,190 +77,169 @@ export function NetworkGraph({
   onOpen: (inv: Investigation) => void;
   onHover: (node: NetNode | null, links: NetLink[]) => void;
 }) {
-  const data = useMemo(() => buildNetwork(investigations), [investigations]);
-  const wrap = useRef<HTMLDivElement>(null);
-  const fg = useRef<ForceGraphMethods<N, L> | undefined>(undefined);
-  const [size, setSize] = useState({ w: 0, h: 0 });
+  const { nodes, links } = useMemo(() => buildNetwork(investigations), [investigations]);
+  const index = useMemo(() => new Map(nodes.map((n, i) => [n.id, i])), [nodes]);
+  const svg = useRef<SVGSVGElement>(null);
+  const [box, setBox] = useState<Box | null>(null);
+  // The layout is computed once per box size; dragged positions are kept only for that layout.
+  const base = useMemo(() => (box ? layout(nodes, links, box) : []), [box, nodes, links]);
+  const [dragged, setDragged] = useState<{ base: Pt[]; pos: Pt[] } | null>(null);
+  const pos = dragged?.base === base ? dragged.pos : base;
+  const setPos = (f: (old: Pt[]) => Pt[]) => setDragged({ base, pos: f(pos) });
   const [hover, setHover] = useState<string | null>(null);
-  const [ready, setReady] = useState(false);
-  const fitted = useRef(false); // fit once after each layout, so later drags never rescale the view
-  const frame = useRef<Frame | null>(null);
-  // The library finds the dot under the pointer on a hidden "hit map" that it repaints at most every 800 ms, so
-  // right after dots move it can point at old positions. A new hit painter makes it repaint now; we do that on
-  // every press, just before the drag starts looking for the dot under the pointer.
-  const [hitVersion, refreshHitMap] = useReducer((v: number) => v + 1, 0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- a new function identity is the point
-  const hitPainter = useMemo(() => paintHitArea.bind(null), [hitVersion]);
-  const [reduced] = useState(() => matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const [tokens] = useState(readTokens);
+  const drag = useRef<{ i: number; id: number; start: Pt; offset: Pt; moved: boolean } | null>(null);
 
-  const neighbors = useMemo(() => {
-    if (!hover) return null;
-    const set = new Set([hover]);
-    for (const l of data.links) {
-      const [s, t] = [endId(l.source), endId(l.target)];
-      if (s === hover) set.add(t);
-      if (t === hover) set.add(s);
-    }
-    return set;
-  }, [hover, data]);
-
-  // The box has a fixed height in CSS (560px on phones, 520px from sm), so the page never jumps around the graph.
+  // The box has a fixed height in CSS; the viewBox matches its pixel size, so text stays 11px on every screen.
+  // A new width gives a fresh layout.
   useEffect(() => {
-    const el = wrap.current!;
-    const ro = new ResizeObserver(() => setSize({ w: el.clientWidth, h: el.clientHeight }));
+    const el = svg.current!.parentElement!;
+    const ro = new ResizeObserver(() =>
+      setBox((b) => (b && b.w === el.clientWidth && b.h === el.clientHeight ? b : { w: el.clientWidth, h: el.clientHeight })),
+    );
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
 
-  // While the graph is on screen, the library keeps redrawing (and keeps its hit map catching up with the dots).
-  // Off screen, its animation loop stops completely, so scrolling elsewhere costs nothing. The first layout is
-  // allowed to settle and fit off screen first (onEngineStop pauses it then), so it is ready before it is seen.
-  const onScreen = useRef(false);
+  const neighbors = useMemo(() => {
+    if (!hover) return null;
+    const set = new Set([hover]);
+    for (const l of links) {
+      if (l.source === hover) set.add(l.target);
+      if (l.target === hover) set.add(l.source);
+    }
+    return set;
+  }, [hover, links]);
+
+  const enter = (n: NetNode | null) => {
+    if (drag.current) return; // keep the dragged dot highlighted
+    setHover(n?.id ?? null);
+    onHover(n, n ? links.filter((l) => l.source === n.id || l.target === n.id) : []);
+  };
+
+  const toSvg = (e: PointerEvent): Pt => {
+    const m = svg.current!.getScreenCTM()!.inverse();
+    const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m);
+    return { x: p.x, y: p.y };
+  };
+
+  const down = (i: number) => (e: PointerEvent<SVGGElement>) => {
+    if (e.button !== 0 || drag.current) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const p = toSvg(e);
+    drag.current = { i, id: e.pointerId, start: p, offset: { x: pos[i].x - p.x, y: pos[i].y - p.y }, moved: false };
+  };
+  const move = (e: PointerEvent<SVGGElement>) => {
+    const d = drag.current;
+    if (!d || d.id !== e.pointerId) return;
+    const p = toSvg(e);
+    if (!d.moved && Math.hypot(p.x - d.start.x, p.y - d.start.y) < CLICK_SLOP) return;
+    d.moved = true;
+    const q = clamp({ x: p.x + d.offset.x, y: p.y + d.offset.y }, nodes[d.i], box!);
+    setPos((old) => old.map((o, j) => (j === d.i ? q : o)));
+  };
+  const up = (e: PointerEvent<SVGGElement>) => {
+    const d = drag.current;
+    if (!d || d.id !== e.pointerId) return;
+    drag.current = null;
+    if (!d.moved) return onOpen(nodes[d.i].inv);
+    setPos((old) => old.map((o, j) => (j === d.i ? freeSpot(j, o, nodes, old, box!) : o)));
+  };
+  const cancel = () => (drag.current = null);
+  const key = (n: NetNode) => (e: KeyboardEvent) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    onOpen(n.inv);
+  };
+
+  // A finger on a dot drags it instead of scrolling the page. Chrome ignores touch-action on shapes inside an SVG,
+  // so block the scroll here (React's touch listeners are passive and cannot). Empty graph space still scrolls.
   useEffect(() => {
-    if (!ready) return;
-    const io = new IntersectionObserver(([e]) => {
-      onScreen.current = e.isIntersecting;
-      if (e.isIntersecting) fg.current?.resumeAnimation();
-      else if (fitted.current) fg.current?.pauseAnimation();
-    });
-    io.observe(wrap.current!);
-    return () => io.disconnect();
-  }, [ready]);
-
-  useEffect(() => {
-    const g = fg.current;
-    if (!g) return;
-    g.d3Force("charge")?.strength(-140);
-    // Weak links: dragging one dot barely tugs its neighbors.
-    (g.d3Force("link") as ForceLink<N, L> | undefined)?.distance(55).strength(0.15);
-    g.d3Force("collide", forceCollide<N>((n) => radius(n) + GAP / 2));
-    // On a narrow screen, pull dots toward the vertical middle line so the graph grows tall instead of wide.
-    g.d3Force("narrow", size.w < 640 ? forceX<N>(0).strength(0.12) : null);
-    // Dots that are not pinned stay inside the frame; a dragged dot is kept inside by onNodeDrag.
-    let nodes: N[] = [];
-    const inFrame = Object.assign(() => nodes.forEach((n) => n.fx == null && clampToFrame(n, frame.current)), {
-      initialize: (ns: N[]) => (nodes = ns),
-    });
-    g.d3Force("frame", inFrame);
-    fitted.current = false;
-    frame.current = null;
-    g.d3ReheatSimulation();
-    // Hand over the data only now, so the layout (computed before the first paint) already uses these forces.
-    setReady(true);
-  }, [size.w]);
-
-  useEffect(() => {
-    if (!ready) return;
-    // The drag library blocks page scrolling on the whole graph (touch-action: none), which traps a phone user.
-    // pan-y lets a finger on empty space scroll the page; a finger on a dot still drags it.
-    wrap.current?.querySelector("canvas")?.style.setProperty("touch-action", "pan-y");
-    // The browser test (tests/e2e/network-drag.cjs) reads node positions through this.
-    Object.assign(window, { __networkGraph: { graph: fg.current, nodes: data.nodes } });
-  }, [ready, data]);
-
-  const onEngineStop = useCallback(() => {
-    const g = fg.current;
-    if (fitted.current || !ready || !g) return;
-    fitted.current = true;
-    g.zoomToFit(0, 48);
-    const a = g.screen2GraphCoords(0, 0), b = g.screen2GraphCoords(size.w, size.h);
-    frame.current = { x0: a.x, y0: a.y, x1: b.x, y1: b.y, k: g.zoom() };
-    // The library schedules its next frame right after this callback returns, so pause just after that.
-    queueMicrotask(() => onScreen.current || g.pauseAnimation());
-  }, [ready, size]);
-
-  const onNodeHover = useCallback(
-    (n: N | null) => {
-      setHover(n?.id ?? null);
-      onHover(n ?? null, n ? data.links.filter((l) => endId(l.source) === n.id || endId(l.target) === n.id) : []);
-      if (wrap.current) wrap.current.style.cursor = n ? "pointer" : "";
-    },
-    [data, onHover],
-  );
-  const onNodeClick = useCallback((n: N) => onOpen(n.inv), [onOpen]);
-  // While dragging, keep the dot inside the frame.
-  const onNodeDrag = useCallback((n: N) => {
-    clampToFrame(n, frame.current);
-    [n.fx, n.fy] = [n.x, n.y];
+    const el = svg.current!;
+    const stop = (e: TouchEvent) => (e.target as Element).closest("[data-id]") && e.preventDefault();
+    el.addEventListener("touchstart", stop, { passive: false });
+    return () => el.removeEventListener("touchstart", stop);
   }, []);
-  // On drop, pin the dot (off any other pinned dot), so the cluster does not pull it back.
-  const onNodeDragEnd = useCallback(
-    (n: N) => {
-      clampToFrame(n, frame.current);
-      moveOffPinned(n, data.nodes, frame.current);
-      [n.fx, n.fy] = [n.x, n.y];
-    },
-    [data],
-  );
 
-  const hot = useCallback((l: L) => hover !== null && (endId(l.source) === hover || endId(l.target) === hover), [hover]);
-  const linkWidth = useCallback((l: L) => (hot(l) ? 1.5 + l.reasons.length : 0.5 + l.reasons.length * 0.5), [hot]);
-  const linkColor = useCallback(
-    (l: L) => (!hover ? tokens.link : hot(l) ? tokens.linkHot : "rgba(0,0,0,0.04)"),
-    [hover, hot, tokens],
-  );
+  // The browser test (tests/e2e/network-drag.cjs) waits for this before reading dot positions from the page.
+  useEffect(() => {
+    if (pos.length) Object.assign(window, { __networkGraph: { ready: true } });
+  }, [pos.length]);
 
-  const drawNode = useCallback(
-    (n: N, ctx: CanvasRenderingContext2D, scale: number) => {
-      const r = radius(n);
-      const colors = n.areas.length ? n.areas.map((a) => tokens.area[a] ?? tokens.none) : [tokens.none];
-      ctx.globalAlpha = !neighbors || neighbors.has(n.id) ? 1 : 0.18;
-      // A node with two safety areas is split into two halves.
-      colors.forEach((c, i) => {
-        const step = (2 * Math.PI) / colors.length;
-        ctx.beginPath();
-        ctx.moveTo(n.x!, n.y!);
-        ctx.arc(n.x!, n.y!, r, -Math.PI / 2 + i * step, -Math.PI / 2 + (i + 1) * step);
-        ctx.fillStyle = c;
-        ctx.fill();
-      });
-      ctx.beginPath();
-      ctx.arc(n.x!, n.y!, r, 0, 2 * Math.PI);
-      ctx.lineWidth = (n.id === hover ? 2.5 : 1.5) / scale;
-      ctx.strokeStyle = n.id === hover ? tokens.text : tokens.card;
-      ctx.stroke();
-      const font = 11 / scale;
-      ctx.font = `${n.id === hover ? 600 : 400} ${font}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "top";
-      ctx.fillStyle = n.id === hover ? tokens.text : tokens.muted;
-      ctx.fillText(n.id, n.x!, n.y! + r + 3 / scale);
-      ctx.globalAlpha = 1;
-    },
-    [hover, neighbors, tokens],
-  );
-
+  const ready = box && pos.length === nodes.length;
   return (
-    <div ref={wrap} className="h-[560px] w-full sm:h-[520px]" onPointerDownCapture={() => refreshHitMap()} aria-hidden>
-      {size.w > 0 && (
-        <ForceGraph2D<NetNode, NetLink>
-          ref={fg}
-          graphData={ready ? data : EMPTY}
-          width={size.w}
-          height={size.h}
-          backgroundColor="rgba(0,0,0,0)"
-          // The layout is computed before the first paint, so the graph appears settled. After a drag, the
-          // neighbors settle for at most 60 frames (about 1 s); with reduced motion they stay put.
-          warmupTicks={300}
-          cooldownTicks={reduced ? 0 : 60}
-          d3VelocityDecay={0.55}
-          autoPauseRedraw={false}
-          onEngineStop={onEngineStop}
-          enableZoomInteraction={false}
-          enablePanInteraction={false}
-          enableNodeDrag
-          nodeLabel={noLabel}
-          onNodeHover={onNodeHover}
-          onNodeClick={onNodeClick}
-          onNodeDrag={onNodeDrag}
-          onNodeDragEnd={onNodeDragEnd}
-          linkWidth={linkWidth}
-          linkColor={linkColor}
-          nodePointerAreaPaint={hitPainter}
-          nodeCanvasObject={drawNode}
-        />
-      )}
+    <div className="h-[560px] w-full sm:h-[520px]">
+      <svg ref={svg} viewBox={box ? `0 0 ${box.w} ${box.h}` : undefined} className="block size-full select-none" role="group" aria-label="Network of investigations">
+        {ready && (
+          <>
+            <g>
+              {links.map((l) => {
+                const [a, b] = [pos[index.get(l.source)!], pos[index.get(l.target)!]];
+                const hot = hover !== null && (l.source === hover || l.target === hover);
+                return (
+                  <line
+                    key={`${l.source}-${l.target}`}
+                    x1={a.x}
+                    y1={a.y}
+                    x2={b.x}
+                    y2={b.y}
+                    stroke={!hover ? "var(--input)" : hot ? "var(--primary)" : "rgba(0,0,0,0.04)"}
+                    strokeWidth={hot ? 1.5 + l.reasons.length : 0.5 + l.reasons.length * 0.5}
+                  />
+                );
+              })}
+            </g>
+            {nodes.map((n, i) => {
+              const r = radius(n), on = n.id === hover;
+              const colors = n.areas.length ? n.areas.map(areaColor) : ["var(--area-none)"];
+              return (
+                <g
+                  key={n.id}
+                  data-id={n.id}
+                  data-r={r}
+                  transform={`translate(${pos[i].x} ${pos[i].y})`}
+                  opacity={!neighbors || neighbors.has(n.id) ? 1 : 0.18}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${n.id}, ${n.inv.name}, ${n.degree} links. Press Enter to open.`}
+                  className="group cursor-pointer outline-none"
+                  onPointerEnter={() => enter(n)}
+                  onPointerLeave={() => enter(null)}
+                  onFocus={() => enter(n)}
+                  onBlur={() => enter(null)}
+                  onPointerDown={down(i)}
+                  onPointerMove={move}
+                  onPointerUp={up}
+                  onPointerCancel={cancel}
+                  onKeyDown={key(n)}
+                >
+                  <circle r={r + 3} fill="transparent" />
+                  {colors.length === 1 ? (
+                    <circle r={r} fill={colors[0]} />
+                  ) : (
+                    colors.map((c, k) => <path key={k} d={wedge(r, k, colors.length)} fill={c} />)
+                  )}
+                  <circle
+                    r={r}
+                    fill="none"
+                    strokeWidth={on ? 2.5 : 1.5}
+                    className={`${on ? "stroke-foreground" : "stroke-card"} group-focus-visible:stroke-primary`}
+                  />
+                  <text
+                    y={r + 3}
+                    dominantBaseline="hanging"
+                    textAnchor="middle"
+                    fontSize={11}
+                    fontWeight={on ? 600 : 400}
+                    className={`pointer-events-none font-mono ${on ? "fill-foreground" : "fill-muted-foreground"}`}
+                  >
+                    {n.id}
+                  </text>
+                </g>
+              );
+            })}
+          </>
+        )}
+      </svg>
     </div>
   );
 }
