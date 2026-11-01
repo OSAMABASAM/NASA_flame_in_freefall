@@ -104,8 +104,8 @@ Built with Claude Code as a coding assistant.
 Needs Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/OSAMABASAM/flame-in-freefall.git
-cd flame-in-freefall
+git clone https://github.com/OSAMABASAM/flame_in_freefall.git
+cd flame_in_freefall
 npm install
 cp .env.example .env
 npm run dev
