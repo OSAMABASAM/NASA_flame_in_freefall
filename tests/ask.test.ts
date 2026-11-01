@@ -80,3 +80,9 @@ test("a name must be in the record cited right after it", () => {
   assert.deepEqual(findProblems("SAME heated Teflon [SAME]. SAME-R added Pyrell foam [SAME-R].", recs, ""), []);
   assert.deepEqual(findProblems("No Moon-base test exists, nor a Martian one [SAME].", recs, "Moon"), []);
 });
+
+test("85% oxygen needs the burner flow caveat", () => {
+  const recs = new Map([["ACME-CFI-G", JSON.stringify({ id: "ACME-CFI-G", o2_max_pct: 85, relevance_note: "Oxygen up to 85% is the burner flow in inverse flames" })]]);
+  assert.match(findProblems("ACME-CFI-G reached 85% oxygen [ACME-CFI-G].", recs, "").join(), /burner flow/);
+  assert.deepEqual(findProblems("ACME-CFI-G reached 85% oxygen, the burner flow in an inverse flame, not the cabin air [ACME-CFI-G].", recs, ""), []);
+});

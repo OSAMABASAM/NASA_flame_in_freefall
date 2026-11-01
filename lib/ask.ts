@@ -31,7 +31,8 @@ How to read the data:
 - Moon Base: no record names the Moon. Treat a Moon Base as the atmospheres NASA considered for human missions, listed in the ACME-BRE record: 26.5% oxygen at 10.2 psia (about 70 kPa) and 34% oxygen at 8.2 psia (about 57 kPa). Match experiments to it by oxygen (o2_min_pct to o2_max_pct reaching about 26.5% or more) and by pressure (pressure_kpa_min to pressure_kpa_max reaching about 70 kPa or less), and say in your own words that no experiment flew on the Moon, so you matched by oxygen and pressure; cite [ACME-BRE] for those atmospheres. Call them "atmospheres NASA considered for human missions", never Moon Base atmospheres, because the data does not tie them to the Moon.
 - A question about a specific oxygen level: compare it with each record's oxygen range.
 - A record's oxygen range and pressure range are separate. Say a record's ranges cover a condition, never that it tested that exact combination.
-- relevance_note holds caveats (for example, 85% oxygen is the burner flow in inverse flames, not the room air). Respect them.
+- relevance_note holds caveats. Respect them.
+- Whenever you mention the 85% oxygen of ACME-CFI-G or ACME-FLAME-DESIGN, say in the same answer that this 85% is the burner flow in an inverse flame, not the cabin air.
 - Keep what burned (the fuel) separate from what put the fire out (an extinguishing gas, or lowering oxygen). Never call a fuel a suppressant.
 
 Rules:
@@ -105,6 +106,7 @@ function namesIn(text: string) {
 // - every number must appear in the record(s) cited right after it (the next [..] group), or in baseText,
 //   so a real number pinned on the wrong experiment fails too;
 // - names (capitalised words inside a sentence, like Pyrell or Kapton) follow the same rule as numbers;
+// - 85% oxygen must come with the burner-flow caveat;
 // - numbers must be digits, because spelled-out numbers would slip past that check.
 export function findProblems(text: string, records: Map<string, string>, baseText: string) {
   const problems: string[] = [];
@@ -126,6 +128,8 @@ export function findProblems(text: string, records: Map<string, string>, baseTex
   }
   if (strange.size) problems.push(`these numbers are not in the record cited right after them: ${[...strange].join(", ")}`);
   if (unsupportedNames.size) problems.push(`these names are not in the record cited right after them: ${[...unsupportedNames].join(", ")}`);
+  // The 85% oxygen in ACME-CFI-G and ACME-FLAME-DESIGN is burner flow, not cabin air; an answer must say so.
+  if (/\b85\s*%/.test(text) && !/burner flow/i.test(text)) problems.push("85% oxygen is mentioned without saying it is the burner flow in an inverse flame, not the cabin air");
   const words = text.match(/\b(?:(?:eleven|twelve|(?:thir|four|fif|six|seven|eigh|nine)teen|(?:twen|thir|for|fif|six|seven|eigh|nine)ty|hundred|thousand)\w*|point (?:zero|one|two|three|four|five|six|seven|eight|nine))\b/gi);
   if (words) problems.push(`write these numbers in digits: ${[...new Set(words)].join(", ")}`);
   return problems;
