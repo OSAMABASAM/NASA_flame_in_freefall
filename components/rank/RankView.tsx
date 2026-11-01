@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useDeferredValue, useState } from "react";
 import { CompareTable } from "@/components/compare/CompareTable";
 import { DetailDrawer } from "@/components/detail/DetailDrawer";
 import { HowItWorks } from "@/components/rank/HowItWorks";
@@ -18,9 +18,11 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   const [detail, setDetail] = useState<Investigation | null>(null);
   const [picked, setPicked] = useState<string[]>([]);
   const [comparing, setComparing] = useState(false);
-  const ranked = rank(investigations, { habitat, oxygen, area });
+  // The slider and controls update at once; the card list follows at lower priority, so dragging stays smooth.
+  const [dHabitat, dOxygen, dArea] = [useDeferredValue(habitat), useDeferredValue(oxygen), useDeferredValue(area)];
+  const ranked = rank(investigations, { habitat: dHabitat, oxygen: dOxygen, area: dArea });
   const pickedInvs = picked.map((id) => investigations.find((i) => i.id === id)!);
-  const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
+  const toggle = useCallback((id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id])), []);
 
   return (
     <section id="rank" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
@@ -101,8 +103,8 @@ export function RankView({ investigations }: { investigations: Investigation[] }
               place={i + 1}
               picked={picked.includes(item.inv.id)}
               pickDisabled={!picked.includes(item.inv.id) && picked.length >= 3}
-              onDetails={() => setDetail(item.inv)}
-              onTogglePick={() => toggle(item.inv.id)}
+              onDetails={setDetail}
+              onTogglePick={toggle}
             />
           ))}
         </ol>
