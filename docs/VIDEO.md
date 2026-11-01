@@ -4,7 +4,7 @@ Target length: 90 seconds. Change it the moment Space Apps publishes the officia
 The video is recorded once on 2 November. The voice never mentions a number that the 13 November data could change (no "17 experiments", no scores), so it stays correct.
 
 ## How it is made
-**Plan A: Claude Code records it (Task 6).** Claude runs the site inside its cloud session, Playwright clicks through the timeline below and records the screen. Osama records only his voice on his phone, reading the voice lines, and uploads it on github.com as `docs/demo/voice.mp3`. Claude merges screen + voice + title and end cards into `docs/demo/final.mp4`, which Osama downloads from github.com.
+**Plan A: Claude Code records it (Task 7).** Claude runs the site inside its cloud session, Playwright clicks through the timeline below and records the screen. Osama records only his voice on his phone, reading the voice lines, and uploads it on github.com as `docs/demo/voice.mp3`. Claude merges screen + voice + title and end cards into `docs/demo/final.mp4`, which Osama downloads from github.com.
 
 **Plan B: Osama records it (only if Plan A fails in the cloud).** OBS Studio (Ubuntu Software app): Sources → + → Screen Capture, keep Mic/Aux on, record mp4 while clicking the live site and reading the voice lines. Several takes are fine.
 

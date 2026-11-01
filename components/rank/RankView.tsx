@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { CompareTable } from "@/components/compare/CompareTable";
+import { DetailDrawer } from "@/components/detail/DetailDrawer";
 import type { Investigation } from "@/lib/data";
 import { AREAS, HABITATS, MOON_O2_PCT, MOON_PSIA, rank, type Area, type Habitat } from "@/lib/score";
 
@@ -42,7 +44,12 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   const [habitat, setHabitat] = useState<Habitat>("spacecraft");
   const [oxygen, setOxygen] = useState(21);
   const [area, setArea] = useState<Area>("all");
+  const [detail, setDetail] = useState<Investigation | null>(null);
+  const [picked, setPicked] = useState<string[]>([]);
+  const [comparing, setComparing] = useState(false);
   const ranked = rank(investigations, { habitat, oxygen, area });
+  const pickedInvs = picked.map((id) => investigations.find((i) => i.id === id)!);
+  const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
 
   return (
     <section className="mt-12">
@@ -120,9 +127,48 @@ export function RankView({ investigations }: { investigations: Investigation[] }
                 <span className="rounded border px-2 py-0.5">From challenge text only</span>
               )}
             </div>
+            <div className="mt-3 flex items-center justify-between gap-3 border-t pt-3 text-sm">
+              <button onClick={() => setDetail(inv)} className="rounded-md border px-3 py-1 hover:bg-muted">
+                Details
+              </button>
+              <label className="flex items-center gap-2 has-disabled:opacity-50">
+                <input
+                  type="checkbox"
+                  checked={picked.includes(inv.id)}
+                  disabled={!picked.includes(inv.id) && picked.length >= 3}
+                  onChange={() => toggle(inv.id)}
+                  className="size-4 accent-primary"
+                />
+                Compare
+              </label>
+            </div>
           </li>
         ))}
       </ol>
+
+      {picked.length > 0 && (
+        <div className="sticky bottom-4 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-background p-3 text-sm shadow-lg">
+          <span>
+            <span className="font-medium">{picked.length} of 3 picked:</span> {picked.join(", ")}
+            {picked.length < 2 && <span className="text-muted-foreground"> (pick at least 2)</span>}
+          </span>
+          <span className="flex gap-2">
+            <button onClick={() => setPicked([])} className="rounded-md px-3 py-1.5 hover:bg-muted">
+              Clear
+            </button>
+            <button
+              disabled={picked.length < 2}
+              onClick={() => setComparing(true)}
+              className="rounded-md bg-primary px-4 py-1.5 font-medium text-primary-foreground disabled:opacity-50"
+            >
+              Compare
+            </button>
+          </span>
+        </div>
+      )}
+
+      <DetailDrawer inv={detail} onClose={() => setDetail(null)} />
+      <CompareTable invs={pickedInvs} open={comparing && picked.length >= 2} onClose={() => setComparing(false)} />
     </section>
   );
 }
