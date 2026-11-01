@@ -45,5 +45,5 @@ test("empty cells get one plain-English line; filled cells none", () => {
   const r = coverage([inv("A", { o2_min_pct: 21, o2_max_pct: 21, pressure_kpa_min: 101, pressure_kpa_max: 101, gravity: ["microgravity"] })]);
   assert.equal(r.cells.length, 4 * 3 * 3);
   assert.equal(cell(r, "microgravity", "air", "sea").line, "");
-  assert.equal(cell(r, "moon", "moon", "low").line, "No Moon-gravity test at Moon-habitat oxygen and low pressure.");
+  assert.equal(cell(r, "moon", "moon", "low").line, "No test on the Moon with Moon base oxygen and low pressure.");
 });

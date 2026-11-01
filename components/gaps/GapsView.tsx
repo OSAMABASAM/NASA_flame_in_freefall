@@ -7,7 +7,7 @@ const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-f
 const card = "h-full rounded-2xl bg-card p-6 shadow-card sm:p-7";
 const eyebrow = "text-xs font-medium text-muted-foreground";
 
-// Moon gravity + Moon-habitat oxygen + low pressure: the real conditions of a Moon base.
+// Moon gravity + Moon base oxygen + low pressure: the real conditions of a Moon base.
 const isMoonBase = (c: Cell) => c.gravity === "moon" && c.oxygen === "moon" && c.pressure === "low";
 
 export function GapsView({ investigations }: { investigations: Investigation[] }) {
