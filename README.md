@@ -42,9 +42,9 @@ NASA has studied fire in microgravity for decades, and the results are public in
 
 ```
 NASA PSI records and DOIs
-  -> data/investigations.csv        one row per investigation, filled by hand from PSI, empty when PSI does not say
+  -> data/investigations.csv        one row per investigation, taken from PSI records and their test tables, empty when PSI does not say
   -> npm run data                   scripts/build-data.mjs checks every column and writes investigations.json
-  -> Next.js build on Vercel        pages are built from the JSON; example answers are cached at build time
+  -> Next.js build on Vercel        pages are built from the JSON; checked example answers ship with the repo
   -> https://flame-in-freefall-five.vercel.app
 ```
 
@@ -65,7 +65,7 @@ To add or fix data, edit the CSV on github.com. Vercel rebuilds the site. See [d
 1. The model gets only the 20 records as its source and must cite a record id after each claim.
 2. Every answer is checked in code before it is shown: each cited id must exist, and every number and name must appear in the record cited right after it. Answers that mention 85% oxygen must say it is burner flow, not cabin air.
 3. A failed check gets one retry with the problems listed. Groq is tried first, then Gemini. If neither gives an answer that passes, the site shows an error instead of an unchecked answer.
-4. Answers to the example questions are cached at build time, so the demo does not depend on the AI being available.
+4. Answers to the example questions are saved in `data/demo-answers.json` after passing the same checks. A build only asks the AI again when the data changes, and only replaces an answer with one that passes, so the demo does not depend on the AI being available.
 
 ## Data sources
 
@@ -123,7 +123,7 @@ Everything else (rank, compare, network, gaps) works without keys. Tests: `npm t
 - Ask runs on free AI tiers (Groq, then Gemini). When both are busy or over quota, typed questions fail with a message to try again; the example questions still answer from the cache.
 - Only 10 of 20 investigations state an oxygen range and 5 state a pressure range in PSI. Missing values are left empty and score 0. They are never guessed.
 - No investigation in PSI ran in partial gravity. Moon Base is scored by the oxygen and pressure NASA considered for human missions, not by lunar gravity data.
-- The dataset covers 20 investigations, filled by hand from PSI records. It is not a live feed from PSI.
+- The dataset covers 20 investigations taken from PSI records. It is a snapshot, not a live feed from PSI.
 
 ## License
 

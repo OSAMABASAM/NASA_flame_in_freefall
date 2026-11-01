@@ -1,6 +1,14 @@
 {
   "name": "flame-in-freefall",
   "version": "0.1.0",
+  "description": "Ask, rank and compare NASA microgravity fire experiments for Moon Base fire safety",
+  "homepage": "https://flame-in-freefall-five.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OSAMABASAM/flame-in-freefall"
+  },
+  "author": "Osama Saleh",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "data": "node scripts/build-data.mjs",
