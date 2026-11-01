@@ -8,9 +8,11 @@ export default function Home() {
         Which NASA microgravity fire experiments matter for a crew habitat, and why.
       </p>
       <h2 className="mt-10 text-lg font-medium">Investigations ({investigations.length})</h2>
-      <p className="mt-1 text-sm text-muted-foreground">
-        * From the challenge text only, not yet checked against NASA sources.
-      </p>
+      {investigations.some((inv) => inv.data_status === "challenge_text") && (
+        <p className="mt-1 text-sm text-muted-foreground">
+          * From the challenge text only, not yet checked against NASA sources.
+        </p>
+      )}
       <ul className="mt-3 divide-y rounded-lg border">
         {investigations.map((inv) => (
           <li key={inv.id} className="px-4 py-3">

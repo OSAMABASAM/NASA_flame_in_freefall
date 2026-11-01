@@ -55,7 +55,13 @@ Plan B (Osama records): he records screen + voice in one take with OBS Studio, f
 No stretch tasks. Simple and working beats bigger and broken.
 
 ## Progress
-- Done: Task 0 code (Next.js 15 + TypeScript + Tailwind 4, shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; home page lists the 17 investigations; `npm run data` runs before dev and build). Verified with `npm run build`, `npm run lint`, and Playwright screenshots at desktop and phone size.
-- Waiting on Osama: merge the PR on github.com, import the repo on vercel.com, add `GROQ_API_KEY` and `GEMINI_API_KEY`, send the live link.
-- Next: Task 1 (enrich the data).
+- Done: Task 0 (Next.js 16 + React 19.3 + Tailwind 4; shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; `npm run data` runs before dev and build). Live link: not recorded yet in CLAUDE.md.
+- Done: Task 1. All rows now come from NASA PSI (psi.nasa.gov records and their "Experimental table" files), `data_status=verified`, each row cites its PSI page and DOI. Added 3 PSI flight investigations not named in the challenge: ACME-FLAME-DESIGN, ACME-CLD, ACME-S-FLAME (20 rows total). Verified with `npm run data`, build, lint and a browser screenshot.
+- Remaining data gaps (left empty on purpose, PSI does not state them):
+  - Oxygen: BASS, SAFFIRE-III, SAME, SAME-R, DAFT, DAFT-2, ACME-E-FIELD, ACME-CLD, SPICE, SLICE.
+  - Pressure: only FLEX, FLEX-2, CFI, ACME-CFI-G, ACME-FLAME-DESIGN have it. ACME-BRE pressures were varied but are "not identified" in its table.
+  - Habitats: no PSI record mentions the Moon, Mars, rovers or a habitat. Only `spacecraft` and `station` are filled, where PSI says so. Task 3 must decide how Moon Base scores (the formula gives 35 points for a habitat match, so today every row gets 0 for Moon Base).
+  - Sensors: FLEX and DAFT-2 rely on shared or missing descriptions; FLEX is empty.
+- Judgment calls to review: `safety_area` is our classification from the PSI objectives (left empty for pure science studies). Oxygen for inverse flames (ACME-CFI-G, ACME-FLAME-DESIGN) is the burner flow, up to 85%; the row note says so.
+- Next: Task 2 (Ask).
 - Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. System fonts for now; Task 5 brings the design fonts.
