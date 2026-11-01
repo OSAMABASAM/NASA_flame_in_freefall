@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { EXAMPLE_QUESTIONS, type Answer } from "@/lib/ask";
-import { plainDashes } from "@/lib/text";
+import { EXAMPLE_QUESTIONS, MAX_QUESTION, type Answer } from "@/lib/ask";
 
 type Props = { cache: Record<string, Answer> };
 
-// Shows "[FLEX]" in the answer text as a chip that jumps to that investigation.
+// "[FLEX]" in the answer becomes a chip that jumps to that investigation's card.
 function AnswerText({ text }: { text: string }) {
   return (
     <p className="text-[15px] leading-relaxed sm:text-base">
@@ -41,7 +40,7 @@ export function AskBox({ cache }: Props) {
     setQuestion(q);
     setError("");
     setResult(null);
-    if (cache[q]) return setResult(cache[q]);
+    if (Object.hasOwn(cache, q)) return setResult(cache[q]);
     setLoading(true);
     try {
       const res = await fetch("/api/ask", {
@@ -72,7 +71,7 @@ export function AskBox({ cache }: Props) {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask the fire data…"
-          maxLength={300}
+          maxLength={MAX_QUESTION}
           aria-label="Your question"
           className="min-w-0 flex-1 bg-transparent px-3 text-base outline-none placeholder:text-muted-foreground"
         />
@@ -100,7 +99,7 @@ export function AskBox({ cache }: Props) {
               <p className="card-label text-muted-foreground">AI answer</p>
               {result.cited.length > 0 && <span className="pill bg-sun text-sun-foreground">{result.cited.length} cited</span>}
             </div>
-            <AnswerText text={plainDashes(result.answer)} />
+            <AnswerText text={result.answer} />
             <p className="mt-4 border-t pt-3 text-xs text-muted-foreground">
               Written only from the investigation data on this page. Click an id to jump to that investigation.
             </p>
