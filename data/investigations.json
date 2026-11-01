@@ -1,0 +1,504 @@
+{
+  "generated_at": "2026-11-01T10:05:49.247Z",
+  "count": 17,
+  "items": [
+    {
+      "id": "BASS",
+      "name": "Burning and Suppression of Solids",
+      "project": "",
+      "safety_area": [
+        "prevention",
+        "suppression"
+      ],
+      "fuel_type": [],
+      "fuel_detail": "Solid materials (challenge text names fabrics and plastics for flammability studies); the BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "hardware": [
+        "Microgravity Science Glovebox (MSG)",
+        "SPICE fan-driven flow duct"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Flammability of solid materials in microgravity",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Named in the challenge as a solid-materials flammability study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "BASS-II",
+      "name": "Burning and Suppression of Solids II",
+      "project": "",
+      "safety_area": [
+        "prevention",
+        "suppression"
+      ],
+      "fuel_type": [],
+      "fuel_detail": "Solid materials (challenge text names fabrics and plastics for flammability studies); the BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "hardware": [
+        "Microgravity Science Glovebox (MSG)",
+        "SPICE fan-driven flow duct"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Flammability of solid materials in microgravity",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Named in the challenge as a solid-materials flammability study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SAFFIRE-I",
+      "name": "Spacecraft Fire Safety Demonstration I",
+      "project": "Saffire",
+      "safety_area": [
+        "prevention"
+      ],
+      "fuel_type": [
+        "solid"
+      ],
+      "fuel_detail": "Solid materials such as fabrics and plastics (challenge text)",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Flammability of solid materials",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Named in the challenge as a solid-materials flammability study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SAFFIRE-II",
+      "name": "Spacecraft Fire Safety Demonstration II",
+      "project": "Saffire",
+      "safety_area": [
+        "prevention"
+      ],
+      "fuel_type": [
+        "solid"
+      ],
+      "fuel_detail": "Solid materials such as fabrics and plastics (challenge text)",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Flammability of solid materials",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Named in the challenge as a solid-materials flammability study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SAFFIRE-III",
+      "name": "Spacecraft Fire Safety Demonstration III",
+      "project": "Saffire",
+      "safety_area": [
+        "prevention"
+      ],
+      "fuel_type": [
+        "solid"
+      ],
+      "fuel_detail": "Solid materials such as fabrics and plastics (challenge text)",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Flammability of solid materials",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Named in the challenge as a solid-materials flammability study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SAME",
+      "name": "Smoke and Aerosol Measurement Experiment",
+      "project": "",
+      "safety_area": [
+        "detection"
+      ],
+      "fuel_type": [],
+      "fuel_detail": "",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Fire detection tested in microgravity (smoke and aerosol measurement)",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "Terrestrial smoke detection improvements are mentioned in the challenge text",
+      "relevance_note": "Named in the challenge as the fire detection study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SAME-R",
+      "name": "Smoke and Aerosol Measurement Experiment Reflight",
+      "project": "",
+      "safety_area": [
+        "detection"
+      ],
+      "fuel_type": [],
+      "fuel_detail": "",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Fire detection tested in microgravity (smoke and aerosol measurement)",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Named in the challenge as the fire detection study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "DAFT",
+      "name": "Dust and Aerosol Measurement Feasibility Test",
+      "project": "",
+      "safety_area": [
+        "detection"
+      ],
+      "fuel_type": [],
+      "fuel_detail": "",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [
+        "One of the SAME smoke-detection instruments (challenge text)"
+      ],
+      "objective": "Detect dust with an instrument also used for smoke detection in SAME",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Indirect: same instrument as SAME",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "DAFT-2",
+      "name": "Dust and Aerosol Measurement Feasibility Test 2",
+      "project": "",
+      "safety_area": [
+        "detection"
+      ],
+      "fuel_type": [],
+      "fuel_detail": "",
+      "hardware": [],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [
+        "One of the SAME smoke-detection instruments (challenge text)"
+      ],
+      "objective": "Detect dust with an instrument also used for smoke detection in SAME",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Indirect: same instrument as SAME",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "FLEX",
+      "name": "Flame Extinguishment Experiment",
+      "project": "",
+      "safety_area": [
+        "suppression"
+      ],
+      "fuel_type": [
+        "liquid"
+      ],
+      "fuel_detail": "Burning droplets of liquid fuel",
+      "hardware": [
+        "Multi-user Droplet Combustion Apparatus (MDCA)",
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Suppression by diluting the chamber atmosphere with carbon dioxide and helium",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "Fine-water-mist extinguishers from ISS work have Earth uses (challenge text; not tied to FLEX specifically)",
+      "relevance_note": "Named in the challenge as the suppression study",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "FLEX-2",
+      "name": "Flame Extinguishment Experiment 2",
+      "project": "",
+      "safety_area": [],
+      "fuel_type": [
+        "liquid"
+      ],
+      "fuel_detail": "Burning droplets of liquid fuel",
+      "hardware": [
+        "Multi-user Droplet Combustion Apparatus (MDCA)",
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Listed in the challenge with FLEX and CFI (same apparatus)",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "CFI",
+      "name": "Cool Flames Investigation",
+      "project": "",
+      "safety_area": [],
+      "fuel_type": [
+        "liquid"
+      ],
+      "fuel_detail": "Burning droplets of liquid fuel",
+      "hardware": [
+        "Multi-user Droplet Combustion Apparatus (MDCA)",
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Listed in the challenge with FLEX and FLEX-2 (same apparatus)",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "ACME-BRE",
+      "name": "Burning Rate Emulator",
+      "project": "ACME",
+      "safety_area": [
+        "prevention"
+      ],
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Gaseous fuels used to emulate burning solids",
+      "hardware": [
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Materials flammability in still atmospheres as a function of material properties",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "ACME experiment named in the challenge",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "ACME-CFI-G",
+      "name": "Cool Flames Investigation with Gases",
+      "project": "ACME",
+      "safety_area": [],
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Chamber filled with nitrogen and a flammable gas (e.g. propane); oxygen-nitrogen mixture flows from a spherical burner, making an inside-out flame",
+      "hardware": [
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": 85,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Cool flames with gaseous fuels; highest oxygen concentrations tested in microgravity",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Oxygen value is the burner flow (up to 85% O2), not the chamber atmosphere",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "ACME-E-FIELD",
+      "name": "Electric-Field Effects on Laminar Diffusion Flames",
+      "project": "ACME",
+      "safety_area": [],
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Gaseous fuel flames",
+      "hardware": [
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "Mimic partial gravity through the effect of an electric field on the ions in flames",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Only partial-gravity proxy in PSI (challenge text)",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SPICE",
+      "name": "Smoke Point In Co-flow Experiment",
+      "project": "",
+      "safety_area": [],
+      "fuel_type": [],
+      "fuel_detail": "The BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "hardware": [
+        "Microgravity Science Glovebox (MSG)",
+        "SPICE fan-driven flow duct"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "The flow duct built for SPICE was reused by BASS and SLICE",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    },
+    {
+      "id": "SLICE",
+      "name": "Structure & Liftoff In Combustion Experiment",
+      "project": "",
+      "safety_area": [],
+      "fuel_type": [],
+      "fuel_detail": "The BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "hardware": [
+        "Microgravity Science Glovebox (MSG)",
+        "SPICE fan-driven flow duct"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [],
+      "objective": "",
+      "variables": "",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Uses the SPICE flow duct in the MSG",
+      "source_url": [
+        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      ],
+      "data_status": "challenge_text"
+    }
+  ]
+}
