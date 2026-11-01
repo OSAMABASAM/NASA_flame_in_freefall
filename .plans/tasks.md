@@ -64,5 +64,7 @@ No stretch tasks. Simple and working beats bigger and broken.
   - Habitats: no PSI record mentions the Moon, Mars, rovers or a habitat. Only `spacecraft` and `station` are filled, where PSI says so. Task 3 must decide how Moon Base scores (the formula gives 35 points for a habitat match, so today every row gets 0 for Moon Base).
   - Sensors: FLEX and DAFT-2 rely on shared or missing descriptions; FLEX is empty.
 - Judgment calls to review: `safety_area` is our classification from the PSI objectives (left empty for pure science studies). Oxygen for inverse flames (ACME-CFI-G, ACME-FLAME-DESIGN) is the burner flow, up to 85%; the row note says so.
-- Next: Task 2 (Ask).
+- Done (code), live check pending: Task 2. `lib/ask.ts` holds the prompt, Groq (`llama-3.3-70b-versatile`) then Gemini (`gemini-3.5-flash-lite`) fallback, and the citation check (unknown ids are removed). `/api/ask` route, `components/ask/AskBox.tsx`, `npm run cache` in `prebuild` (never fails the build), `npm test` (3 citation tests). Verified here: tests, tsc, lint, build, browser screenshots of a cached answer with citation chips and of the no-key error message. The real AI call can only be checked on the Vercel preview (keys live only in Vercel).
+- Note for Task 6: `data/demo-answers.json` is `{}` in git because this session has no keys. Vercel fills it during each build. For local recording, first fetch the 3 answers from the live `/api/ask` and save them into that file.
+- Next: Task 3 (Rank).
 - Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. System fonts for now; Task 5 brings the design fonts.
