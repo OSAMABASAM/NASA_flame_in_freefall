@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "motion/react";
+import type { HTMLMotionProps } from "motion/react";
+import * as m from "motion/react-m";
 
 const EASE_OUT = [0.2, 0, 0, 1] as const;
 
@@ -15,5 +16,5 @@ export const reveal = (index = 0, rise = 16) => ({
 
 // fadeOnly: opacity without a transform, for the network graph (a transform would offset its drag math).
 export function Reveal({ index, fadeOnly, ...props }: HTMLMotionProps<"div"> & { index?: number; fadeOnly?: boolean }) {
-  return <motion.div {...reveal(index, fadeOnly ? 0 : 16)} {...props} />;
+  return <m.div {...reveal(index, fadeOnly ? 0 : 16)} {...props} />;
 }

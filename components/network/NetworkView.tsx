@@ -1,13 +1,15 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { DetailDrawer } from "@/components/detail/DetailDrawer";
+import { useCallback, useState } from "react";
+import { DetailDrawer } from "@/components/detail/LazyDetail";
 import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
 import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
 
-// The graph library draws on a canvas and needs the browser, so it loads only on the client.
+// The graph library draws on a canvas and needs the browser, so it loads only on the client. The placeholder has
+// the graph's exact size, so nothing moves when it arrives. This whole section mounts only near the screen
+// (LazySection.tsx).
 const NetworkGraph = dynamic(() => import("@/components/network/NetworkGraph").then((m) => m.NetworkGraph), {
   ssr: false,
   loading: () => <div className="h-[560px] sm:h-[520px]" />,
@@ -27,17 +29,9 @@ export function NetworkView({ investigations }: { investigations: Investigation[
   const [hover, setHover] = useState<{ node: NetNode; links: NetLink[] } | null>(null);
   const onHover = useCallback((node: NetNode | null, links: NetLink[]) => setHover(node ? { node, links } : null), []);
   const list = buildNetwork(investigations);
-  // Load and start the graph only when the section comes near the screen.
-  const box = useRef<HTMLDivElement>(null);
-  const [near, setNear] = useState(false);
-  useEffect(() => {
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "400px" });
-    io.observe(box.current!);
-    return () => io.disconnect();
-  }, []);
 
   return (
-    <section id="network" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
+    <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
       <Reveal>
         <p className="card-label text-accent-foreground">Network</p>
         <h2 className="mt-1 text-3xl font-bold tracking-tight">How the experiments connect</h2>
@@ -49,7 +43,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
 
       {/* Opacity only: a transform on the graph or any parent would shift where a drag lands. */}
       <Reveal fadeOnly index={1}>
-        <div ref={box} className="glow mt-6 overflow-hidden rounded-2xl bg-card">
+        <div className="glow mt-6 overflow-hidden rounded-2xl bg-card">
           <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
             <p className="card-label text-muted-foreground">Shared fuel, hardware or project</p>
             <span className="pill bg-charcoal text-charcoal-foreground">{list.links.length} links</span>
@@ -63,15 +57,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
             ))}
             <li className="text-muted-foreground">Half and half = two safety areas</li>
           </ul>
-          {near ? (
-            <NetworkGraph
-              investigations={investigations}
-              onOpen={setDetail}
-              onHover={onHover}
-            />
-          ) : (
-            <div className="h-[560px] sm:h-[520px]" />
-          )}
+          <NetworkGraph investigations={investigations} onOpen={setDetail} onHover={onHover} />
           <p className="min-h-12 border-t px-5 py-3 text-sm text-secondary-foreground" aria-live="polite">
             {hover ? (
               <>
@@ -110,7 +96,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
         </ul>
       </details>
 
-      <DetailDrawer inv={detail} onClose={() => setDetail(null)} />
+      {detail && <DetailDrawer inv={detail} onClose={() => setDetail(null)} />}
     </section>
   );
 }

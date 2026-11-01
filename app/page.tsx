@@ -1,10 +1,9 @@
+import type { CSSProperties } from "react";
 import { AskBox } from "@/components/ask/AskBox";
-import { GapsView } from "@/components/gaps/GapsView";
 import { HeroStats } from "@/components/hero/HeroStats";
+import { LazyGaps, LazyNetwork } from "@/components/layout/LazySection";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { Reveal } from "@/components/motion/Reveal";
-import { NetworkView } from "@/components/network/NetworkView";
 import { RankView } from "@/components/rank/RankView";
 import cache from "@/data/demo-answers.json";
 import type { Answer } from "@/lib/ask";
@@ -34,7 +33,8 @@ export default function Home() {
       <main>
         <section className="mx-auto grid max-w-6xl items-start gap-x-10 gap-y-10 px-4 pt-12 pb-4 sm:px-6 sm:pt-16 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            <Reveal>
+            {/* The hero fades in with CSS (rise-in), so it shows on the first paint, before JavaScript loads. */}
+            <div className="rise-in">
               <p className="card-label text-accent-foreground">Microgravity combustion and crew fire safety</p>
               <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">
                 Which space fire experiments matter for your habitat?
@@ -46,16 +46,16 @@ export default function Home() {
                   Source: NASA challenge brief
                 </a>
               </p>
-            </Reveal>
-            <Reveal index={1}>
+            </div>
+            <div className="rise-in" style={{ "--i": 1 } as CSSProperties}>
               <AskBox cache={cache as Record<string, Answer>} />
-            </Reveal>
+            </div>
           </div>
           <HeroStats {...numbers} />
         </section>
         <RankView investigations={investigations} />
-        <NetworkView investigations={investigations} />
-        <GapsView investigations={investigations} />
+        <LazyNetwork investigations={investigations} />
+        <LazyGaps investigations={investigations} />
       </main>
       <SiteFooter investigations={investigations} />
     </>

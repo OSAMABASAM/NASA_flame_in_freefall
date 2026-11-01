@@ -14,7 +14,7 @@ export function GapsView({ investigations }: { investigations: Investigation[] }
   const { cells, notReported, partialGravity, microgravity, total } = coverage(investigations);
 
   return (
-    <section id="gaps" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
+    <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
       <Reveal>
         <p className="card-label text-accent-foreground">Gaps</p>
         <h2 className="mt-1 text-3xl font-bold tracking-tight">Research gaps</h2>

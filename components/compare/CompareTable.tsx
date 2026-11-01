@@ -6,10 +6,10 @@ import type { Investigation } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { EMPTY, FIELDS, differs } from "@/lib/fields";
 
-export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; open: boolean; onClose: () => void }) {
+// Loaded and mounted only when Compare is pressed (see RankView).
+export function CompareTable({ invs, onClose }: { invs: Investigation[]; onClose: () => void }) {
   return (
     <Modal
-      open={open}
       onClose={onClose}
       title={`Compare ${invs.length} investigations`}
       className="m-auto max-h-[90dvh] w-[min(68rem,100%-1rem)] rounded-2xl open:duration-200 open:animate-in open:fade-in open:slide-in-from-bottom-2"
