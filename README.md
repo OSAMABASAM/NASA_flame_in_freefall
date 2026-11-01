@@ -97,8 +97,6 @@ All 20 investigations come from [NASA Physical Science Informatics (PSI)](https:
 
 [![Tech stack](https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,vercel)](https://skillicons.dev)
 
-Built with Claude Code as a coding assistant.
-
 ## Run locally
 
 Needs Node.js 20 or newer.
