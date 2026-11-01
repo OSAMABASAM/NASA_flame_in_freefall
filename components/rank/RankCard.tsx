@@ -17,14 +17,13 @@ type Props = {
 
 function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDetails, onTogglePick }: Props) {
   const tags = [...inv.fuel_type.map((f) => `${f} fuel`), ...inv.hardware];
-  // The top match is the yellow card; its muted text uses the yellow-safe token.
+  // Muted text on the yellow top card needs its own token to keep contrast.
   const top = place === 1;
   const muted = top ? "text-sun-muted" : "text-muted-foreground";
   const r = reveal((place - 1) % 2);
   return (
     <m.li
-      // Glide to a new place only when the place changes. Without layoutDependency, Motion measures the layout of
-      // every card on every slider tick, which is what made dragging the slider stutter.
+      // Without layoutDependency Motion measures every card on every slider tick, and the slider stutters.
       layout="position"
       layoutDependency={place}
       {...r}
@@ -79,7 +78,7 @@ function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDe
   );
 }
 
-// Re-render a card only when what it shows changes, so moving the slider does not redraw all of them.
+// rank() returns new objects on every slider tick, so compare what the card shows.
 export const RankCard = memo(
   Card,
   (a, b) =>

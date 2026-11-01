@@ -1,5 +1,4 @@
-// The fields shown in the detail drawer and the compare table, as plain text ("" = not in our data).
-// Only type imports, so plain Node can run the tests.
+// Fields shown in the detail drawer and the compare table, as plain text ("" = not in our data).
 import type { Investigation } from "./data.ts";
 
 export type Field = { label: string; value: (inv: Investigation) => string };

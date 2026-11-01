@@ -8,11 +8,10 @@ import { RankView } from "@/components/rank/RankView";
 import cache from "@/data/demo-answers.json";
 import type { Answer } from "@/lib/ask";
 import { investigations } from "@/lib/data";
+import { CHALLENGE_URL } from "@/lib/links";
 import { AREAS } from "@/lib/score";
 
-const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/";
-
-// Hero numbers, counted from the dataset at build time. Nothing is typed in by hand.
+// Counted from the dataset at build time, never typed in by hand.
 const numbers = {
   total: investigations.length,
   withOxygen: investigations.filter((i) => i.o2_min_pct !== null || i.o2_max_pct !== null).length,
@@ -33,7 +32,7 @@ export default function Home() {
       <main>
         <section className="mx-auto grid max-w-6xl items-start gap-x-10 gap-y-10 px-4 pt-12 pb-4 sm:px-6 sm:pt-16 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            {/* The hero fades in with CSS (rise-in), so it shows on the first paint, before JavaScript loads. */}
+            {/* CSS animation, not Motion, so the hero shows on the first paint before JavaScript loads. */}
             <div className="rise-in">
               <p className="card-label text-accent-foreground">Microgravity combustion and crew fire safety</p>
               <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">
@@ -42,7 +41,7 @@ export default function Home() {
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg">
                 Apollo 1&apos;s crew died in a 1967 test fire in a cabin full of oxygen. As Artemis heads back to the
                 Moon, habitats will run richer oxygen at lower pressure, where materials burn more easily.{" "}
-                <a href={CHALLENGE} target="_blank" rel="noreferrer" className="whitespace-nowrap underline decoration-input underline-offset-4 hover:text-foreground">
+                <a href={CHALLENGE_URL} target="_blank" rel="noreferrer" className="whitespace-nowrap underline decoration-input underline-offset-4 hover:text-foreground">
                   Source: NASA challenge brief
                 </a>
               </p>

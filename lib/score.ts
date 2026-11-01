@@ -1,6 +1,7 @@
-// Ranking formula from .plans/spec.md section 6. Shown to users in "How the score works".
-// Only type imports, so plain Node can run the tests.
+// Ranking formula from .plans/spec.md section 6, explained to users in HowItWorks.tsx.
+// Imports only local .ts files so plain Node can run the tests.
 import type { Investigation } from "./data.ts";
+import { span } from "./range.ts";
 
 export type Habitat = "spacecraft" | "station" | "moon_base";
 export type Area = "all" | "prevention" | "detection" | "suppression";
@@ -21,16 +22,10 @@ export const MOON_O2_PCT = 26.5;
 export const MOON_PSIA = 10.2;
 const KPA_PER_PSI = 6.894757;
 
-function range(min: number | null, max: number | null): [number, number] | null {
-  const lo = min ?? max;
-  const hi = max ?? min;
-  return lo === null || hi === null ? null : [lo, hi];
-}
-
-// 1 for each half: reaches 26.5% oxygen or more; reaches 10.2 psia or less (rounded to 0.1 psia like NASA's list).
+// Pressure is rounded to 0.1 psia like NASA's list, so 70.4 kPa counts as 10.2 psia.
 function moonConditions(inv: Investigation) {
-  const o2 = range(inv.o2_min_pct, inv.o2_max_pct);
-  const p = range(inv.pressure_kpa_min, inv.pressure_kpa_max);
+  const o2 = span(inv.o2_min_pct, inv.o2_max_pct);
+  const p = span(inv.pressure_kpa_min, inv.pressure_kpa_max);
   const highO2 = o2 !== null && o2[1] >= MOON_O2_PCT;
   const lowP = p !== null && Math.round((p[0] / KPA_PER_PSI) * 10) / 10 <= MOON_PSIA;
   return { highO2, lowP };
@@ -52,7 +47,7 @@ export function scoreInvestigation(inv: Investigation, c: Choice): Scored {
     else if (lowP) reasons.push(`tested at ${MOON_PSIA} psia or less`);
   }
 
-  const o2 = range(inv.o2_min_pct, inv.o2_max_pct);
+  const o2 = span(inv.o2_min_pct, inv.o2_max_pct);
   if (o2) {
     const tested = o2[0] === o2[1] ? `${o2[0]}%` : `${o2[0]} to ${o2[1]}%`;
     if (c.oxygen >= o2[0] && c.oxygen <= o2[1]) {

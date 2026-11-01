@@ -5,7 +5,6 @@ import { Sources } from "@/components/detail/Sources";
 import type { Investigation } from "@/lib/data";
 import { EMPTY, FIELDS } from "@/lib/fields";
 
-// Loaded and mounted only when a card or graph dot is opened (see LazyDetail.ts).
 export function DetailDrawer({ inv, onClose }: { inv: Investigation; onClose: () => void }) {
   return (
     <Modal

@@ -1,8 +1,7 @@
+import { PSI_URL } from "@/lib/links";
 import { SpaceAppsLogo } from "./SpaceAppsLogo";
 
-const PSI = "https://science.nasa.gov/physical-sciences-informatics-psi/";
-
-// Header height 64px fits the 35px logo plus its brand-guide clear space (14px) above and below.
+// h-16 fits the 35px logo plus its 14px brand-guide clear space above and below.
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 bg-background">
@@ -21,7 +20,7 @@ export function SiteHeader() {
           <a href="#gaps" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Gaps
           </a>
-          <a href={PSI} target="_blank" rel="noreferrer" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
+          <a href={PSI_URL} target="_blank" rel="noreferrer" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Data: NASA PSI ↗
           </a>
         </nav>

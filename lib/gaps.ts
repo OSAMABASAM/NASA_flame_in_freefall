@@ -1,8 +1,8 @@
-// Research gaps: which oxygen × pressure × gravity conditions the investigations covered.
-// An investigation counts in a cell only when the data states all three values; a min–max range counts in
-// every band it touches. Missing values go to "not reported", never into a cell.
-// Only type imports, so plain Node can run the tests.
+// Which oxygen x pressure x gravity conditions the investigations covered. An investigation counts in a cell only
+// when the data states all three; a range counts in every band it touches. Missing values go to "not reported".
+// Imports only local .ts files so plain Node can run the tests.
 import type { Investigation } from "./data.ts";
+import { span } from "./range.ts";
 
 type Band = { id: string; label: string; words: string; lo: number; hi: number; hiIn?: boolean; loOut?: boolean };
 
@@ -26,12 +26,6 @@ export const GRAVITY = [
   { id: "moon", label: "Moon", words: "on the Moon" },
   { id: "mars", label: "Mars", words: "on Mars" },
 ] as const;
-
-// [min, max] from the data; one known end is treated as a single value. null = not reported.
-function span(min: number | null, max: number | null): [number, number] | null {
-  if (min === null && max === null) return null;
-  return [min ?? max!, max ?? min!];
-}
 
 // Does the closed range [a, b] touch the band? Bands include lo and exclude hi, unless loOut or hiIn say otherwise.
 export function touches([a, b]: [number, number], band: Band) {
@@ -61,7 +55,6 @@ export function coverage(invs: Investigation[]) {
     oxygen: placed.filter((x) => !x.o2).length,
     pressure: placed.filter((x) => !x.p).length,
     gravity: placed.filter((x) => !x.g.length).length,
-    // Investigations that miss at least one of the three, so they sit in no cell.
     any: placed.filter((x) => !x.o2 || !x.p || !x.g.length).length,
   };
   const partialGravity = invs.filter((i) => i.gravity.some((g) => g === "moon" || g === "mars")).length;

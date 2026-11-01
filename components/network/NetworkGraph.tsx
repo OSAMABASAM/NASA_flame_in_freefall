@@ -3,14 +3,14 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY, type SimulationNodeDatum } from "d3-force";
 import type { Investigation } from "@/lib/data";
-import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
+import type { NetLink, NetNode, Network } from "@/lib/network";
 
 type Pt = { x: number; y: number };
 type Box = { w: number; h: number };
 
 const radius = (n: NetNode) => 4 + Math.sqrt(n.degree) * 1.8;
 const PAD = 4;
-const CLICK_SLOP = 4; // a press that moves less than this (in px) is a click, not a drag
+const CLICK_SLOP = 4; // px a press may move and still count as a click
 
 // Keeps a dot and its id label (below the dot) inside the frame.
 function clamp(p: Pt, n: NetNode, box: Box): Pt {
@@ -69,15 +69,14 @@ function wedge(r: number, i: number, count: number) {
 const areaColor = (a: string) => (["prevention", "detection", "suppression"].includes(a) ? `var(--area-${a})` : "var(--area-none)");
 
 export function NetworkGraph({
-  investigations,
+  network: { nodes, links },
   onOpen,
   onHover,
 }: {
-  investigations: Investigation[];
+  network: Network;
   onOpen: (inv: Investigation) => void;
   onHover: (node: NetNode | null, links: NetLink[]) => void;
 }) {
-  const { nodes, links } = useMemo(() => buildNetwork(investigations), [investigations]);
   const index = useMemo(() => new Map(nodes.map((n, i) => [n.id, i])), [nodes]);
   const svg = useRef<SVGSVGElement>(null);
   const [box, setBox] = useState<Box | null>(null);
@@ -160,11 +159,6 @@ export function NetworkGraph({
     return () => el.removeEventListener("touchstart", stop);
   }, []);
 
-  // The browser test (tests/e2e/network-drag.cjs) waits for this before reading dot positions from the page.
-  useEffect(() => {
-    if (pos.length) Object.assign(window, { __networkGraph: { ready: true } });
-  }, [pos.length]);
-
   const ready = box && pos.length === nodes.length;
   return (
     <div className="h-[560px] w-full sm:h-[520px]">
@@ -190,7 +184,8 @@ export function NetworkGraph({
             </g>
             {nodes.map((n, i) => {
               const r = radius(n), on = n.id === hover;
-              const colors = n.areas.length ? n.areas.map(areaColor) : ["var(--area-none)"];
+              const areas = n.inv.safety_area;
+              const colors = areas.length ? areas.map(areaColor) : ["var(--area-none)"];
               return (
                 <g
                   key={n.id}
