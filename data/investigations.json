@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T15:26:33.786Z",
+  "generated_at": "2026-11-01T15:45:41.782Z",
   "count": 20,
   "items": [
     {
@@ -13,10 +13,10 @@
       "fuel_type": [
         "solid"
       ],
-      "fuel_detail": "SIBAL cotton-fiberglass fabric, Nomex, Ultem, PMMA slabs and spheres, paraffin and Japan wax candles",
+      "fuel_detail": "SIBAL cotton and fiberglass fabric, Nomex, Ultem, PMMA slabs and spheres, paraffin and Japan wax candles",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
-        "Small flow duct (76 mm x 76 mm) with variable-speed fan"
+        "Small flow duct (76 mm x 76 mm) with variable speed fan"
       ],
       "o2_min_pct": null,
       "o2_max_pct": null,
@@ -25,7 +25,7 @@
       "flow_min_cm_s": null,
       "flow_max_cm_s": 40,
       "sensors": [],
-      "objective": "Bridge the gap between the normal-gravity NASA-STD-6001 Test 1 and real material flammability in microgravity, and test an inert gaseous extinguishing agent on different materials and geometries",
+      "objective": "Bridge the gap between the normal gravity NASA-STD-6001 Test 1 and real material flammability in microgravity, and test an inert gaseous extinguishing agent on different materials and geometries",
       "variables": "Material, sample shape (flat, sphere, cylinder, wake flames), flow direction (opposed or concurrent) and flow speed up to 40 cm/s",
       "habitats": [
         "spacecraft"
@@ -68,7 +68,7 @@
         "O2, CO2 and CO measurement",
         "Cameras"
       ],
-      "objective": "Ignition, flame growth, flame spread and extinction limits of solid fuels in low-speed forced flow in microgravity",
+      "objective": "Ignition, flame growth, flame spread and extinction limits of solid fuels in low speed forced flow in microgravity",
       "variables": "Flow speed and direction; ambient oxygen (lowered below 21% by adding nitrogen); sample geometry (rods, spherical sections, slabs, films, fabric)",
       "habitats": [
         "spacecraft"
@@ -108,16 +108,16 @@
         "Two cameras",
         "Thermocouples (flow, flame and plume temperature)",
         "Two radiometers",
-        "Solid-state pressure, CO2 and O2 sensors",
+        "Solid state pressure, CO2 and O2 sensors",
         "Two anemometers"
       ],
-      "objective": "How fast a large fire grows in low gravity, and low-g flammability limits compared with NASA's normal-gravity screening test",
+      "objective": "How fast a large fire grows in low gravity, and low gravity flammability limits compared with NASA's normal gravity screening test",
       "variables": "Flow direction (concurrent or opposed); same material and flow speed",
       "habitats": [
         "spacecraft"
       ],
       "earth_application": "",
-      "relevance_note": "Large-scale fire on an exploration vehicle without risk to a crew (PSI)",
+      "relevance_note": "Large fire on an exploration vehicle without risk to a crew (PSI)",
       "source_url": [
         "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
         "https://doi.org/10.60555/0t15-1z43"
@@ -151,10 +151,10 @@
         "Two cameras",
         "Thermocouples (flow, flame and plume temperature)",
         "Two radiometers",
-        "Solid-state pressure, CO2 and O2 sensors",
+        "Solid state pressure, CO2 and O2 sensors",
         "Two anemometers"
       ],
-      "objective": "How fast a large fire grows in low gravity, and low-g flammability limits compared with NASA's normal-gravity screening test",
+      "objective": "How fast a large fire grows in low gravity, and low gravity flammability limits compared with NASA's normal gravity screening test",
       "variables": "Material and thickness, flow direction; flow 20 cm/s in the PSI table (the PSI text also mentions 30 cm/s for some samples)",
       "habitats": [
         "spacecraft"
@@ -194,10 +194,10 @@
         "Two cameras",
         "Thermocouples (flow, flame and plume temperature)",
         "Two radiometers",
-        "Solid-state pressure, CO2 and O2 sensors",
+        "Solid state pressure, CO2 and O2 sensors",
         "Two anemometers"
       ],
-      "objective": "How fast a large fire grows in low gravity, and low-g flammability limits compared with NASA's normal-gravity screening test",
+      "objective": "How fast a large fire grows in low gravity, and low gravity flammability limits compared with NASA's normal gravity screening test",
       "variables": "Flow direction (concurrent or opposed) at 30 cm/s, compared with 20 cm/s in Saffire-I",
       "habitats": [
         "spacecraft"
@@ -246,7 +246,7 @@
         "spacecraft"
       ],
       "earth_application": "Smoke detectors for other extreme places on Earth, such as submarines or underwater laboratories (PSI)",
-      "relevance_note": "Basis for an advanced fire detector for future long-duration spacecraft (PSI)",
+      "relevance_note": "Basis for an advanced fire detector for future spacecraft on long missions (PSI)",
       "source_url": [
         "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
         "https://doi.org/10.60555/gd4k-8h62"
@@ -266,7 +266,7 @@
       "fuel_type": [
         "solid"
       ],
-      "fuel_detail": "Overheated (not burning) materials: Kapton, silicone, lampwick, Teflon, Pyrell fire-retardant foam",
+      "fuel_detail": "Overheated (not burning) materials: Kapton, silicone, lampwick, Teflon, Pyrell fire retardant foam",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
         "Comparative Soot Diagnostic hardware"
@@ -283,12 +283,12 @@
         "M-pass instrument (new in SAME-R)"
       ],
       "objective": "Repeat SAME with new materials and wider conditions to measure smoke particle size in low gravity",
-      "variables": "Material, higher heating temperatures, no-flow heating, aging time; 66 test points",
+      "variables": "Material, higher heating temperatures, heating without airflow, aging time; 66 test points",
       "habitats": [
         "spacecraft"
       ],
       "earth_application": "Smoke detectors for other extreme places on Earth, such as submarines or underwater laboratories (PSI)",
-      "relevance_note": "Basis for an advanced fire detector for future long-duration spacecraft (PSI)",
+      "relevance_note": "Basis for an advanced fire detector for future spacecraft on long missions (PSI)",
       "source_url": [
         "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
         "https://doi.org/10.60555/2np7-jv14"
@@ -440,7 +440,7 @@
         "Color camera",
         "Chamber pressure and temperature sensors"
       ],
-      "objective": "Extend FLEX to fuels and conditions like real combustors, with benchmark data on two-component droplets",
+      "objective": "Extend FLEX to fuels and conditions like real combustors, with benchmark data on droplets made of two fuels",
       "variables": "Fuel, gas mixture (O2 with nitrogen or helium), pressure, droplet size, droplet speed, droplet spacing",
       "habitats": [],
       "earth_application": "",
@@ -474,12 +474,12 @@
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
       "sensors": [
-        "Black-and-white camera",
+        "Black and white camera",
         "UV camera (OH* emission)",
-        "Narrow-band and wide-band radiometers"
+        "Narrow band and wide band radiometers"
       ],
-      "objective": "Cool-flame burning of n-dodecane and mixtures at different pressures and helium dilution",
-      "variables": "Pressure (0.5 to 5 atm), oxygen, helium dilution, fuel mixture, fiber-supported or free droplet",
+      "objective": "Cool flame burning of n-dodecane and mixtures at different pressures and helium dilution",
+      "variables": "Pressure (0.5 to 5 atm), oxygen, helium dilution, fuel mixture, droplet held on a fiber or free floating",
       "habitats": [],
       "earth_application": "Understanding of fuel octane and cetane numbers in engines (PSI)",
       "relevance_note": "Fundamental study; PSI says it supports the design of safer spacecraft systems",
@@ -523,7 +523,7 @@
         "spacecraft"
       ],
       "earth_application": "",
-      "relevance_note": "Flames kept burning without airflow in elevated-oxygen atmospheres considered for future spacecraft; at 21% they self-extinguished (PSI). Pressure per test is not listed",
+      "relevance_note": "Flames kept burning without airflow in atmospheres with extra oxygen considered for future spacecraft; at 21% they went out on their own (PSI). Pressure per test is not listed",
       "source_url": [
         "https://psi.nasa.gov/physci/repo/data/investigations/PSI-20",
         "https://doi.org/10.60555/vb93-3y72"
@@ -579,7 +579,7 @@
       "fuel_type": [
         "gas"
       ],
-      "fuel_detail": "Methane and ethylene (pure or diluted with nitrogen) on a coflow or gas-jet burner",
+      "fuel_detail": "Methane and ethylene (pure or diluted with nitrogen) on a coflow or gas jet burner",
       "hardware": [
         "Combustion Integrated Rack (CIR)"
       ],
@@ -590,7 +590,7 @@
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
       "sensors": [
-        "High-resolution cameras",
+        "High resolution cameras",
         "Thermopile detectors (flame radiation)",
         "Ion current measurement"
       ],
@@ -598,7 +598,7 @@
       "variables": "Field strength and polarity, fuel and dilution, burner type, coflow velocity",
       "habitats": [],
       "earth_application": "Electric fields could reduce pollutants from combustion on Earth (PSI)",
-      "relevance_note": "The challenge text describes it as a partial-gravity proxy",
+      "relevance_note": "The challenge text describes it as a partial gravity proxy",
       "source_url": [
         "https://psi.nasa.gov/physci/repo/data/investigations/PSI-22",
         "https://doi.org/10.60555/se5a-8c73",
@@ -631,8 +631,8 @@
       "sensors": [
         "Still and video cameras"
       ],
-      "objective": "Smoke point (when a flame starts to release soot) of jet flames in co-flowing air in microgravity",
-      "variables": "Fuel, burner diameter, co-flow air speed, fuel flow; 526 flames",
+      "objective": "Smoke point (when a flame starts to release soot) of jet flames in coflowing air in microgravity",
+      "variables": "Fuel, burner diameter, coflow air speed, fuel flow; 526 flames",
       "habitats": [
         "spacecraft"
       ],
@@ -658,7 +658,7 @@
       "fuel_detail": "Methane, ethylene and ethane, pure or diluted with nitrogen",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
-        "SPICE fan-driven flow duct"
+        "SPICE flow duct with a fan"
       ],
       "o2_min_pct": null,
       "o2_max_pct": null,
@@ -667,7 +667,7 @@
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
       "sensors": [
-        "High-resolution camera",
+        "High resolution camera",
         "Flow and temperature sensors"
       ],
       "objective": "Structure and stability (liftoff) of laminar diffusion flames in microgravity",
@@ -709,7 +709,7 @@
         "Photomultiplier tubes",
         "Thermocouples"
       ],
-      "objective": "Soot-inception and extinction limits of normal and inverse spherical flames",
+      "objective": "Soot inception and extinction limits of normal and inverse spherical flames",
       "variables": "Flow rate, fuel dilution with nitrogen, oxygen, pressure, normal or inverse flame",
       "habitats": [],
       "earth_application": "More efficient, cleaner combustors on Earth (PSI)",
@@ -745,7 +745,7 @@
         "OH* and CH* emission imaging",
         "Soot luminosity",
         "Laser extinction",
-        "Thin-filament pyrometry"
+        "Thin filament pyrometry"
       ],
       "objective": "Weak coflow flames and soot at extreme fuel dilution, to test computer models",
       "variables": "Fuel, fuel dilution, flow velocity",

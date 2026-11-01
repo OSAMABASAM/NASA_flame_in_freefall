@@ -46,6 +46,10 @@
   --area-detection: #eb6834;
   --area-suppression: #1baf7a;
   --area-none: #a9abb0;
+  /* Hover glow: fire orange light from the left side plus a thin ring; soft yellow on orange surfaces. */
+  --glow: rgb(255 106 31 / 0.45);
+  --glow-ring: rgb(255 106 31 / 0.4);
+  --glow-sun: rgb(255 214 64 / 0.75);
   --elev-card: 0 1px 2px rgb(0 0 0 / 0.04);
   --elev-lift: 0 2px 6px rgb(0 0 0 / 0.06), 0 16px 40px rgb(0 0 0 / 0.12);
 }
@@ -113,6 +117,46 @@
 /* Compact pill badge for a card corner. */
 @utility pill {
   @apply inline-flex h-5 items-center rounded-full px-2 text-[11px] font-semibold whitespace-nowrap;
+}
+
+/* Hover glow on everything you can point at. Outside Tailwind's layers on purpose, so it wins over shadow and ring
+   utilities on the same element. Boxes (cards, cells, buttons, pills, menus, checkboxes) get a side light;
+   text links and the logo get a soft glow on the text. Only on devices that really hover, plus keyboard focus. */
+.glow,
+button,
+select,
+summary,
+a,
+label:has(> input[type="checkbox"]) {
+  transition-property: color, background-color, border-color, text-decoration-color, box-shadow, text-shadow, filter;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.bg-fire.glow,
+.bg-primary.glow {
+  --glow: var(--glow-sun);
+  --glow-ring: var(--glow-sun);
+}
+@media (hover: hover) {
+  .glow:hover,
+  button:hover,
+  select:hover,
+  summary:hover,
+  label:has(> input[type="checkbox"]):hover {
+    box-shadow: 0 0 0 1px var(--glow-ring), -10px 0 28px -6px var(--glow), var(--elev-lift);
+  }
+  a:not(.glow):hover {
+    text-shadow: 0 0 14px var(--glow);
+  }
+  a:hover :is(svg, img) {
+    filter: drop-shadow(-4px 0 10px var(--glow));
+  }
+}
+.glow:focus-visible,
+button:focus-visible,
+select:focus-visible,
+a.glow:focus-visible {
+  box-shadow: 0 0 0 1px var(--glow-ring), -10px 0 28px -6px var(--glow);
 }
 
 @media (prefers-reduced-motion: reduce) {

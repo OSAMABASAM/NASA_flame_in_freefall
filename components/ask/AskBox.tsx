@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { EXAMPLE_QUESTIONS, type Answer } from "@/lib/ask";
+import { plainDashes } from "@/lib/text";
 
 type Props = { cache: Record<string, Answer> };
 
@@ -94,12 +95,12 @@ export function AskBox({ cache }: Props) {
         )}
         {error && <p className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-destructive">{error}</p>}
         {result && (
-          <div className="rounded-2xl bg-card p-6">
+          <div className="glow rounded-2xl bg-card p-6">
             <div className="mb-3 flex items-start justify-between gap-3">
               <p className="card-label text-muted-foreground">AI answer</p>
               {result.cited.length > 0 && <span className="pill bg-sun text-sun-foreground">{result.cited.length} cited</span>}
             </div>
-            <AnswerText text={result.answer} />
+            <AnswerText text={plainDashes(result.answer)} />
             <p className="mt-4 border-t pt-3 text-xs text-muted-foreground">
               Written only from the investigation data on this page. Click an id to jump to that investigation.
             </p>

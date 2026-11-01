@@ -35,12 +35,12 @@ export default function Home() {
         <section className="mx-auto grid max-w-6xl items-start gap-x-10 gap-y-10 px-4 pt-12 pb-4 sm:px-6 sm:pt-16 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <Reveal>
-              <p className="card-label text-accent-foreground">Microgravity combustion · crew fire safety</p>
+              <p className="card-label text-accent-foreground">Microgravity combustion and crew fire safety</p>
               <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight text-balance sm:text-5xl">
                 Which space fire experiments matter for your habitat?
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg">
-                Apollo 1&apos;s crew died in a 1967 test fire in an oxygen-filled cabin. As Artemis heads back to the
+                Apollo 1&apos;s crew died in a 1967 test fire in a cabin full of oxygen. As Artemis heads back to the
                 Moon, habitats will run richer oxygen at lower pressure, where materials burn more easily.{" "}
                 <a href={CHALLENGE} target="_blank" rel="noreferrer" className="whitespace-nowrap underline decoration-input underline-offset-4 hover:text-foreground">
                   Source: NASA challenge brief
