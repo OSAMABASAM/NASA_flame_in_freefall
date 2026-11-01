@@ -6,10 +6,12 @@
     "data": "node scripts/build-data.mjs",
     "predev": "npm run data",
     "dev": "next dev --turbopack",
-    "prebuild": "npm run data",
+    "prebuild": "npm run data && npm run cache",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cache": "node --no-warnings scripts/cache-answers.mjs",
+    "test": "node --test tests/*.test.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

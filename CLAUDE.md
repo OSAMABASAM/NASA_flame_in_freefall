@@ -10,7 +10,7 @@
 - Event: NASA Space Apps Challenge 2026, challenge "Flame in Freefall". Solo, online. Deadline and video rules: unknown yet.
 - Judging: Impact, Creativity, Validity, Relevance, Presentation, 1 to 5 each.
 - Demo flow: ask box → cited answer → rank by habitat and oxygen → detail → compare.
-- Live link:
+- Live link: https://flame-in-freefall-five.vercel.app
 - SIMPLE BUILD: read `.plans/spec.md` section 0 (simplicity contract) before every task. Three features only. No GSAP or Lenis in this project.
 - The idea is LOCKED. Skip /hack-start and /hack-plan. Plans are ready in `.plans/` (inputs, idea, spec, tasks, design-brief). Start with `/hack-build` Task 0.
 - Data lives in `data/investigations.csv` and is built with `npm run data`. Never edit `investigations.json` by hand. Never guess a value: leave it empty.

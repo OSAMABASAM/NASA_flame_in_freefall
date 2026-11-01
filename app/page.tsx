@@ -1,3 +1,6 @@
+import { AskBox } from "@/components/ask/AskBox";
+import cache from "@/data/demo-answers.json";
+import type { Answer } from "@/lib/ask";
 import { investigations } from "@/lib/data";
 
 export default function Home() {
@@ -7,6 +10,7 @@ export default function Home() {
       <p className="mt-2 text-muted-foreground">
         Which NASA microgravity fire experiments matter for a crew habitat, and why.
       </p>
+      <AskBox cache={cache as Record<string, Answer>} />
       <h2 className="mt-10 text-lg font-medium">Investigations ({investigations.length})</h2>
       {investigations.some((inv) => inv.data_status === "challenge_text") && (
         <p className="mt-1 text-sm text-muted-foreground">
@@ -15,7 +19,7 @@ export default function Home() {
       )}
       <ul className="mt-3 divide-y rounded-lg border">
         {investigations.map((inv) => (
-          <li key={inv.id} className="px-4 py-3">
+          <li key={inv.id} id={`inv-${inv.id}`} className="scroll-mt-4 px-4 py-3 target:bg-muted">
             <span className="font-mono text-sm text-muted-foreground">{inv.id}</span> {inv.name}
             {inv.data_status === "challenge_text" && <span className="text-muted-foreground"> *</span>}
           </li>
