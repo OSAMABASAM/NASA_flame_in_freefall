@@ -22,6 +22,8 @@ export type Investigation = {
   relevance_note: string;
   source_url: string[];
   data_status: string;
+  /** Gravity level(s) the tests ran in, as the source states it (PSI "Project Type"). Empty = not reported. */
+  gravity: string[];
 };
 
 export const investigations = dataset.items as Investigation[];

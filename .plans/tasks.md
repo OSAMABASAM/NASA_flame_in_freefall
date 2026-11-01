@@ -52,6 +52,16 @@ Run `/hack-build`. One task per session where possible. The whole build fits in 
 - `react-force-graph-2d` (latest stable, 1.29.2), loaded only in the browser. Light theme colors are tokens in `globals.css` (validated colorblind-safe). Zoom and pan are off so the page still scrolls on a phone. With reduced motion, the layout is computed before the first paint and never moves.
 - **Accept:** Playwright at 1440 and 390 wide, normal and reduced motion: graph shows, hover names the neighbors, click opens the drawer, no horizontal scroll, no console errors; with reduced motion the canvas does not change after load; Rank drawer and Compare still work; tests, tsc, lint and build pass.
 
+## Task 6c: research gaps (added by Osama on 1 Nov) — owns `lib/gaps.ts`, `components/gaps/`
+- Its own section under the network ("Research gaps"), plus a "Gaps" link in the header. Same bento cards as the rest of the site.
+- Coverage grid: oxygen bands (below 21%, 21 to 26%, 26.5 to 34%, above 34%) × pressure bands (below 71 kPa, 71 to 102 kPa, above 102 kPa) × gravity (microgravity, Moon, Mars). Each cell counts the investigations that ran there, computed from `data/investigations.json`.
+- A cell counts an investigation only when the data states its oxygen, pressure and gravity. A range counts in every band it touches. Missing values go to a separate "not reported" count, never guessed.
+- New CSV column `gravity` (`microgravity` | `moon` | `mars`). All 20 rows are `microgravity`: every PSI record says "Project Type: Microgravity Investigation" (checked 1 Nov).
+- Empty cells in fire orange, one plain-English line each. Moon gravity + 26.5 to 34% oxygen + low pressure is marked "Moon base conditions".
+- One headline card with the strongest true finding (how many investigations ran in partial gravity), linking LUCI and FM2 as coming next.
+- Same scroll motion: each card glides up and fades in once as it enters the screen (Motion `whileInView`, 500 ms like the hero; no movement with reduced motion).
+- **Accept:** counting tests pass; Playwright desktop 1440 and phone 390 screenshots look clean; no horizontal scroll; no console errors; tests, tsc, lint and build pass.
+
 ## Task 7: demo-check + video (Day 2 = 2 Nov, afternoon)
 Plan A (Claude records, try this first):
 - Run the app inside this cloud session (`npm run build && npm start`, or `npm run dev`) and use Playwright against localhost, so no outside network is needed. The example questions answer from the cache, so no AI call is needed during recording.
@@ -71,7 +81,7 @@ Plan B (Osama records): he records screen + voice in one take with OBS Studio, f
 - Fix anything that needed Claude, and update `docs/DATA_DAY.md`.
 - **Accept:** Osama did the whole data day alone in the browser in under 30 minutes.
 
-Only stretch task: 6b (network view), added by Osama. Simple and working beats bigger and broken.
+Only stretch tasks: 6b (network view) and 6c (research gaps), added by Osama. Simple and working beats bigger and broken.
 
 ## Progress
 - Done: Task 0 (Next.js 16 + React 19.3 + Tailwind 4; shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; `npm run data` runs before dev and build). Live link: https://flame-in-freefall-five.vercel.app (in CLAUDE.md).
@@ -94,5 +104,6 @@ Only stretch task: 6b (network view), added by Osama. Simple and working beats b
 - Demo blocker found on 1 Nov (not fixed here): on the live site the cached answer for "Which experiments matter most for a Moon Base at 30% oxygen?" is "That is not in the data yet." (Gemini). Demo step 2 needs this fixed before Task 7: likely the prompt or the question wording, since no PSI row names the Moon.
 - Done: Task 6b (network view, react-force-graph-2d 1.29.2). `lib/network.ts` builds nodes and links (1 new test, 10 total). `components/network/NetworkView.tsx` (section, legend, hover line, list view, its own copy of the existing DetailDrawer) and `NetworkGraph.tsx` (canvas, client only). On a phone the layout is pulled into a tall shape. Verified: Playwright at 1440 and 390, with and without reduced motion: hover, click → drawer, static under reduced motion, no horizontal scroll, no console errors; Rank drawer and Compare unchanged; tests, tsc, lint, build pass. Known: a click in the first half second after load can be missed while the graph library starts.
 - Fixed 1 Nov (after Task 6b went live): (1) only some network nodes could be dragged. Cause: the graph library finds the node under the pointer on a hidden hit map that it redraws at most every 800 ms, so while dots were still moving it lagged behind what was drawn. Now the layout is computed before the first paint, the hit map is refreshed on every simulation step, the hit area = the drawn dot + 3 px, dots never overlap (collision force) and never leave the frame (bounds force), and dragging works with reduced motion too (neighbors stay put). Playwright drags and clicks all 20 nodes one by one: 20/20 on desktop mouse, phone touch and reduced motion. (2) Speed: the graph loads only when its section is near the screen and its drawing loop pauses off screen; after a drag it settles in at most 60 frames and stops. Rank cards are memoized and the ranking follows the slider at lower priority (`useDeferredValue`); the card glide is unchanged. The hero entrance is now a glide without the fade, because a fade from opacity 0 delayed LCP by about 1.9 s. Lighthouse mobile 88 → 97 to 99; LCP 3.2 s → 0.92 s; JS loaded with the page 253 → 195 KB; slider worst frame 83 to 117 ms → 50 to 67 ms at 4x CPU slowdown.
+- Done: Task 6c (research gaps). `lib/gaps.ts` counts the grid (4 new tests, 14 total); `components/gaps/GapsView.tsx` shows a headline card, a "not reported" card, one grid per gravity and a "How we count" card; `components/motion/Reveal.tsx` is the scroll glide. New `gravity` column in the CSV, filled `microgravity` for all 20 rows from the PSI "Project Type". Today the grid says: 0 of 20 ran in partial gravity, so all 24 Moon and Mars cells are orange; only 5 investigations state both oxygen and pressure (FLEX, FLEX-2, CFI, ACME-CFI-G, ACME-FLAME-DESIGN), and they cover every microgravity cell. Verified: tests, tsc, lint, build, Playwright desktop and phone screenshots, no horizontal scroll, no console errors.
 - Next: fix the Moon Base cached answer, then Task 7 (demo-check + video).
 - Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. Fonts: system stack first, Inter via `next/font/google` as fallback (downloads at build time).

@@ -18,6 +18,9 @@ export function SiteHeader() {
           <a href="#network" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Network
           </a>
+          <a href="#gaps" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
+            Gaps
+          </a>
           <a href={PSI} target="_blank" rel="noreferrer" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Data: NASA PSI ↗
           </a>

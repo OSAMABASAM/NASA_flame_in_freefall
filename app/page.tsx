@@ -1,4 +1,5 @@
 import { AskBox } from "@/components/ask/AskBox";
+import { GapsView } from "@/components/gaps/GapsView";
 import { HeroStats } from "@/components/hero/HeroStats";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -54,6 +55,7 @@ export default function Home() {
         </section>
         <RankView investigations={investigations} />
         <NetworkView investigations={investigations} />
+        <GapsView investigations={investigations} />
       </main>
       <SiteFooter investigations={investigations} />
     </>

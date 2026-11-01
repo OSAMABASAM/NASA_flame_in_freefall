@@ -32,6 +32,8 @@
   --fire: #ff6a1f;
   --fire-foreground: #17181a;
   --fire-muted: #4a1d05;
+  /* Research gaps: untested cells. Orange at 12% on white, solid so contrast is exact: fire-text on it 4.9. */
+  --fire-soft: #ffede4;
   --sun: #ffe47a;
   --sun-foreground: #17181a;
   --sun-muted: #5c4f1c;
@@ -73,6 +75,7 @@
   --color-fire: var(--fire);
   --color-fire-foreground: var(--fire-foreground);
   --color-fire-muted: var(--fire-muted);
+  --color-fire-soft: var(--fire-soft);
   --color-sun: var(--sun);
   --color-sun-foreground: var(--sun-foreground);
   --color-sun-muted: var(--sun-muted);
