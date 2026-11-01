@@ -12,16 +12,16 @@ export function SiteHeader() {
           Flame in Freefall
         </a>
         <nav className="hidden items-center gap-1 rounded-full bg-card p-1 text-sm font-medium text-muted-foreground sm:flex">
-          <a href="#rank" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
+          <a href="#rank" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Rank
           </a>
-          <a href="#network" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
+          <a href="#network" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Network
           </a>
-          <a href="#gaps" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
+          <a href="#gaps" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Gaps
           </a>
-          <a href={PSI} target="_blank" rel="noreferrer" className="rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
+          <a href={PSI} target="_blank" rel="noreferrer" className="glow rounded-full px-3.5 py-1.5 hover:bg-charcoal hover:text-charcoal-foreground">
             Data: NASA PSI ↗
           </a>
         </nav>

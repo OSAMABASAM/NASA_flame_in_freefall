@@ -1,5 +1,7 @@
 // Ask logic shared by the /api/ask route and scripts/cache-answers.mjs.
-// No imports, so plain Node can run it too. If a model is retired, change its name here.
+// Only a small local import, so plain Node can run it too. If a model is retired, change its name here.
+import { plainDashes } from "./text.ts";
+
 const GROQ_MODEL = "llama-3.3-70b-versatile";
 const GEMINI_MODEL = "gemini-3.5-flash-lite";
 
@@ -26,7 +28,7 @@ Rules:
 - After each claim, cite the investigation id in square brackets, like [FLEX] or [ACME-BRE].
 - Answer whenever any record is relevant, even partly. Say "That is not in the data yet." only when no record is relevant at all.
 - Never invent numbers. Only use numbers from the data or listed above. If a value is missing from the data, say it is not in the data.
-- Plain English, no jargon, no markdown headings, under 150 words.
+- Plain English, no jargon, no markdown headings, under 150 words. Never use dashes (— or –) as punctuation; use commas or full stops.
 - Units: oxygen in percent, pressure in kPa, airflow in cm/s.`;
 
 // Keep only the fields that help answer; drop empty ones to save tokens.
@@ -41,10 +43,10 @@ function slim(rows: Row[]) {
   );
 }
 
-// Rewrites "[A, B]" as "[A][B]", removes ids not in the dataset, lists cited ids once.
+// Rewrites "[A, B]" as "[A][B]", removes ids not in the dataset, lists cited ids once, and drops long dashes.
 export function checkCitations(text: string, ids: Set<string>) {
   const cited: string[] = [];
-  const answer = text
+  const answer = plainDashes(text)
     .replace(/\s*\[([^\]]+)\]/g, (_m, inside: string) => {
       const good = inside.split(",").map((s) => s.trim()).filter((id) => ids.has(id));
       for (const id of good) if (!cited.includes(id)) cited.push(id);

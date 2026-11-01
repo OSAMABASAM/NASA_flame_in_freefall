@@ -28,7 +28,7 @@ function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDe
       transition={{ ...r.transition, layout: { duration: 0.22 } }}
       id={`inv-${inv.id}`}
       className={cn(
-        "flex scroll-mt-20 flex-col rounded-2xl p-6 transition-shadow hover:shadow-lift target:ring-2 target:ring-charcoal has-checked:ring-2 has-checked:ring-charcoal",
+        "glow flex scroll-mt-20 flex-col rounded-2xl p-6 target:ring-2 target:ring-charcoal has-checked:ring-2 has-checked:ring-charcoal",
         top ? "bg-sun text-sun-foreground" : "bg-card",
       )}
     >
@@ -46,7 +46,7 @@ function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDe
       <p className={cn("mt-3 line-clamp-2 text-sm leading-relaxed", muted)}>{inv.objective}</p>
       <p className="mt-3 text-sm leading-relaxed">
         <span className="font-semibold">Why: </span>
-        {reasons.length ? reasons.join(" · ") : "no matching data for these settings."}
+        {reasons.length ? reasons.join(", ") : "no matching data for these settings."}
       </p>
       <ul className="mt-3 mb-4 flex flex-wrap gap-1.5 text-xs">
         {tags.map((t) => (

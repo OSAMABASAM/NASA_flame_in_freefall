@@ -49,7 +49,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
 
       {/* Opacity only: a transform on the graph or any parent would shift where a drag lands. */}
       <Reveal fadeOnly index={1}>
-        <div ref={box} className="mt-6 overflow-hidden rounded-2xl bg-card">
+        <div ref={box} className="glow mt-6 overflow-hidden rounded-2xl bg-card">
           <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
             <p className="card-label text-muted-foreground">Shared fuel, hardware or project</p>
             <span className="pill bg-charcoal text-charcoal-foreground">{list.links.length} links</span>
@@ -99,7 +99,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
             return (
               <li key={n.id} className="grid gap-1 py-3 sm:grid-cols-[11rem_1fr] sm:gap-4">
                 <button onClick={() => setDetail(n.inv)} className="text-left font-mono text-xs text-accent-foreground hover:underline">
-                  {n.id} · {n.degree} links
+                  {n.id}, {n.degree} links
                 </button>
                 <span className="text-secondary-foreground">
                   {mine.length ? mine.map((l) => `${other(l, n.id)} (${l.reasons.join(", ")})`).join("; ") : "No shared fuel, hardware or project in our data."}

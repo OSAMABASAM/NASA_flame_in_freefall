@@ -4,10 +4,10 @@ import { coverage, GRAVITY, OXYGEN, PRESSURE, type Cell } from "@/lib/gaps";
 import { cn } from "@/lib/utils";
 
 const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/";
-const card = "h-full rounded-2xl bg-card p-6 sm:p-7";
+const card = "glow h-full rounded-2xl bg-card p-6 sm:p-7";
 const eyebrow = "card-label text-muted-foreground";
 
-// Moon gravity + Moon-habitat oxygen + low pressure: the real conditions of a Moon base.
+// Moon gravity + Moon base oxygen + low pressure: the real conditions of a Moon base.
 const isMoonBase = (c: Cell) => c.gravity === "moon" && c.oxygen === "moon" && c.pressure === "low";
 
 export function GapsView({ investigations }: { investigations: Investigation[] }) {
@@ -148,7 +148,7 @@ function GravityGrid({ label, cells }: { label: string; cells: Cell[] }) {
                     key={p.id}
                     title={c.ids.length ? c.ids.join(", ") : c.line}
                     className={cn(
-                      "h-full rounded-xl p-2 align-top",
+                      "glow h-full rounded-xl p-2 align-top",
                       c.ids.length ? "bg-accent" : "bg-fire-soft",
                       isMoonBase(c) && "ring-2 ring-charcoal",
                     )}

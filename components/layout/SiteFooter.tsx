@@ -12,7 +12,7 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
     <footer className="mt-24">
       <div className="mx-auto grid max-w-6xl items-start gap-4 px-4 sm:px-6 md:grid-cols-[3fr_2fr]">
         <Reveal>
-          <section aria-labelledby="earth" className="rounded-2xl bg-card p-6 sm:p-7">
+          <section aria-labelledby="earth" className="glow rounded-2xl bg-card p-6 sm:p-7">
             <div className="flex items-start justify-between gap-3">
               <p className="card-label text-muted-foreground">Back on Earth</p>
               <span className="pill bg-charcoal text-charcoal-foreground">{earth.length} of {investigations.length}</span>
@@ -32,16 +32,16 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
           </section>
         </Reveal>
         <Reveal index={1}>
-          <section aria-labelledby="next" className="rounded-2xl bg-charcoal p-6 text-charcoal-foreground sm:p-7">
+          <section aria-labelledby="next" className="glow rounded-2xl bg-charcoal p-6 text-charcoal-foreground sm:p-7">
             <div className="flex items-start justify-between gap-3">
               <p className="card-label text-charcoal-muted">Coming next</p>
               <span className="pill bg-fire text-fire-foreground">Partial gravity</span>
             </div>
             <h2 id="next" className="mt-2 text-xl font-bold tracking-tight">LUCI and FM2 data</h2>
             <p className="mt-3 text-sm leading-relaxed text-charcoal-muted">
-              NASA&apos;s PSI has no partial-gravity fire data yet. When LUCI (Lunar-g Combustion Investigation) and FM2
+              NASA&apos;s PSI has no fire data from partial gravity yet. When LUCI (Lunar-g Combustion Investigation) and FM2
               (Flammability of Materials on the Moon) publish, they become new rows in the same table, and Moon Base can be
-              ranked by real lunar-gravity results.
+              ranked by real results from lunar gravity.
             </p>
             <a href={CHALLENGE} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-fire underline decoration-fire/40 underline-offset-4 hover:decoration-fire">
               Source: NASA challenge brief

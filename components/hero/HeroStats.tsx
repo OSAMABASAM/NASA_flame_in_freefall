@@ -26,7 +26,7 @@ type TileProps = { drift?: MotionValue<number>; index: number; span?: string; su
 function Tile({ drift, index, span, surface, compact, children }: TileProps) {
   return (
     <motion.div style={drift ? { y: drift } : undefined} className={span}>
-      <motion.div {...reveal(index)} className={cn("flex h-full flex-col rounded-2xl p-5", !compact && "min-h-44", surface)}>
+      <motion.div {...reveal(index)} className={cn("glow flex h-full flex-col rounded-2xl p-5", !compact && "min-h-44", surface)}>
         {children}
       </motion.div>
     </motion.div>

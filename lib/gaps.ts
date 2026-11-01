@@ -8,23 +8,23 @@ type Band = { id: string; label: string; words: string; lo: number; hi: number; 
 
 // Oxygen in % by volume. 26.5% and 34% are NASA's planned exploration atmospheres (ACME-BRE PSI record).
 export const OXYGEN: Band[] = [
-  { id: "below", label: "Below 21%", words: "below-air oxygen", lo: -Infinity, hi: 21 },
-  { id: "air", label: "21 to 26%", words: "air-level oxygen", lo: 21, hi: 26.5 },
-  { id: "moon", label: "26.5 to 34%", words: "Moon-habitat oxygen", lo: 26.5, hi: 34, hiIn: true },
+  { id: "below", label: "Below 21%", words: "less oxygen than air", lo: -Infinity, hi: 21 },
+  { id: "air", label: "21 to 26%", words: "oxygen like air", lo: 21, hi: 26.5 },
+  { id: "moon", label: "26.5 to 34%", words: "Moon base oxygen", lo: 26.5, hi: 34, hiIn: true },
   { id: "above", label: "Above 34%", words: "very high oxygen", lo: 34, hi: Infinity, loOut: true },
 ];
 
-// Pressure in kPa. 10.2 psia (70.3 kPa) and 8.2 psia are the planned Moon-habitat pressures; 101 kPa is sea level.
+// Pressure in kPa. 10.2 psia (70.3 kPa) and 8.2 psia are the planned Moon base pressures; 101 kPa is sea level.
 export const PRESSURE: Band[] = [
   { id: "low", label: "Below 71 kPa", words: "low pressure", lo: -Infinity, hi: 71 },
-  { id: "sea", label: "71 to 102 kPa", words: "sea-level pressure", lo: 71, hi: 102, hiIn: true },
+  { id: "sea", label: "71 to 102 kPa", words: "normal air pressure", lo: 71, hi: 102, hiIn: true },
   { id: "high", label: "Above 102 kPa", words: "high pressure", lo: 102, hi: Infinity, loOut: true },
 ];
 
 export const GRAVITY = [
-  { id: "microgravity", label: "Microgravity", words: "microgravity" },
-  { id: "moon", label: "Moon", words: "Moon-gravity" },
-  { id: "mars", label: "Mars", words: "Mars-gravity" },
+  { id: "microgravity", label: "Microgravity", words: "in microgravity" },
+  { id: "moon", label: "Moon", words: "on the Moon" },
+  { id: "mars", label: "Mars", words: "on Mars" },
 ] as const;
 
 // [min, max] from the data; one known end is treated as a single value. null = not reported.
@@ -53,7 +53,7 @@ export function coverage(invs: Investigation[]) {
         const ids = placed
           .filter((x) => x.o2 && x.p && x.g.includes(g.id) && touches(x.o2, o) && touches(x.p, p))
           .map((x) => x.id);
-        return { gravity: g.id, oxygen: o.id, pressure: p.id, ids, line: ids.length ? "" : `No ${g.words} test at ${o.words} and ${p.words}.` };
+        return { gravity: g.id, oxygen: o.id, pressure: p.id, ids, line: ids.length ? "" : `No test ${g.words} with ${o.words} and ${p.words}.` };
       }),
     ),
   );

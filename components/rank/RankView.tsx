@@ -40,7 +40,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
       </Reveal>
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[17rem_1fr]">
-        <motion.div {...reveal(1)} className="space-y-7 rounded-2xl bg-charcoal p-6 text-charcoal-foreground lg:sticky lg:top-20">
+        <motion.div {...reveal(1)} className="glow space-y-7 rounded-2xl bg-charcoal p-6 text-charcoal-foreground lg:sticky lg:top-20">
           <label className="block">
             <span className={label}>Habitat</span>
             <select
