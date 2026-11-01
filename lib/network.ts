@@ -1,10 +1,12 @@
 import type { Investigation } from "./data.ts";
 
-export type NetNode = { id: string; inv: Investigation; areas: string[]; degree: number };
+export type NetNode = { id: string; inv: Investigation; degree: number };
 export type NetLink = { source: string; target: string; reasons: string[] };
 
 // Two investigations are linked when they share a fuel type, a piece of hardware, or the same project.
-export function buildNetwork(invs: Investigation[]): { nodes: NetNode[]; links: NetLink[] } {
+export type Network = { nodes: NetNode[]; links: NetLink[] };
+
+export function buildNetwork(invs: Investigation[]): Network {
   const links: NetLink[] = [];
   invs.forEach((a, i) =>
     invs.slice(i + 1).forEach((b) => {
@@ -19,7 +21,6 @@ export function buildNetwork(invs: Investigation[]): { nodes: NetNode[]; links: 
   const nodes = invs.map((inv) => ({
     id: inv.id,
     inv,
-    areas: inv.safety_area,
     degree: links.filter((l) => l.source === inv.id || l.target === inv.id).length,
   }));
   return { nodes, links };

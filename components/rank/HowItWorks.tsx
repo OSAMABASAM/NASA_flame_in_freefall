@@ -8,7 +8,6 @@ const PARTS = [
   [10, "its data was checked against NASA sources"],
 ] as const;
 
-// Native HTML popover: Esc and click-outside come from the browser.
 export function HowItWorks() {
   return (
     <>

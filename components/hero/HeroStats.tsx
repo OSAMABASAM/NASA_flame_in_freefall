@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { CountUp } from "@/components/motion/CountUp";
 import { cn } from "@/lib/utils";
 
-export type HeroNumbers = {
+type HeroNumbers = {
   total: number;
   withOxygen: number;
   sourced: number;
@@ -13,8 +13,7 @@ const pct = (k: number, n: number) => (n ? Math.round((k / n) * 100) : 0);
 
 type TileProps = { drift: number; index: number; span?: string; surface: string; compact?: boolean; children: ReactNode };
 
-// Light parallax: each card drifts up a different amount (at most 20px) over the first 600px of scroll (.drift in
-// globals.css, off with reduced motion). The card inside fades in with the rest of the hero.
+// Outer div drifts with scroll (.drift), inner card fades in (.rise-in): two elements so the transforms don't clash.
 function Tile({ drift, index, span, surface, compact, children }: TileProps) {
   return (
     <div style={{ "--drift": drift } as CSSProperties} className={cn("drift", span)}>
@@ -28,7 +27,6 @@ function Tile({ drift, index, span, surface, compact, children }: TileProps) {
   );
 }
 
-// Hero bento row. Every number is counted from data/investigations.json at build time.
 export function HeroStats({ total, withOxygen, sourced, byArea }: HeroNumbers) {
   const max = Math.max(1, ...byArea.map((a) => a.value));
 

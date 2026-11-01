@@ -1,4 +1,4 @@
-// Loaded on demand by MotionProvider. domMax includes layout animations (rank cards glide to new places).
+// Its own file so MotionProvider can load it lazily. domMax, not domAnimation: rank cards need layout animations.
 import { domMax } from "motion/react";
 
 export default domMax;

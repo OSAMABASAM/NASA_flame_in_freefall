@@ -1,15 +1,14 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { DetailDrawer } from "@/components/detail/LazyDetail";
 import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
 import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
 
-// The graph measures its box before laying out the dots, so it loads only on the client. The placeholder has the
-// graph's exact size, so nothing moves when it arrives. This whole section mounts only near the screen
-// (LazySection.tsx).
+// The graph measures its box before laying out the dots, so it renders only on the client. The placeholder has
+// the graph's exact size, so nothing moves when it arrives.
 const NetworkGraph = dynamic(() => import("@/components/network/NetworkGraph").then((m) => m.NetworkGraph), {
   ssr: false,
   loading: () => <div className="h-[560px] sm:h-[520px]" />,
@@ -28,7 +27,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
   const [detail, setDetail] = useState<Investigation | null>(null);
   const [hover, setHover] = useState<{ node: NetNode; links: NetLink[] } | null>(null);
   const onHover = useCallback((node: NetNode | null, links: NetLink[]) => setHover(node ? { node, links } : null), []);
-  const list = buildNetwork(investigations);
+  const network = useMemo(() => buildNetwork(investigations), [investigations]);
 
   return (
     <section className="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
@@ -45,7 +44,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
         <div className="glow mt-6 overflow-hidden rounded-2xl bg-card">
           <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
             <p className="card-label text-muted-foreground">Shared fuel, hardware or project</p>
-            <span className="pill bg-charcoal text-charcoal-foreground">{list.links.length} links</span>
+            <span className="pill bg-charcoal text-charcoal-foreground">{network.links.length} links</span>
           </div>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 border-b px-5 pt-3 pb-4 text-xs text-secondary-foreground">
             {LEGEND.map((l) => (
@@ -56,7 +55,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
             ))}
             <li className="text-muted-foreground">Half and half = two safety areas</li>
           </ul>
-          <NetworkGraph investigations={investigations} onOpen={setDetail} onHover={onHover} />
+          <NetworkGraph network={network} onOpen={setDetail} onHover={onHover} />
           <p className="min-h-12 border-t px-5 py-3 text-sm text-secondary-foreground" aria-live="polite">
             {hover ? (
               <>
@@ -79,8 +78,8 @@ export function NetworkView({ investigations }: { investigations: Investigation[
       <details className="mt-4 text-sm">
         <summary className="cursor-pointer font-medium text-muted-foreground hover:text-foreground">Show the links as a list</summary>
         <ul className="mt-3 divide-y rounded-2xl bg-card px-5">
-          {list.nodes.map((n) => {
-            const mine = list.links.filter((l) => l.source === n.id || l.target === n.id);
+          {network.nodes.map((n) => {
+            const mine = network.links.filter((l) => l.source === n.id || l.target === n.id);
             return (
               <li key={n.id} className="grid gap-1 py-3 sm:grid-cols-[11rem_1fr] sm:gap-4">
                 <button onClick={() => setDetail(n.inv)} className="text-left font-mono text-xs text-accent-foreground hover:underline">

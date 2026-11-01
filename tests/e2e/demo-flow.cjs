@@ -132,7 +132,7 @@ async function run(browser, device) {
   // 6. Network graph, research gaps and footer appear when scrolled to, without pushing the page around.
   await check("6 network graph loads when scrolled to", async () => {
     await page.locator("#network").scrollIntoViewIfNeeded();
-    await page.waitForFunction(() => window.__networkGraph?.ready);
+    await page.locator("#network svg g[data-id]").first().waitFor();
     await page.locator("#network svg").first().scrollIntoViewIfNeeded();
     await page.waitForTimeout(500);
     await shot("6-network");

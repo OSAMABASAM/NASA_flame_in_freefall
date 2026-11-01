@@ -19,7 +19,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   const [detail, setDetail] = useState<Investigation | null>(null);
   const [picked, setPicked] = useState<string[]>([]);
   const [comparing, setComparing] = useState(false);
-  // The slider and controls update at once; the card list follows at lower priority, so dragging stays smooth.
+  // Controls update at once; the card list follows at lower priority, so dragging the slider stays smooth.
   const [dHabitat, dOxygen, dArea] = [useDeferredValue(habitat), useDeferredValue(oxygen), useDeferredValue(area)];
   const ranked = useMemo(
     () => rank(investigations, { habitat: dHabitat, oxygen: dOxygen, area: dArea }),
@@ -27,8 +27,6 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   );
   const toggle = useCallback((id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id])), []);
   useEffect(preloadDetail, []);
-  // The card list is rebuilt only when the ranking or the picks change, not on every slider tick; each card
-  // (RankCard, memoized) then redraws only if what it shows changed.
   const cards = useMemo(
     () =>
       ranked.map((item, i) => (

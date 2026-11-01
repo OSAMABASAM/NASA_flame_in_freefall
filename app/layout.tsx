@@ -4,8 +4,8 @@ import { MotionProvider } from "@/components/motion/MotionProvider";
 import { ScrollEffects } from "@/components/motion/ScrollEffects";
 import "./globals.css";
 
-// System font first (San Francisco on Apple devices); Inter is the web fallback elsewhere. While Inter loads, text
-// shows in "Inter Fallback" (Arial resized to Inter's metrics), so the swap does not move the text.
+// The system font comes first in --font-sans; Inter is the fallback, with metric-matched Arial so the swap does not
+// move text.
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", adjustFontFallback: true });
 
 export const metadata: Metadata = {
