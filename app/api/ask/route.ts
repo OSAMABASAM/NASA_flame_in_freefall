@@ -2,7 +2,8 @@ import { askModel, MAX_QUESTION } from "@/lib/ask";
 import { investigations } from "@/lib/data";
 import cache from "@/data/demo-answers.json";
 
-export const maxDuration = 15;
+// Two providers, each with one retry, can take a while; Vercel allows up to 60 s.
+export const maxDuration = 60;
 
 const LIMIT = 6;
 const WINDOW_MS = 60_000;
@@ -50,7 +51,7 @@ export async function POST(req: Request) {
   } catch (e) {
     console.error("ask failed:", e);
     return Response.json(
-      { error: "The AI is busy or unavailable right now. Try an example question, or try again in a minute." },
+      { error: "The AI is busy, or its answer did not match the data. Try an example question, or rephrase and try again in a minute." },
       { status: 503 },
     );
   }
