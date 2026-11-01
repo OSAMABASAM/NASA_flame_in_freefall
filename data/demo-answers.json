@@ -1,1 +1,37 @@
-{}
+{
+  "Which experiments matter most for a Moon Base at 30% oxygen?": {
+    "answer": "No experiment flew on the Moon, so investigations are matched by oxygen levels and pressure. The ACME-BRE record lists atmospheres NASA considered for human missions, such as 26.5% oxygen at 10.2 psia (about 70 kPa) and 34% oxygen at 8.2 psia (about 57 kPa) [ACME-BRE].\n\nFLEX covers oxygen levels from 12% to 34% and pressures from 70.2 to 309.3 kPa [FLEX]. FLEX-2 covers oxygen levels from 17% to 30% and pressures from 50.7 to 304 kPa [FLEX-2]. ACME-CFI-G covers oxygen levels from 12% to 85% and pressures from 49.5 to 331 kPa [ACME-CFI-G]. ACME-FLAME-DESIGN covers oxygen levels from 19.8% to 85% and pressures from 43 to 306.9 kPa [ACME-FLAME-DESIGN]. In addition, ACME-BRE tested oxygen levels from 21% to 40% [ACME-BRE]. ACME-S-FLAME tested oxygen levels from 21% to 30% [ACME-S-FLAME].",
+    "cited": [
+      "ACME-BRE",
+      "FLEX",
+      "FLEX-2",
+      "ACME-CFI-G",
+      "ACME-FLAME-DESIGN",
+      "ACME-S-FLAME"
+    ],
+    "provider": "gemini",
+    "data_hash": "71c027f587c1"
+  },
+  "What has NASA tested on detecting smoke in microgravity?": {
+    "answer": "NASA tested smoke detection with overheated spacecraft materials such as Teflon, Kapton, silicone rubber, lampwick and dibutyl phthalate, using two smoke detectors, thermophoretic smoke samplers and video cameras [SAME]. NASA also tested detection with Kapton, silicone, lampwick, Teflon and Pyrell fire retardant foam, employing an ionization smoke detector, DustTrak and an M-pass instrument [SAME-R]. NASA further tested aerosol detection using Arizona Road Dust mixed with nitrogen, using a modified TSI P-Trak particle counter and DustTrak instrument [DAFT]. The same aerosol detection test was repeated in a second record [DAFT-2].",
+    "cited": [
+      "SAME",
+      "SAME-R",
+      "DAFT",
+      "DAFT-2"
+    ],
+    "provider": "groq",
+    "data_hash": "71c027f587c1"
+  },
+  "Which experiments tested putting out fires, and with what?": {
+    "answer": "BASS tested putting out solid fuel fires using an inert gaseous extinguishing agent [BASS]. BASS-II investigated extinction limits of solid fuels by lowering the ambient oxygen level below 21% through nitrogen dilution [BASS-II]. \n\nFLEX tested extinguishing liquid fuel droplets using gaseous suppressants, specifically carbon dioxide and helium [FLEX]. ACME-BRE evaluated flame extinction in still air without forced flow, where flames went out on their own at 21% oxygen [ACME-BRE].",
+    "cited": [
+      "BASS",
+      "BASS-II",
+      "FLEX",
+      "ACME-BRE"
+    ],
+    "provider": "gemini",
+    "data_hash": "71c027f587c1"
+  }
+}
