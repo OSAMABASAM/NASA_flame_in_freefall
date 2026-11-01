@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import type { Scored } from "@/lib/score";
 
@@ -13,7 +14,9 @@ type Props = {
 export function RankCard({ item: { inv, score, reasons }, place, picked, pickDisabled, onDetails, onTogglePick }: Props) {
   const tags = [...inv.fuel_type.map((f) => `${f} fuel`), ...inv.hardware];
   return (
-    <li
+    <motion.li
+      layout="position"
+      transition={{ duration: 0.22 }}
       id={`inv-${inv.id}`}
       className="flex scroll-mt-20 flex-col rounded-xl border bg-card p-5 transition-colors hover:border-muted-foreground/40 target:border-primary target:ring-2 target:ring-primary/40 has-checked:border-primary/60"
     >
@@ -55,6 +58,6 @@ export function RankCard({ item: { inv, score, reasons }, place, picked, pickDis
           Compare
         </label>
       </div>
-    </li>
+    </motion.li>
   );
 }

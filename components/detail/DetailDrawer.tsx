@@ -12,7 +12,7 @@ export function DetailDrawer({ inv, onClose }: { inv: Investigation | null; onCl
       onClose={onClose}
       eyebrow={inv?.id}
       title={inv?.name ?? ""}
-      className="m-0 ml-auto h-dvh max-h-dvh w-full max-w-xl border-l"
+      className="m-0 ml-auto h-dvh max-h-dvh w-full max-w-xl border-l open:duration-250 open:animate-in open:slide-in-from-right"
     >
       {inv && (
         <dl className="divide-y text-sm">

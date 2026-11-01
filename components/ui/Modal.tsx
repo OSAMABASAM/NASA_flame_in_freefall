@@ -33,7 +33,7 @@ export function Modal({
       aria-label={title}
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
-      className={cn("bg-card p-0 text-card-foreground shadow-2xl shadow-black/60 backdrop:bg-black/60 backdrop:backdrop-blur-sm", className)}
+      className={cn("bg-card p-0 text-card-foreground shadow-2xl shadow-black/60 backdrop:bg-black/60 backdrop:backdrop-blur-sm open:backdrop:duration-200 open:backdrop:animate-in open:backdrop:fade-in", className)}
     >
       <div className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b bg-card/95 px-4 py-4 sm:px-6 backdrop-blur">
         <div className="min-w-0">

@@ -78,14 +78,16 @@ export function RankView({ investigations }: { investigations: Investigation[] }
             <span className={label}>Safety area</span>
             <div className="mt-2 grid grid-cols-2 gap-1 rounded-lg bg-raised p-1 text-sm">
               {AREAS.map((a) => (
-                <button
+                <Button
                   key={a}
+                  variant="ghost"
+                  size="sm"
                   aria-pressed={area === a}
                   onClick={() => setArea(a)}
-                  className="h-8 rounded-md capitalize text-muted-foreground transition-colors hover:text-foreground aria-pressed:bg-card aria-pressed:text-foreground aria-pressed:shadow-sm aria-pressed:ring-1 aria-pressed:ring-border"
+                  className="font-normal capitalize aria-pressed:bg-card aria-pressed:text-foreground aria-pressed:shadow-sm aria-pressed:ring-1 aria-pressed:ring-border"
                 >
                   {a}
-                </button>
+                </Button>
               ))}
             </div>
           </div>

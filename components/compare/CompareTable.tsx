@@ -12,7 +12,7 @@ export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; o
       open={open}
       onClose={onClose}
       title={`Compare ${invs.length} investigations`}
-      className="m-auto max-h-[90dvh] w-[min(68rem,100%-1rem)] rounded-xl border"
+      className="m-auto max-h-[90dvh] w-[min(68rem,100%-1rem)] rounded-xl border open:duration-200 open:animate-in open:fade-in open:slide-in-from-bottom-2"
     >
       <p className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
         <span className="inline-block size-3 shrink-0 rounded-sm border border-primary/40 bg-accent" />
