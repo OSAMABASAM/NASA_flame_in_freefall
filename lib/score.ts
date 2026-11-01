@@ -10,7 +10,7 @@ export type Scored = { inv: Investigation; score: number; reasons: string[] };
 export const HABITATS: { value: Habitat; label: string }[] = [
   { value: "spacecraft", label: "Spacecraft" },
   { value: "station", label: "Space station" },
-  { value: "moon_base", label: "Moon Base (scored by conditions)" },
+  { value: "moon_base", label: "Moon Base (by conditions)" },
 ];
 export const AREAS: Area[] = ["all", "prevention", "detection", "suppression"];
 
