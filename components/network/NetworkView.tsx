@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DetailDrawer } from "@/components/detail/DetailDrawer";
+import { Reveal } from "@/components/motion/Reveal";
 import type { Investigation } from "@/lib/data";
 import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
 
@@ -37,52 +38,62 @@ export function NetworkView({ investigations }: { investigations: Investigation[
 
   return (
     <section id="network" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
-      <h2 className="text-2xl font-semibold tracking-tight">How the experiments connect</h2>
-      <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-        Each dot is an investigation. A line means two share a fuel type, a piece of hardware or a project; thicker lines
-        share more. Bigger dots have more links. Hover to see neighbors, click to open the details.
-      </p>
-
-      <div ref={box} className="mt-6 overflow-hidden rounded-2xl bg-card shadow-card">
-        <ul className="flex flex-wrap gap-x-5 gap-y-2 border-b px-5 py-3 text-xs text-secondary-foreground">
-          {LEGEND.map((l) => (
-            <li key={l.label} className="flex items-center gap-2">
-              <span className="size-2.5 rounded-full" style={{ background: l.color }} />
-              {l.label}
-            </li>
-          ))}
-          <li className="text-muted-foreground">Half and half = two safety areas</li>
-        </ul>
-        {near ? (
-          <NetworkGraph
-            investigations={investigations}
-            onOpen={setDetail}
-            onHover={onHover}
-          />
-        ) : (
-          <div className="h-[560px] sm:h-[520px]" />
-        )}
-        <p className="min-h-12 border-t px-5 py-3 text-sm text-secondary-foreground" aria-live="polite">
-          {hover ? (
-            <>
-              <span className="font-mono text-xs text-accent-foreground">{hover.node.id}</span> {hover.node.inv.name}:{" "}
-              {hover.links.length} links
-              {hover.links.length > 0 && (
-                <span className="text-muted-foreground">
-                  {" "}
-                  ({[...new Set(hover.links.flatMap((l) => l.reasons))].join(", ")})
-                </span>
-              )}
-            </>
-          ) : (
-            <span className="text-muted-foreground">Hover a dot to see what it shares. On a phone, tap a dot to open it.</span>
-          )}
+      <Reveal>
+        <p className="card-label text-accent-foreground">Network</p>
+        <h2 className="mt-1 text-3xl font-bold tracking-tight">How the experiments connect</h2>
+        <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+          Each dot is an investigation. A line means two share a fuel type, a piece of hardware or a project; thicker lines
+          share more. Bigger dots have more links. Hover to see neighbors, click to open the details.
         </p>
-      </div>
+      </Reveal>
+
+      {/* Opacity only: a transform on the graph or any parent would shift where a drag lands. */}
+      <Reveal fadeOnly index={1}>
+        <div ref={box} className="mt-6 overflow-hidden rounded-2xl bg-card">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
+            <p className="card-label text-muted-foreground">Shared fuel, hardware or project</p>
+            <span className="pill bg-charcoal text-charcoal-foreground">{list.links.length} links</span>
+          </div>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 border-b px-5 pt-3 pb-4 text-xs text-secondary-foreground">
+            {LEGEND.map((l) => (
+              <li key={l.label} className="flex items-center gap-2">
+                <span className="size-2.5 rounded-full" style={{ background: l.color }} />
+                {l.label}
+              </li>
+            ))}
+            <li className="text-muted-foreground">Half and half = two safety areas</li>
+          </ul>
+          {near ? (
+            <NetworkGraph
+              investigations={investigations}
+              onOpen={setDetail}
+              onHover={onHover}
+            />
+          ) : (
+            <div className="h-[560px] sm:h-[520px]" />
+          )}
+          <p className="min-h-12 border-t px-5 py-3 text-sm text-secondary-foreground" aria-live="polite">
+            {hover ? (
+              <>
+                <span className="font-mono text-xs text-accent-foreground">{hover.node.id}</span> {hover.node.inv.name}:{" "}
+                {hover.links.length} links
+                {hover.links.length > 0 && (
+                  <span className="text-muted-foreground">
+                    {" "}
+                    ({[...new Set(hover.links.flatMap((l) => l.reasons))].join(", ")})
+                  </span>
+                )}
+              </>
+            ) : (
+              <span className="text-muted-foreground">Hover a dot to see what it shares. On a phone, tap a dot to open it.</span>
+            )}
+          </p>
+        </div>
+      </Reveal>
 
       <details className="mt-4 text-sm">
-        <summary className="cursor-pointer text-muted-foreground hover:text-foreground">Show the links as a list</summary>
-        <ul className="mt-3 divide-y rounded-2xl bg-card px-5 shadow-card">
+        <summary className="cursor-pointer font-medium text-muted-foreground hover:text-foreground">Show the links as a list</summary>
+        <ul className="mt-3 divide-y rounded-2xl bg-card px-5">
           {list.nodes.map((n) => {
             const mine = list.links.filter((l) => l.source === n.id || l.target === n.id);
             return (

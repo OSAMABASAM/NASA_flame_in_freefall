@@ -6,14 +6,15 @@ import { cn } from "@/lib/utils";
 
 // shadcn-style button, restyled with the design tokens. Soft lift on hover, soft press on tap (Motion).
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-45",
+  "inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-45",
   {
     variants: {
       variant: {
-        primary: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90",
-        outline: "rounded-full border border-input bg-card hover:bg-raised",
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        dark: "bg-charcoal text-charcoal-foreground hover:bg-charcoal-raised",
+        outline: "border border-input bg-card hover:border-charcoal hover:bg-charcoal hover:text-charcoal-foreground",
         ghost: "text-muted-foreground hover:bg-raised hover:text-foreground",
-        chip: "rounded-full bg-card text-left font-normal text-secondary-foreground shadow-card hover:bg-accent hover:text-accent-foreground",
+        chip: "bg-card text-left font-normal text-secondary-foreground hover:bg-sun hover:text-sun-foreground",
       },
       size: {
         sm: "h-8 px-3",

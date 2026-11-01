@@ -16,7 +16,7 @@ function AnswerText({ text }: { text: string }) {
           <a
             key={i}
             href={`#inv-${id}`}
-            className="mx-0.5 inline-block rounded-md bg-accent px-1.5 py-px font-mono text-xs text-accent-foreground hover:bg-primary hover:text-primary-foreground"
+            className="mx-0.5 inline-block rounded-full bg-accent px-2 py-px font-mono text-xs font-semibold text-accent-foreground hover:bg-primary hover:text-primary-foreground"
           >
             {id}
           </a>
@@ -59,13 +59,13 @@ export function AskBox({ cache }: Props) {
   }
 
   return (
-    <section className="mt-10 max-w-3xl" aria-label="Ask the fire data">
+    <section className="mt-8 max-w-3xl" aria-label="Ask the fire data">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           ask(question);
         }}
-        className="flex gap-2 rounded-full bg-card p-2 pl-3 shadow-lift ring-1 ring-border focus-within:ring-2 focus-within:ring-primary/60"
+        className="flex gap-2 rounded-full bg-card p-2 pl-3 ring-1 ring-transparent focus-within:ring-2 focus-within:ring-ring"
       >
         <input
           value={question}
@@ -88,15 +88,17 @@ export function AskBox({ cache }: Props) {
       </div>
       <div aria-live="polite" className="mt-5 empty:hidden">
         {loading && (
-          <p className="flex items-center gap-2 text-muted-foreground">
+          <p className="flex items-center gap-2 rounded-2xl bg-card p-5 text-muted-foreground">
             <span className="size-2 animate-pulse rounded-full bg-primary" /> Reading NASA&apos;s fire data…
           </p>
         )}
         {error && <p className="rounded-2xl border border-destructive/30 bg-destructive/5 p-4 text-destructive">{error}</p>}
         {result && (
-          <div className="rounded-2xl bg-card p-6 shadow-card">
-            <p className="mb-2 text-xs font-medium text-muted-foreground">
-AI answer</p>
+          <div className="rounded-2xl bg-card p-6">
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <p className="card-label text-muted-foreground">AI answer</p>
+              {result.cited.length > 0 && <span className="pill bg-sun text-sun-foreground">{result.cited.length} cited</span>}
+            </div>
             <AnswerText text={result.answer} />
             <p className="mt-4 border-t pt-3 text-xs text-muted-foreground">
               Written only from the investigation data on this page. Click an id to jump to that investigation.

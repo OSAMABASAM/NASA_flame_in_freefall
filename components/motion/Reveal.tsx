@@ -1,20 +1,19 @@
 "use client";
 
-import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import { motion, type HTMLMotionProps } from "motion/react";
 
-// Scroll motion: the block glides up a little and fades in once, when it enters the screen.
-// Same 500 ms glide as the hero; MotionConfig reducedMotion="user" drops the movement.
-export function Reveal({ children, className, delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay }}
-    >
-      {children}
-    </motion.div>
-  );
+const EASE_OUT = [0.2, 0, 0, 1] as const;
+
+// Fade in and rise 16px the first time an element enters the screen. index staggers siblings by 60ms.
+// Spread reveal() straight onto a motion element when a wrapper would break the layout (sticky, list items).
+export const reveal = (index = 0, rise = 16) => ({
+  initial: { opacity: 0, y: rise },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "0px 0px -40px 0px" },
+  transition: { duration: 0.4, delay: index * 0.06, ease: EASE_OUT },
+});
+
+// fadeOnly: opacity without a transform, for the network graph (a transform would offset its drag math).
+export function Reveal({ index, fadeOnly, ...props }: HTMLMotionProps<"div"> & { index?: number; fadeOnly?: boolean }) {
+  return <motion.div {...reveal(index, fadeOnly ? 0 : 16)} {...props} />;
 }

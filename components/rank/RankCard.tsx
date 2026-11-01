@@ -1,7 +1,10 @@
 import { motion } from "motion/react";
 import { memo } from "react";
+import { reveal } from "@/components/motion/Reveal";
+import { ScoreGauge } from "@/components/rank/ScoreGauge";
 import { Button } from "@/components/ui/button";
 import type { Scored } from "@/lib/score";
+import { cn } from "@/lib/utils";
 
 type Props = {
   item: Scored;
@@ -14,48 +17,58 @@ type Props = {
 
 function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDetails, onTogglePick }: Props) {
   const tags = [...inv.fuel_type.map((f) => `${f} fuel`), ...inv.hardware];
+  // The top match is the yellow card; its muted text uses the yellow-safe token.
+  const top = place === 1;
+  const muted = top ? "text-sun-muted" : "text-muted-foreground";
+  const r = reveal((place - 1) % 2);
   return (
     <motion.li
       layout="position"
-      transition={{ duration: 0.22 }}
+      {...r}
+      transition={{ ...r.transition, layout: { duration: 0.22 } }}
       id={`inv-${inv.id}`}
-      className="flex scroll-mt-20 flex-col rounded-2xl bg-card p-6 shadow-card transition-shadow hover:shadow-lift target:ring-2 target:ring-primary/50 has-checked:ring-2 has-checked:ring-primary/40"
+      className={cn(
+        "flex scroll-mt-20 flex-col rounded-2xl p-6 transition-shadow hover:shadow-lift target:ring-2 target:ring-charcoal has-checked:ring-2 has-checked:ring-charcoal",
+        top ? "bg-sun text-sun-foreground" : "bg-card",
+      )}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className="font-mono text-xs text-muted-foreground">
-            <span className="text-accent-foreground">#{place}</span> · {inv.id}
+          <p className="flex flex-wrap items-center gap-2">
+            <span className="pill bg-charcoal text-charcoal-foreground">#{place}</span>
+            <span className={cn("card-label font-mono", muted)}>{inv.id}</span>
+            {top && <span className="card-label">Top match</span>}
           </p>
-          <h3 className="mt-1 font-semibold leading-snug text-balance">{inv.name}</h3>
+          <h3 className="mt-2.5 text-lg leading-snug font-bold tracking-tight text-balance">{inv.name}</h3>
         </div>
-        <div className="shrink-0 text-right" aria-label={`Score ${score} of 100`}>
-          <p className="text-[28px] leading-none font-semibold tracking-tight tabular-nums">{score}</p>
-          <div className="mt-2 h-1 w-14 overflow-hidden rounded-full bg-muted">
-            <div className="h-full rounded-full bg-primary" style={{ width: `${score}%` }} />
-          </div>
-        </div>
+        <ScoreGauge score={score} onSun={top} />
       </div>
-      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{inv.objective}</p>
-      <p className="mt-3 text-sm leading-relaxed text-secondary-foreground">
-        <span className="text-accent-foreground">Why: </span>
+      <p className={cn("mt-3 line-clamp-2 text-sm leading-relaxed", muted)}>{inv.objective}</p>
+      <p className="mt-3 text-sm leading-relaxed">
+        <span className="font-semibold">Why: </span>
         {reasons.length ? reasons.join(" · ") : "no matching data for these settings."}
       </p>
       <ul className="mt-3 mb-4 flex flex-wrap gap-1.5 text-xs">
         {tags.map((t) => (
-          <li key={t} className="rounded-full bg-raised px-2.5 py-0.5 text-secondary-foreground">
+          <li key={t} className={cn("rounded-full px-2.5 py-0.5 text-secondary-foreground", top ? "bg-card/70" : "bg-raised")}>
             {t}
           </li>
         ))}
         {inv.data_status === "challenge_text" && (
-          <li className="rounded-full border border-dashed px-2.5 py-0.5 text-muted-foreground">From challenge text only</li>
+          <li className={cn("rounded-full border border-dashed border-current px-2.5 py-0.5", muted)}>From challenge text only</li>
         )}
       </ul>
-      <div className="mt-auto flex items-center justify-between gap-3 border-t pt-3 text-sm">
+      <div className={cn("mt-auto flex items-center justify-between gap-3 border-t pt-3 text-sm", top && "border-sun-muted/20")}>
         <Button variant="outline" size="sm" onClick={() => onDetails(inv)}>
           Details
         </Button>
-        <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-muted-foreground hover:text-foreground has-checked:text-accent-foreground has-disabled:cursor-not-allowed has-disabled:opacity-45">
-          <input type="checkbox" checked={picked} disabled={pickDisabled} onChange={() => onTogglePick(inv.id)} className="size-4 accent-primary" />
+        <label
+          className={cn(
+            "flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 font-medium hover:text-foreground has-checked:text-foreground has-disabled:cursor-not-allowed has-disabled:opacity-45",
+            muted,
+          )}
+        >
+          <input type="checkbox" checked={picked} disabled={pickDisabled} onChange={() => onTogglePick(inv.id)} className="size-4 accent-charcoal" />
           Compare
         </label>
       </div>
