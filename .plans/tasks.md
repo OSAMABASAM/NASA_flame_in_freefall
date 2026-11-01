@@ -24,6 +24,7 @@ Run `/hack-build`. One task per session where possible. The whole build fits in 
 - Implement the formula from spec §6 in `lib/score.ts` with a unit test for 3 cases (match, partial oxygen, no data).
 - Controls: habitat select, oxygen slider 15 to 40%, safety area tabs. Cards with score + reason. "How the score works" popover.
 - **Accept:** test passes; slider reorders cards instantly.
+- **Decision (Osama, 1 Nov): Moon Base is scored by conditions, not by a habitat label.** No PSI record names the Moon, so the 35 habitat points for Moon Base go to how well an experiment covers Moon Base conditions: high oxygen and low pressure, measured against NASA's planned exploration atmospheres as listed in the ACME-BRE PSI record (21% O2 at 14.7 psia, 26.5% at 10.2 psia, 34% at 8.2 psia). Never add a `moon_base` label to a row without a source. Explain this in "How the score works".
 
 ## Task 4: Detail + Compare (Day 2 = 2 Nov, morning) — owns `components/detail/`, `components/compare/`
 - Detail drawer with all fields and source link. Compare table for 2 to 3 selected; highlight differing cells; "Not in our data yet" for empty.
@@ -55,7 +56,7 @@ Plan B (Osama records): he records screen + voice in one take with OBS Studio, f
 No stretch tasks. Simple and working beats bigger and broken.
 
 ## Progress
-- Done: Task 0 (Next.js 16 + React 19.3 + Tailwind 4; shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; `npm run data` runs before dev and build). Live link: not recorded yet in CLAUDE.md.
+- Done: Task 0 (Next.js 16 + React 19.3 + Tailwind 4; shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; `npm run data` runs before dev and build). Live link: https://flame-in-freefall-five.vercel.app (in CLAUDE.md).
 - Done: Task 1. All rows now come from NASA PSI (psi.nasa.gov records and their "Experimental table" files), `data_status=verified`, each row cites its PSI page and DOI. Added 3 PSI flight investigations not named in the challenge: ACME-FLAME-DESIGN, ACME-CLD, ACME-S-FLAME (20 rows total). Verified with `npm run data`, build, lint and a browser screenshot.
 - Remaining data gaps (left empty on purpose, PSI does not state them):
   - Oxygen: BASS, SAFFIRE-III, SAME, SAME-R, DAFT, DAFT-2, ACME-E-FIELD, ACME-CLD, SPICE, SLICE.
