@@ -49,10 +49,11 @@
 | 1 | 1: البيانات العامة | `/hack-build Task 1. Use the public PSI site and NASA pages. Leave unknown cells empty.` |
 | 1 | 2: اسأل | `/hack-build Task 2` |
 | 2 | 3 و 4: رتّب وقارن | `/hack-build Task 3 and Task 4` |
-| 2 | 5: التصميم | `/design` بعدين `/hack-build Task 5` |
-| 2 | 6: فحص الديمو والفيديو | ارفع صوتك أولاً (تحت)، بعدين `/hack-build Task 6` |
-| 2 | 7: README والعرض | `/hack-build Task 7` |
-| 3 | 8: بروفة يوم 13 | اتبع `docs/DATA_DAY.md` بنفسك على github.com بدون Claude، وارجع لـ Claude بس إذا خطوة ما زبطت |
+| 2 | 5: حركة ناعمة | `/hack-build Task 5` |
+| 2 | 6: التصميم | `/design` بعدين `/hack-build Task 6` |
+| 2 | 7: فحص الديمو والفيديو | ارفع صوتك أولاً (تحت)، بعدين `/hack-build Task 7` |
+| 2 | 8: README والعرض | `/hack-build Task 8` |
+| 3 | 9: بروفة يوم 13 | اتبع `docs/DATA_DAY.md` بنفسك على github.com بدون Claude، وارجع لـ Claude بس إذا خطوة ما زبطت |
 
 بعد كل مهمة:
 - افتح الرابط الحي وجرّب بنفسك.
@@ -70,7 +71,7 @@
 **الخطة أ: Claude Code بيصوّر (المهمة 6):**
 1. سجّل صوتك بالموبايل وأنت بتقرأ النص الإنجليزي بـ `docs/VIDEO.md`.
 2. على github.com ادخل مجلد `docs/demo`، اضغط **Add file ← Upload files**، وارفع الملف باسم `voice.mp3`.
-3. اكتب لـ Claude `/hack-build Task 6`. هو بيشغّل الموقع عنده، بيصوّر الشاشة وهو بيضغط، وبيدمجها مع صوتك.
+3. اكتب لـ Claude `/hack-build Task 7`. هو بيشغّل الموقع عنده، بيصوّر الشاشة وهو بيضغط، وبيدمجها مع صوتك.
 4. بتنزّل `docs/demo/final.mp4` من github.com، وبترفعه على يوتيوب **Unlisted**.
 
 **الخطة ب (بس إذا الخطة أ ما زبطت بالسحابة):** بتسجّل أنت الشاشة وصوتك مع بعض ببرنامج OBS، والخطوات بـ `docs/VIDEO.md`.

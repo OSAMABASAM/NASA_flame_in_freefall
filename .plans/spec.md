@@ -4,7 +4,7 @@ Read `00-inputs.md` and `00-idea.md` first. The idea is locked; do not re-open i
 
 ## 0. Simplicity contract (read before every task)
 - Three features only: Ask, Rank, Compare. The detail view is just a drawer on the card. Nothing else gets built until all three run on the live link.
-- One small page app. No login, no database, no graph view, no GSAP or Lenis. One Motion fade-in on the home hero is the only animation.
+- One small page app. No login, no database, no graph view, no GSAP or Lenis. Motion only on the demo path (Task 5, Osama 1 Nov): hero fade-in, rank cards glide to new positions, soft press on buttons, drawer slides in. Subtle, fast, off with reduced motion.
 - Every step Osama must repeat on 13 November without Claude Code is a single `npm run ...` command, documented in `docs/DATA_DAY.md`. If a task makes that harder, it is the wrong design.
 - If a task takes more than double its time, cut it down and tell Osama.
 
@@ -61,7 +61,7 @@ Reason line = the parts that scored, in words.
 | UI, rank, compare | TypeScript | browser + Next.js build | Next.js App Router, Tailwind, shadcn/ui |
 | Data build | JavaScript (Node, no deps) | Osama's laptop | `scripts/build-data.mjs` |
 | Ask | TypeScript | Vercel route handler | `fetch` to Groq API, Gemini API fallback |
-| Motion | TypeScript | browser | Motion, one fade-in on the home hero |
+| Motion | TypeScript | browser | Motion, small animations on the demo path (Task 5) |
 | Demo check + video | TypeScript | laptop | Playwright, ffmpeg |
 Env vars: `GROQ_API_KEY`, `GEMINI_API_KEY` (Vercel + `.env.local`; names in `.env.example`).
 
@@ -73,6 +73,6 @@ Env vars: `GROQ_API_KEY`, `GEMINI_API_KEY` (Vercel + `.env.local`; names in `.en
 ## 9. Time plan (two build days; Claude Code budget ends 4 Nov)
 - Before 1 Nov: install, API keys tested, repo on GitHub, Vercel connected, Claude Design screens done.
 - 1 Nov: Task 0 deployed, Task 1 data enriched from public PSI, Task 2 Ask working.
-- 2 Nov: Tasks 3 to 7. **Feature freeze 16:00.** Full demo, voice recorded, final video, README, pitch.
-- 3 Nov: Task 8 rehearsal of data day, bug fixes only. No new features.
+- 2 Nov: Tasks 3 to 8. **Feature freeze 16:00.** Full demo, voice recorded, final video, README, pitch.
+- 3 Nov: Task 9 rehearsal of data day, bug fixes only. No new features.
 - 13 Nov: resources added to `data/investigations.csv` by hand, one-command rebuild, submit (see DATA_DAY.md).

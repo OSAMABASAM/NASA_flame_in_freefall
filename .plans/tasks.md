@@ -30,11 +30,20 @@ Run `/hack-build`. One task per session where possible. The whole build fits in 
 - Detail drawer with all fields and source link. Compare table for 2 to 3 selected; highlight differing cells; "Not in our data yet" for empty.
 - **Accept:** demo steps 4 and 5 run.
 
-## Task 5: design applied (Day 2 = 2 Nov, midday) — after Claude Design handoff
-- `/design-kit` steps 1 to 4 only: tokens from the handoff, shadcn components restyled, one Motion fade-in on the home hero. No GSAP or Lenis. Footer: Back on Earth, Coming next.
+## Task 5: smooth Motion on the demo path (Day 2 = 2 Nov, midday) — owns motion code in `components/`
+- Added by Osama on 1 Nov. Install `motion` (latest stable, check with `npm view motion version`). No GSAP or Lenis.
+- Rank cards animate to their new position when the oxygen slider, habitat or safety area changes (Motion layout animation on each card, keyed by id).
+- Buttons and chips (Ask, example chips, safety area tabs, Details, Compare, Clear) get a soft press and hover effect.
+- The detail drawer slides in from the right; the compare dialog fades in. Keep the native `<dialog>` (Esc, focus, backdrop).
+- One fade-in on the home hero.
+- Subtle and fast: about 150 to 250 ms, small distances, no bounce. With `prefers-reduced-motion: reduce`, no movement at all (Motion `MotionConfig reducedMotion="user"` plus CSS fallback).
+- **Accept:** Playwright: slider 21 → 30% at Moon Base still reorders correctly and cards settle within 300 ms; with reduced motion emulated, cards jump with no animation; no console errors; slider still feels instant.
+
+## Task 6: design applied (Day 2 = 2 Nov, midday) — after Claude Design handoff
+- `/design-kit` steps 1 to 4 only: tokens from the handoff, shadcn components restyled. Motion is Task 5. No GSAP or Lenis. Footer: Back on Earth, Coming next.
 - **Accept:** screenshots match `docs/design/`; phone size works.
 
-## Task 6: demo-check + video (Day 2 = 2 Nov, afternoon)
+## Task 7: demo-check + video (Day 2 = 2 Nov, afternoon)
 Plan A (Claude records, try this first):
 - Run the app inside this cloud session (`npm run build && npm start`, or `npm run dev`) and use Playwright against localhost, so no outside network is needed. The example questions answer from the cache, so no AI call is needed during recording.
 - `/demo-check`, then `scripts/demo-video.ts` (`npm run video`): walk the click path in `docs/VIDEO.md` with matching pauses, record 1280×720 to `docs/demo/screen.webm`.
@@ -45,10 +54,10 @@ Plan B (Osama records): he records screen + voice in one take with OBS Studio, f
 - Either way: rewrite `docs/VIDEO.md` so the click path matches the real UI exactly. Backup: Osama uploads the final video to YouTube as unlisted.
 - **Accept:** a final video under the length limit (target 90 s).
 
-## Task 7: ship prep (Day 2 = 2 Nov, evening) — README, `docs/SUBMISSION.md`, `docs/PITCH.md`, `docs/QA.md`
+## Task 8: ship prep (Day 2 = 2 Nov, evening) — README, `docs/SUBMISSION.md`, `docs/PITCH.md`, `docs/QA.md`
 - `/pitch` and `/ship`. README states data sources, what is verified vs challenge text, and AI usage.
 
-## Task 8: data-day rehearsal (3 Nov, morning) — browser only
+## Task 9: data-day rehearsal (3 Nov, morning) — browser only
 - Osama follows `docs/DATA_DAY.md` exactly as on 13 Nov, WITHOUT asking Claude: edit `data/investigations.csv` on github.com, add one test row, commit to `main`, watch the Vercel deploy, check the live link. Then delete the test row and commit again. Also try one deliberate mistake (a wrong `fuel_type`) and confirm Vercel shows a clear error and the old site stays live.
 - Fix anything that needed Claude, and update `docs/DATA_DAY.md`.
 - **Accept:** Osama did the whole data day alone in the browser in under 30 minutes.
@@ -65,8 +74,11 @@ No stretch tasks. Simple and working beats bigger and broken.
   - Sensors: FLEX and DAFT-2 rely on shared or missing descriptions; FLEX is empty.
 - Judgment calls to review: `safety_area` is our classification from the PSI objectives (left empty for pure science studies). Oxygen for inverse flames (ACME-CFI-G, ACME-FLAME-DESIGN) is the burner flow, up to 85%; the row note says so.
 - Done (code), live check pending: Task 2. `lib/ask.ts` holds the prompt, Groq (`llama-3.3-70b-versatile`) then Gemini (`gemini-3.5-flash-lite`) fallback, and the citation check (unknown ids are removed). `/api/ask` route, `components/ask/AskBox.tsx`, `npm run cache` in `prebuild` (never fails the build), `npm test` (3 citation tests). Verified here: tests, tsc, lint, build, browser screenshots of a cached answer with citation chips and of the no-key error message. The real AI call can only be checked on the Vercel preview (keys live only in Vercel).
-- Note for Task 6: `data/demo-answers.json` is `{}` in git because this session has no keys. Vercel fills it during each build. For local recording, first fetch the 3 answers from the live `/api/ask` and save them into that file.
+- Note for Task 7: `data/demo-answers.json` is `{}` in git because this session has no keys. Vercel fills it during each build. For local recording, first fetch the 3 answers from the live `/api/ask` and save them into that file.
 - Done: Task 3. `lib/score.ts` (formula from spec §6), `components/rank/RankView.tsx` (habitat select, oxygen slider 15 to 40%, safety area tabs, cards with score and reason, "How the score works" popover using the native HTML popover, no new dependency). The rank cards replaced the plain list and keep the `inv-<ID>` anchors, so Ask citation chips still jump to them. Moon Base = 17.5 if tested at 26.5% oxygen or more + 17.5 if tested at 10.2 psia or less (kPa converted and rounded to 0.1 psia, like NASA's list); a sourced `moon_base` label would still give the full 35. Safety area tabs reorder, they do not hide cards. Verified: 4 new score tests pass (7 total), tsc, lint, build, Playwright: slider reorders in under 20 ms, no console errors, desktop and phone screenshots.
 - Demo note: at Moon Base, moving oxygen 21 → 30% changes the lower ranks (CFI drops, ACME-BRE and ACME-S-FLAME rise); the top 4 already cover Moon Base oxygen. Spacecraft shows a bigger reshuffle.
-- Next: Task 4 (Detail + Compare).
-- Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. System fonts for now; Task 5 brings the design fonts.
+- Done: Task 4. `components/detail/DetailDrawer.tsx` (right-side drawer, every field + source links), `components/compare/CompareTable.tsx` (2 to 3 picked, one row per field, differing cells tinted, "Not in our data yet" for empty), shared field list in `lib/fields.ts`, native `<dialog>` wrapper in `components/ui/Modal.tsx` (Esc, focus trap, backdrop click closes; no new dependency). Each rank card has "Details" and a "Compare" checkbox (4th is disabled at 3); a sticky bar opens the table. Verified: 2 new field tests (9 total), tsc, lint, build, Playwright on desktop and phone: drawer opens, 3 picked, table shows, backdrop closes, no console errors.
+- Demo tip for step 5 ("same hardware, different fuels"): compare FLEX and FLEX-2. Their hardware row stays plain (both MDCA + CIR) and the fuel row is tinted. Adding a third with other hardware tints the hardware row too.
+- Added Task 5 (Motion) on 1 Nov at Osama's request; old Tasks 5 to 8 are now 6 to 9.
+- Next: Task 5 (Motion).
+- Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. System fonts for now; Task 6 brings the design fonts.
