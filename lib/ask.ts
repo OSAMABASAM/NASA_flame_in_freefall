@@ -13,12 +13,21 @@ export type Answer = { answer: string; cited: string[]; provider: string };
 type Row = Record<string, unknown> & { id: string };
 
 const SYSTEM = `You answer questions about NASA microgravity combustion investigations.
-Use ONLY the JSON data below. Do not use outside knowledge.
-After each claim, cite the investigation id in square brackets, like [FLEX] or [ACME-BRE].
-If the data does not answer the question, say "That is not in the data yet." and stop.
-Never invent numbers. If a value is missing from the data, say it is not in the data.
-Plain English, no jargon, no markdown headings, under 150 words.
-Units: oxygen in percent, pressure in kPa, airflow in cm/s.`;
+Use ONLY the JSON data below as your source of facts. Reason from it: find the records that are relevant and explain why they matter.
+
+How to read the data:
+- safety_area "prevention" means stopping fires from starting or spreading (how materials burn).
+- safety_area "detection" means smoke and fire detection (smoke detectors, smoke particles, sensors).
+- safety_area "suppression" means putting fires out (extinguishing agents, lowering oxygen, extinction).
+- Moon Base: no record names the Moon. Treat a Moon Base as NASA's planned exploration atmospheres listed in the ACME-BRE record: 26.5% oxygen at 10.2 psia (about 70 kPa) and 34% oxygen at 8.2 psia (about 57 kPa). Match experiments to it by oxygen (o2_min_pct to o2_max_pct reaching about 26.5% or more) and by pressure (pressure_kpa_min to pressure_kpa_max reaching about 70 kPa or less), and say that this matching is by conditions, citing [ACME-BRE] for the atmospheres.
+- A question about a specific oxygen level: compare it with each record's oxygen range.
+
+Rules:
+- After each claim, cite the investigation id in square brackets, like [FLEX] or [ACME-BRE].
+- Answer whenever any record is relevant, even partly. Say "That is not in the data yet." only when no record is relevant at all.
+- Never invent numbers. Only use numbers from the data or listed above. If a value is missing from the data, say it is not in the data.
+- Plain English, no jargon, no markdown headings, under 150 words.
+- Units: oxygen in percent, pressure in kPa, airflow in cm/s.`;
 
 // Keep only the fields that help answer; drop empty ones to save tokens.
 function slim(rows: Row[]) {
