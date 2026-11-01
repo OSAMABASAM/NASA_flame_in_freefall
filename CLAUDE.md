@@ -33,6 +33,7 @@ Design: `/design-kit` (tokens, shadcn, Motion, GSAP + Lenis), `/impeccable`, `/j
 - Pitch slides are made in Claude Slides with the same design system. Submission text is drafted in `docs/SUBMISSION.md` and edited in Claude Docs.
 
 ## Rules that win
+- Git identity: commit as Osama Saleh <obasam.work@gmail.com> (use git -c user.name="Osama Saleh" -c user.email="obasam.work@gmail.com" commit ... if the environment has another identity). No Co-Authored-By, Claude-Session or "Generated with" lines in commits or PR descriptions. Keep the one honest line in the README that names the coding assistant.
 - Always install the latest stable version of every library (check with npm view <pkg> version), never a version from memory.
 - An ugly demo that works beats a beautiful one that breaks.
 - Build only what appears in the demo. Everything else goes on the cut list.
