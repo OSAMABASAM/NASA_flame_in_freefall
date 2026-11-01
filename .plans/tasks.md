@@ -39,9 +39,11 @@ Run `/hack-build`. One task per session where possible. The whole build fits in 
 - Subtle and fast: about 150 to 250 ms, small distances, no bounce. With `prefers-reduced-motion: reduce`, no movement at all (Motion `MotionConfig reducedMotion="user"` plus CSS fallback).
 - **Accept:** Playwright: slider 21 → 30% at Moon Base still reorders correctly and cards settle within 300 ms; with reduced motion emulated, cards jump with no animation; no console errors; slider still feels instant.
 
-## Task 6: design applied (Day 2 = 2 Nov, midday) — after Claude Design handoff
-- `/design-kit` steps 1 to 4 only: tokens from the handoff, shadcn components restyled. Motion is Task 5. No GSAP or Lenis. Footer: Back on Earth, Coming next.
-- **Accept:** screenshots match `docs/design/`; phone size works.
+## Task 6: design applied (Day 2 = 2 Nov, midday) — no Claude Design handoff, designed by Claude from `.plans/design-brief.md`
+- Osama, 1 Nov: no handoff; Claude designs it from the brief. Look: polished NASA-grade data tool, dark like space, one warm flame accent (orange) plus a cool blue used only for the logo, links and "Coming next". Fonts: Geist and Geist Mono (`next/font/google`).
+- Tokens live in `app/globals.css` (no hex colors in components). shadcn-style `components/ui/button.tsx` (primary, outline, ghost, chip). No GSAP or Lenis.
+- Screens: sticky header; hero with headline, Apollo 1 / Artemis line with source link, ask box, chips, answer card, 3 stats computed from the data; rank with a left controls panel (sticky on desktop) and a 2-column card grid (place, id, score with meter, why line, tags); detail drawer as a label/value list; compare table with tinted differing rows; footer with "Back on Earth" (from `earth_application`) and "Coming next: LUCI and FM2".
+- **Accept:** desktop (1440 wide) and phone (390 wide) screenshots of hero, rank, drawer, compare and footer look clean; no horizontal page scroll on phone; text contrast AA on the dark background; no console errors; tests, tsc, lint and build pass.
 
 ## Task 7: demo-check + video (Day 2 = 2 Nov, afternoon)
 Plan A (Claude records, try this first):

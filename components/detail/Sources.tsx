@@ -1,11 +1,13 @@
+import { EMPTY } from "@/lib/fields";
+
 export function Sources({ urls }: { urls: string[] }) {
-  if (!urls.length) return <span className="text-muted-foreground italic">Not in our data yet</span>;
+  if (!urls.length) return <span className="italic text-muted-foreground">{EMPTY}</span>;
   return (
     <ul className="space-y-1">
       {urls.map((u) => (
         <li key={u}>
-          <a href={u} target="_blank" rel="noreferrer" className="break-all underline underline-offset-2">
-            {u.replace(/^https?:\/\//, "")}
+          <a href={u} target="_blank" rel="noreferrer" className="break-all text-cool underline decoration-cool/40 underline-offset-2 hover:decoration-cool">
+            {u.replace(/^https?:\/\//, "")} ↗
           </a>
         </li>
       ))}

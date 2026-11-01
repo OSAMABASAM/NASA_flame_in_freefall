@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // Native <dialog>: Esc, focus trap and backdrop come from the browser. A click on the backdrop closes it.
@@ -8,12 +9,14 @@ export function Modal({
   open,
   onClose,
   title,
+  eyebrow,
   className,
   children,
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
+  eyebrow?: string;
   className?: string;
   children: ReactNode;
 }) {
@@ -30,15 +33,18 @@ export function Modal({
       aria-label={title}
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
-      className={cn("bg-background p-0 text-foreground backdrop:bg-black/40", className)}
+      className={cn("bg-card p-0 text-card-foreground shadow-2xl shadow-black/60 backdrop:bg-black/60 backdrop:backdrop-blur-sm", className)}
     >
-      <div className="sticky top-0 flex items-center justify-between gap-4 border-b bg-background px-5 py-3">
-        <h2 className="font-medium">{title}</h2>
-        <button onClick={onClose} className="rounded px-2 py-1 text-sm hover:bg-muted" aria-label="Close">
+      <div className="sticky top-0 z-10 flex items-center justify-between gap-4 border-b bg-card/95 px-4 py-4 sm:px-6 backdrop-blur">
+        <div className="min-w-0">
+          {eyebrow && <p className="font-mono text-xs text-accent-foreground">{eyebrow}</p>}
+          <h2 className="font-semibold leading-snug">{title}</h2>
+        </div>
+        <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close" className="-mr-2 shrink-0">
           Close ✕
-        </button>
+        </Button>
       </div>
-      {open && <div className="p-5">{children}</div>}
+      {open && <div className="p-4 sm:p-6">{children}</div>}
     </dialog>
   );
 }

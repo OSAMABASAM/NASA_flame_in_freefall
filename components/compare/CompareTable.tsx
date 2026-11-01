@@ -8,18 +8,24 @@ import { EMPTY, FIELDS, differs } from "@/lib/fields";
 
 export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; open: boolean; onClose: () => void }) {
   return (
-    <Modal open={open} onClose={onClose} title={`Compare ${invs.length} investigations`} className="m-auto w-[min(64rem,100%-2rem)] rounded-lg border">
-      <p className="mb-3 text-sm text-muted-foreground">
-        <span className="rounded bg-amber-50 px-1.5 text-amber-950 ring-1 ring-amber-200">Tinted</span> cells differ between the investigations. Plain rows are the same.
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={`Compare ${invs.length} investigations`}
+      className="m-auto max-h-[90dvh] w-[min(68rem,100%-1rem)] rounded-xl border"
+    >
+      <p className="mb-4 flex items-center gap-2 text-sm text-muted-foreground">
+        <span className="inline-block size-3 shrink-0 rounded-sm border border-primary/40 bg-accent" />
+        Tinted rows differ between the investigations. Plain rows are the same.
       </p>
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[36rem] border-collapse text-sm">
-          <thead>
+      <div className="overflow-x-auto rounded-lg border">
+        <table className="w-full min-w-[40rem] border-collapse text-sm">
+          <thead className="bg-raised">
             <tr>
-              <th className="w-40 border-b p-2 text-left font-normal text-muted-foreground">Field</th>
+              <th className="w-28 border-b sm:w-36 p-3 text-left text-xs font-medium text-muted-foreground">Field</th>
               {invs.map((i) => (
-                <th key={i.id} className="border-b p-2 text-left align-bottom">
-                  <span className="block font-mono text-xs text-muted-foreground">{i.id}</span>
+                <th key={i.id} className="border-b border-l p-3 text-left align-bottom font-semibold">
+                  <span className="block font-mono text-xs font-normal text-accent-foreground">{i.id}</span>
                   {i.name}
                 </th>
               ))}
@@ -29,15 +35,20 @@ export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; o
             {FIELDS.map((f) => {
               const diff = differs(f, invs);
               return (
-                <tr key={f.label} data-differs={diff || undefined} className="group">
-                  <th className="border-b p-2 text-left align-top font-normal text-muted-foreground">{f.label}</th>
+                <tr key={f.label} data-differs={diff || undefined} className="group border-b">
+                  <th className="p-3 text-left align-top text-xs font-medium text-muted-foreground group-data-differs:text-accent-foreground">
+                    {f.label}
+                  </th>
                   {invs.map((i) => {
                     const v = f.value(i);
                     return (
-                      <td key={i.id} className={cn(
-                          "border-b p-2 align-top group-data-differs:bg-amber-50 group-data-differs:text-amber-950",
-                          !v && "italic opacity-70",
-                        )}>
+                      <td
+                        key={i.id}
+                        className={cn(
+                          "border-l p-3 align-top leading-relaxed text-secondary-foreground group-data-differs:bg-accent",
+                          !v && "italic text-muted-foreground",
+                        )}
+                      >
                         {v || EMPTY}
                       </td>
                     );
@@ -46,9 +57,9 @@ export function CompareTable({ invs, open, onClose }: { invs: Investigation[]; o
               );
             })}
             <tr>
-              <th className="p-2 text-left align-top font-normal text-muted-foreground">Source</th>
+              <th className="p-3 text-left align-top text-xs font-medium text-muted-foreground">Source</th>
               {invs.map((i) => (
-                <td key={i.id} className="p-2 align-top text-xs">
+                <td key={i.id} className="border-l p-3 align-top text-xs">
                   <Sources urls={i.source_url} />
                 </td>
               ))}
