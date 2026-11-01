@@ -1,5 +1,7 @@
 import type { Investigation } from "@/lib/data";
+import { SpaceAppsLogo } from "./SpaceAppsLogo";
 
+const PSI = "https://science.nasa.gov/physical-sciences-informatics-psi/";
 const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/";
 
 // Demo step 6: "Back on Earth" from the data, and the partial-gravity data NASA has not published yet.
@@ -35,10 +37,18 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
           </a>
         </section>
       </div>
-      <p className="mx-auto max-w-6xl px-4 pb-10 text-xs text-muted-foreground sm:px-6">
-        Built for the NASA Space Apps Challenge 2026. Not an official NASA site. Data from NASA Physical Sciences Informatics;
-        empty cells mean the source does not state the value.
-      </p>
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 pb-10 text-xs text-muted-foreground sm:flex-row sm:items-center sm:gap-4 sm:px-6">
+        <a href={CHALLENGE} target="_blank" rel="noreferrer" className="-ml-4 shrink-0 self-start sm:self-auto">
+          <SpaceAppsLogo height={40} />
+        </a>
+        <p className="leading-relaxed">
+          Data from NASA&apos;s{" "}
+          <a href={PSI} target="_blank" rel="noreferrer" className="underline decoration-border underline-offset-4 hover:text-foreground">
+            Physical Sciences Informatics (PSI)
+          </a>{" "}
+          system. Not affiliated with or endorsed by NASA. Empty cells mean the source does not state the value.
+        </p>
+      </div>
     </footer>
   );
 }
