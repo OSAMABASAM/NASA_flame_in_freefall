@@ -1,72 +1,86 @@
 {
-  "generated_at": "2026-11-01T10:05:49.247Z",
-  "count": 17,
+  "generated_at": "2026-11-01T12:21:03.544Z",
+  "count": 20,
   "items": [
     {
       "id": "BASS",
       "name": "Burning and Suppression of Solids",
-      "project": "",
+      "project": "BASS",
       "safety_area": [
         "prevention",
         "suppression"
       ],
-      "fuel_type": [],
-      "fuel_detail": "Solid materials (challenge text names fabrics and plastics for flammability studies); the BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "fuel_type": [
+        "solid"
+      ],
+      "fuel_detail": "SIBAL cotton-fiberglass fabric, Nomex, Ultem, PMMA slabs and spheres, paraffin and Japan wax candles",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
-        "SPICE fan-driven flow duct"
+        "Small flow duct (76 mm x 76 mm) with variable-speed fan"
       ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
       "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
+      "flow_max_cm_s": 40,
       "sensors": [],
-      "objective": "Flammability of solid materials in microgravity",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Named in the challenge as a solid-materials flammability study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "objective": "Bridge the gap between the normal-gravity NASA-STD-6001 Test 1 and real material flammability in microgravity, and test an inert gaseous extinguishing agent on different materials and geometries",
+      "variables": "Material, sample shape (flat, sphere, cylinder, wake flames), flow direction (opposed or concurrent) and flow speed up to 40 cm/s",
+      "habitats": [
+        "spacecraft"
       ],
-      "data_status": "challenge_text"
+      "earth_application": "Models apply to many terrestrial combustion problems (PSI)",
+      "relevance_note": "PSI says current NASA spacecraft materials selection uses a 1-g test; BASS checks it in microgravity",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+        "https://doi.org/10.60555/58h4-dy80"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "BASS-II",
       "name": "Burning and Suppression of Solids II",
-      "project": "",
+      "project": "BASS",
       "safety_area": [
         "prevention",
         "suppression"
       ],
-      "fuel_type": [],
-      "fuel_detail": "Solid materials (challenge text names fabrics and plastics for flammability studies); the BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "fuel_type": [
+        "solid"
+      ],
+      "fuel_detail": "PMMA films, slabs and rods (0.1 to 5 mm thick), Nomex III fabric, SIBAL fabric, Japan wax candle",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
-        "SPICE fan-driven flow duct"
+        "Small wind tunnel (flow up to 40 cm/s)"
       ],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
+      "o2_min_pct": 13.6,
+      "o2_max_pct": 22.2,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
       "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Flammability of solid materials in microgravity",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Named in the challenge as a solid-materials flammability study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_max_cm_s": 40,
+      "sensors": [
+        "Radiometer",
+        "O2, CO2 and CO measurement",
+        "Cameras"
       ],
-      "data_status": "challenge_text"
+      "objective": "Ignition, flame growth, flame spread and extinction limits of solid fuels in low-speed forced flow in microgravity",
+      "variables": "Flow speed and direction; ambient oxygen (lowered below 21% by adding nitrogen); sample geometry (rods, spherical sections, slabs, films, fabric)",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "Feeds models used to design fire detection and suppression systems in microgravity and on Earth (PSI)",
+      "relevance_note": "Oxygen range is the calibrated initial O2 per test from the PSI experimental table",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "https://doi.org/10.60555/4qc4-de67"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "SAFFIRE-I",
-      "name": "Spacecraft Fire Safety Demonstration I",
+      "name": "Spacecraft Fire Safety Experiment I",
       "project": "Saffire",
       "safety_area": [
         "prevention"
@@ -74,28 +88,39 @@
       "fuel_type": [
         "solid"
       ],
-      "fuel_detail": "Solid materials such as fabrics and plastics (challenge text)",
-      "hardware": [],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
+      "fuel_detail": "SIBAL fabric (75% cotton, 25% fiberglass), about 0.94 m x 0.4 m",
+      "hardware": [
+        "Saffire flow duct in the Cygnus cargo vehicle after it left the ISS"
+      ],
+      "o2_min_pct": 21.5,
+      "o2_max_pct": 21.7,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Flammability of solid materials",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Named in the challenge as a solid-materials flammability study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_min_cm_s": 20,
+      "flow_max_cm_s": 20,
+      "sensors": [
+        "Two cameras",
+        "Thermocouples (flow, flame and plume temperature)",
+        "Two radiometers",
+        "Solid-state pressure, CO2 and O2 sensors",
+        "Two anemometers"
       ],
-      "data_status": "challenge_text"
+      "objective": "How fast a large fire grows in low gravity, and low-g flammability limits compared with NASA's normal-gravity screening test",
+      "variables": "Flow direction (concurrent or opposed); same material and flow speed",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "",
+      "relevance_note": "Large-scale fire on an exploration vehicle without risk to a crew (PSI)",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+        "https://doi.org/10.60555/0t15-1z43"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "SAFFIRE-II",
-      "name": "Spacecraft Fire Safety Demonstration II",
+      "name": "Spacecraft Fire Experiment II",
       "project": "Saffire",
       "safety_area": [
         "prevention"
@@ -103,28 +128,39 @@
       "fuel_type": [
         "solid"
       ],
-      "fuel_detail": "Solid materials such as fabrics and plastics (challenge text)",
-      "hardware": [],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
+      "fuel_detail": "Nine 5 cm x 29 cm samples: silicone, SIBAL fabric, PMMA (flat and structured), PMMA with Nomex",
+      "hardware": [
+        "Saffire flow duct in the Cygnus cargo vehicle after it left the ISS"
+      ],
+      "o2_min_pct": 21.5,
+      "o2_max_pct": 22.1,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Flammability of solid materials",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Named in the challenge as a solid-materials flammability study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_min_cm_s": 20,
+      "flow_max_cm_s": 20,
+      "sensors": [
+        "Two cameras",
+        "Thermocouples (flow, flame and plume temperature)",
+        "Two radiometers",
+        "Solid-state pressure, CO2 and O2 sensors",
+        "Two anemometers"
       ],
-      "data_status": "challenge_text"
+      "objective": "How fast a large fire grows in low gravity, and low-g flammability limits compared with NASA's normal-gravity screening test",
+      "variables": "Material and thickness, flow direction; flow 20 cm/s in the PSI table (the PSI text also mentions 30 cm/s for some samples)",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "",
+      "relevance_note": "Oxygen is derived from measured CO2 and the initial ISS O2 (PSI table note)",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+        "https://doi.org/10.60555/2chp-m469"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "SAFFIRE-III",
-      "name": "Spacecraft Fire Safety Demonstration III",
+      "name": "Spacecraft Fire Experiment III",
       "project": "Saffire",
       "safety_area": [
         "prevention"
@@ -132,89 +168,128 @@
       "fuel_type": [
         "solid"
       ],
-      "fuel_detail": "Solid materials such as fabrics and plastics (challenge text)",
-      "hardware": [],
+      "fuel_detail": "SIBAL fabric, 94 cm x 40.6 cm",
+      "hardware": [
+        "Saffire flow duct in the Cygnus cargo vehicle after it left the ISS"
+      ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Flammability of solid materials",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Named in the challenge as a solid-materials flammability study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_min_cm_s": 30,
+      "flow_max_cm_s": 30,
+      "sensors": [
+        "Two cameras",
+        "Thermocouples (flow, flame and plume temperature)",
+        "Two radiometers",
+        "Solid-state pressure, CO2 and O2 sensors",
+        "Two anemometers"
       ],
-      "data_status": "challenge_text"
+      "objective": "How fast a large fire grows in low gravity, and low-g flammability limits compared with NASA's normal-gravity screening test",
+      "variables": "Flow direction (concurrent or opposed) at 30 cm/s, compared with 20 cm/s in Saffire-I",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "",
+      "relevance_note": "Same material as Saffire-I at a higher flow speed",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+        "https://doi.org/10.60555/040q-4h36"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "SAME",
       "name": "Smoke and Aerosol Measurement Experiment",
-      "project": "",
+      "project": "SAME",
       "safety_area": [
         "detection"
       ],
-      "fuel_type": [],
-      "fuel_detail": "",
-      "hardware": [],
+      "fuel_type": [
+        "solid",
+        "liquid"
+      ],
+      "fuel_detail": "Overheated (not burning) spacecraft materials: Teflon, Kapton, silicone rubber, lampwick, dibutyl phthalate",
+      "hardware": [
+        "Microgravity Science Glovebox (MSG)",
+        "Comparative Soot Diagnostic hardware"
+      ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Fire detection tested in microgravity (smoke and aerosol measurement)",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "Terrestrial smoke detection improvements are mentioned in the challenge text",
-      "relevance_note": "Named in the challenge as the fire detection study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_min_cm_s": 5,
+      "flow_max_cm_s": 10,
+      "sensors": [
+        "Two smoke detectors",
+        "Thermophoretic smoke samplers (analysed by electron microscope)",
+        "Video cameras"
       ],
-      "data_status": "challenge_text"
+      "objective": "Measure the size of smoke particles made in low gravity and how they affect smoke detectors",
+      "variables": "Sample material, sample heating, air flow (5 or 10 cm/s) and smoke aging time",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "Smoke detectors for other extreme places on Earth, such as submarines or underwater laboratories (PSI)",
+      "relevance_note": "Basis for an advanced fire detector for future long-duration spacecraft (PSI)",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-102",
+        "https://doi.org/10.60555/gd4k-8h62"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "SAME-R",
-      "name": "Smoke and Aerosol Measurement Experiment Reflight",
-      "project": "",
+      "name": "Smoke Aerosol Measurement Experiment Reflight",
+      "project": "SAME",
       "safety_area": [
         "detection"
       ],
-      "fuel_type": [],
-      "fuel_detail": "",
-      "hardware": [],
+      "fuel_type": [
+        "solid"
+      ],
+      "fuel_detail": "Overheated (not burning) materials: Kapton, silicone, lampwick, Teflon, Pyrell fire-retardant foam",
+      "hardware": [
+        "Microgravity Science Glovebox (MSG)",
+        "Comparative Soot Diagnostic hardware"
+      ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Fire detection tested in microgravity (smoke and aerosol measurement)",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Named in the challenge as the fire detection study",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_min_cm_s": 0,
+      "flow_max_cm_s": 8.1,
+      "sensors": [
+        "Ionization smoke detector",
+        "DustTrak",
+        "M-pass instrument (new in SAME-R)"
       ],
-      "data_status": "challenge_text"
+      "objective": "Repeat SAME with new materials and wider conditions to measure smoke particle size in low gravity",
+      "variables": "Material, higher heating temperatures, no-flow heating, aging time; 66 test points",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "Smoke detectors for other extreme places on Earth, such as submarines or underwater laboratories (PSI)",
+      "relevance_note": "Basis for an advanced fire detector for future long-duration spacecraft (PSI)",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-101",
+        "https://doi.org/10.60555/2np7-jv14"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "DAFT",
       "name": "Dust and Aerosol Measurement Feasibility Test",
-      "project": "",
+      "project": "SAME",
       "safety_area": [
         "detection"
       ],
       "fuel_type": [],
-      "fuel_detail": "",
-      "hardware": [],
+      "fuel_detail": "No fuel: Arizona Road Dust mixed with nitrogen as a test aerosol",
+      "hardware": [
+        "Modified TSI P-Trak particle counter",
+        "DustTrak"
+      ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
@@ -222,28 +297,36 @@
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
       "sensors": [
-        "One of the SAME smoke-detection instruments (challenge text)"
+        "Modified TSI P-Trak particle counter",
+        "DustTrak"
       ],
-      "objective": "Detect dust with an instrument also used for smoke detection in SAME",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Indirect: same instrument as SAME",
+      "objective": "Show that a P-Trak particle counter, modified for microgravity, counts aerosols correctly before it was used in SAME",
+      "variables": "Instrument (P-Trak or DustTrak) and sampling location",
+      "habitats": [
+        "station",
+        "spacecraft"
+      ],
+      "earth_application": "Instruments for other hard places on Earth, such as submarines or underwater laboratories (PSI)",
+      "relevance_note": "PSI keeps DAFT and DAFT-2 in one record (PSI-47); fields are shared",
       "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-47",
+        "https://doi.org/10.60555/ztgj-d202"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
     },
     {
       "id": "DAFT-2",
       "name": "Dust and Aerosol Measurement Feasibility Test 2",
-      "project": "",
+      "project": "SAME",
       "safety_area": [
         "detection"
       ],
       "fuel_type": [],
-      "fuel_detail": "",
-      "hardware": [],
+      "fuel_detail": "No fuel: Arizona Road Dust mixed with nitrogen as a test aerosol",
+      "hardware": [
+        "Modified TSI P-Trak particle counter",
+        "DustTrak"
+      ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
@@ -251,140 +334,165 @@
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
       "sensors": [
-        "One of the SAME smoke-detection instruments (challenge text)"
+        "Modified TSI P-Trak particle counter",
+        "DustTrak"
       ],
-      "objective": "Detect dust with an instrument also used for smoke detection in SAME",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Indirect: same instrument as SAME",
+      "objective": "Show that a P-Trak particle counter, modified for microgravity, counts aerosols correctly before it was used in SAME",
+      "variables": "Instrument (P-Trak or DustTrak) and sampling location",
+      "habitats": [
+        "station",
+        "spacecraft"
+      ],
+      "earth_application": "Instruments for other hard places on Earth, such as submarines or underwater laboratories (PSI)",
+      "relevance_note": "PSI keeps DAFT and DAFT-2 in one record (PSI-47); fields are shared",
       "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-47",
+        "https://doi.org/10.60555/ztgj-d202"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
     },
     {
       "id": "FLEX",
       "name": "Flame Extinguishment Experiment",
-      "project": "",
+      "project": "FLEX",
       "safety_area": [
+        "prevention",
         "suppression"
       ],
       "fuel_type": [
         "liquid"
       ],
-      "fuel_detail": "Burning droplets of liquid fuel",
+      "fuel_detail": "Methanol and heptane droplets (1.1 to 4.67 mm initial diameter)",
       "hardware": [
         "Multi-user Droplet Combustion Apparatus (MDCA)",
         "Combustion Integrated Rack (CIR)"
       ],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
-      "pressure_kpa_min": null,
-      "pressure_kpa_max": null,
+      "o2_min_pct": 12,
+      "o2_max_pct": 34,
+      "pressure_kpa_min": 70.4,
+      "pressure_kpa_max": 309.3,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
       "sensors": [],
-      "objective": "Suppression by diluting the chamber atmosphere with carbon dioxide and helium",
-      "variables": "",
+      "objective": "Map flammability limits of liquid fuels in microgravity and measure how well gaseous suppressants (CO2, helium) work",
+      "variables": "Fuel, droplet size, ambient pressure, oxygen, and added CO2 or helium",
       "habitats": [],
-      "earth_application": "Fine-water-mist extinguishers from ISS work have Earth uses (challenge text; not tied to FLEX specifically)",
-      "relevance_note": "Named in the challenge as the suppression study",
+      "earth_application": "Fire safety in confined spaces on Earth (PSI)",
+      "relevance_note": "Finds the lowest oxygen that still burns at each pressure (PSI)",
       "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+        "https://doi.org/10.60555/mbq8-0451"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
     },
     {
       "id": "FLEX-2",
       "name": "Flame Extinguishment Experiment 2",
-      "project": "",
-      "safety_area": [],
+      "project": "FLEX",
+      "safety_area": [
+        "prevention"
+      ],
       "fuel_type": [
         "liquid"
       ],
-      "fuel_detail": "Burning droplets of liquid fuel",
+      "fuel_detail": "Droplets of iso-octane, n-octane, heptane, decane, ethanol and mixtures (1.5 to 5 mm)",
       "hardware": [
         "Multi-user Droplet Combustion Apparatus (MDCA)",
         "Combustion Integrated Rack (CIR)"
       ],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
-      "pressure_kpa_min": null,
-      "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "",
-      "variables": "",
+      "o2_min_pct": 17,
+      "o2_max_pct": 30,
+      "pressure_kpa_min": 50.7,
+      "pressure_kpa_max": 304,
+      "flow_min_cm_s": 0.1,
+      "flow_max_cm_s": 5,
+      "sensors": [
+        "Color camera",
+        "Chamber pressure and temperature sensors"
+      ],
+      "objective": "Extend FLEX to fuels and conditions like real combustors, with benchmark data on two-component droplets",
+      "variables": "Fuel, gas mixture (O2 with nitrogen or helium), pressure, droplet size, droplet speed, droplet spacing",
       "habitats": [],
       "earth_application": "",
-      "relevance_note": "Listed in the challenge with FLEX and CFI (same apparatus)",
+      "relevance_note": "Flow is the speed of a moving droplet, not room airflow",
       "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-68",
+        "https://doi.org/10.60555/byp8-h018"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
     },
     {
       "id": "CFI",
       "name": "Cool Flames Investigation",
-      "project": "",
+      "project": "FLEX",
       "safety_area": [],
       "fuel_type": [
         "liquid"
       ],
-      "fuel_detail": "Burning droplets of liquid fuel",
+      "fuel_detail": "n-dodecane droplets and n-dodecane/iso-dodecane mixtures",
       "hardware": [
         "Multi-user Droplet Combustion Apparatus (MDCA)",
         "Combustion Integrated Rack (CIR)"
       ],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
-      "pressure_kpa_min": null,
-      "pressure_kpa_max": null,
+      "o2_min_pct": 17,
+      "o2_max_pct": 21,
+      "pressure_kpa_min": 50.7,
+      "pressure_kpa_max": 506.6,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Listed in the challenge with FLEX and FLEX-2 (same apparatus)",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "sensors": [
+        "Black-and-white camera",
+        "UV camera (OH* emission)",
+        "Narrow-band and wide-band radiometers"
       ],
-      "data_status": "challenge_text"
+      "objective": "Cool-flame burning of n-dodecane and mixtures at different pressures and helium dilution",
+      "variables": "Pressure (0.5 to 5 atm), oxygen, helium dilution, fuel mixture, fiber-supported or free droplet",
+      "habitats": [],
+      "earth_application": "Understanding of fuel octane and cetane numbers in engines (PSI)",
+      "relevance_note": "Fundamental study; PSI says it supports the design of safer spacecraft systems",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-39",
+        "https://doi.org/10.60555/m6pj-a914"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "ACME-BRE",
       "name": "Burning Rate Emulator",
       "project": "ACME",
       "safety_area": [
-        "prevention"
+        "prevention",
+        "suppression"
       ],
       "fuel_type": [
         "gas"
       ],
-      "fuel_detail": "Gaseous fuels used to emulate burning solids",
+      "fuel_detail": "Ethylene or methane (pure or 50% in nitrogen) through 25 or 50 mm porous burners, emulating burning solids",
       "hardware": [
         "Combustion Integrated Rack (CIR)"
       ],
-      "o2_min_pct": null,
-      "o2_max_pct": null,
+      "o2_min_pct": 21,
+      "o2_max_pct": 40,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Materials flammability in still atmospheres as a function of material properties",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "ACME experiment named in the challenge",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "sensors": [
+        "Heat flux sensor",
+        "Burner surface temperature"
       ],
-      "data_status": "challenge_text"
+      "objective": "Burning conditions of materials in still microgravity air, as a function of material properties",
+      "variables": "Fuel, burner size, oxygen (21 to 40%) and pressure; planned crew atmospheres: 21% O2 at 14.7 psia, 26.5% at 10.2 psia, 34% at 8.2 psia",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "",
+      "relevance_note": "Flames kept burning without airflow in elevated-oxygen atmospheres considered for future spacecraft; at 21% they self-extinguished (PSI). Pressure per test is not listed",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-20",
+        "https://doi.org/10.60555/vb93-3y72"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "ACME-CFI-G",
@@ -394,26 +502,32 @@
       "fuel_type": [
         "gas"
       ],
-      "fuel_detail": "Chamber filled with nitrogen and a flammable gas (e.g. propane); oxygen-nitrogen mixture flows from a spherical burner, making an inside-out flame",
+      "fuel_detail": "Ethane, propane and butane on a spherical porous burner, normal and inverse (oxygen from the burner) flames",
       "hardware": [
         "Combustion Integrated Rack (CIR)"
       ],
-      "o2_min_pct": null,
+      "o2_min_pct": 12,
       "o2_max_pct": 85,
-      "pressure_kpa_min": null,
-      "pressure_kpa_max": null,
+      "pressure_kpa_min": 49.5,
+      "pressure_kpa_max": 331,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Cool flames with gaseous fuels; highest oxygen concentrations tested in microgravity",
-      "variables": "",
+      "sensors": [
+        "Cameras",
+        "Radiometers",
+        "Photomultiplier tubes",
+        "Thermocouples"
+      ],
+      "objective": "Conditions for steady cool diffusion flames with gaseous fuels, including inverse flames",
+      "variables": "Fuel, dilution, flow rate, pressure, normal or inverse flame",
       "habitats": [],
       "earth_application": "",
-      "relevance_note": "Oxygen value is the burner flow (up to 85% O2), not the chamber atmosphere",
+      "relevance_note": "Oxygen up to 85% is the burner flow in inverse flames; normal flames burned in 18 to 40% O2 ambient",
       "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-159",
+        "https://doi.org/10.60555/cyt1-kh64"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
     },
     {
       "id": "ACME-E-FIELD",
@@ -423,7 +537,7 @@
       "fuel_type": [
         "gas"
       ],
-      "fuel_detail": "Gaseous fuel flames",
+      "fuel_detail": "Methane and ethylene (pure or diluted with nitrogen) on a coflow or gas-jet burner",
       "hardware": [
         "Combustion Integrated Rack (CIR)"
       ],
@@ -433,52 +547,67 @@
       "pressure_kpa_max": null,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "Mimic partial gravity through the effect of an electric field on the ions in flames",
-      "variables": "",
+      "sensors": [
+        "High-resolution cameras",
+        "Thermopile detectors (flame radiation)",
+        "Ion current measurement"
+      ],
+      "objective": "How an electric field (up to 10 kV) changes flame stability, soot and ion current in microgravity",
+      "variables": "Field strength and polarity, fuel and dilution, burner type, coflow velocity",
       "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Only partial-gravity proxy in PSI (challenge text)",
+      "earth_application": "Electric fields could reduce pollutants from combustion on Earth (PSI)",
+      "relevance_note": "The challenge text describes it as a partial-gravity proxy",
       "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-22",
+        "https://doi.org/10.60555/se5a-8c73",
         "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
     },
     {
       "id": "SPICE",
       "name": "Smoke Point In Co-flow Experiment",
       "project": "",
       "safety_area": [],
-      "fuel_type": [],
-      "fuel_detail": "The BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Methane, ethylene, propane, propylene and propylene mixtures; burners 0.41, 0.76 and 1.6 mm",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
-        "SPICE fan-driven flow duct"
+        "Flow duct with nozzles"
       ],
       "o2_min_pct": null,
       "o2_max_pct": null,
       "pressure_kpa_min": null,
       "pressure_kpa_max": null,
-      "flow_min_cm_s": null,
-      "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "",
-      "variables": "",
-      "habitats": [],
-      "earth_application": "",
-      "relevance_note": "The flow duct built for SPICE was reused by BASS and SLICE",
-      "source_url": [
-        "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
+      "flow_min_cm_s": 5.4,
+      "flow_max_cm_s": 65,
+      "sensors": [
+        "Still and video cameras"
       ],
-      "data_status": "challenge_text"
+      "objective": "Smoke point (when a flame starts to release soot) of jet flames in co-flowing air in microgravity",
+      "variables": "Fuel, burner diameter, co-flow air speed, fuel flow; 526 flames",
+      "habitats": [
+        "spacecraft"
+      ],
+      "earth_application": "",
+      "relevance_note": "PSI says it helps design safer spacecraft environments (soot)",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-107",
+        "https://doi.org/10.60555/9kbh-e962"
+      ],
+      "data_status": "verified"
     },
     {
       "id": "SLICE",
-      "name": "Structure & Liftoff In Combustion Experiment",
+      "name": "Structure and Liftoff In Combustion Experiment",
       "project": "",
       "safety_area": [],
-      "fuel_type": [],
-      "fuel_detail": "The BASS/BASS-II/SPICE/SLICE group used solid and gaseous fuels",
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Methane, ethylene and ethane, pure or diluted with nitrogen",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
         "SPICE fan-driven flow duct"
@@ -489,16 +618,125 @@
       "pressure_kpa_max": null,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
-      "sensors": [],
-      "objective": "",
-      "variables": "",
+      "sensors": [
+        "High-resolution camera",
+        "Flow and temperature sensors"
+      ],
+      "objective": "Structure and stability (liftoff) of laminar diffusion flames in microgravity",
+      "variables": "Fuel and nitrogen dilution, burner diameter, coflow velocity; 13 test days",
       "habitats": [],
-      "earth_application": "",
-      "relevance_note": "Uses the SPICE flow duct in the MSG",
+      "earth_application": "Better models for more efficient combustion on Earth (PSI)",
+      "relevance_note": "Hardware is from the challenge text; PSI leaves it blank",
       "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-106",
+        "https://doi.org/10.60555/pm12-rg61",
         "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/"
       ],
-      "data_status": "challenge_text"
+      "data_status": "verified"
+    },
+    {
+      "id": "ACME-FLAME-DESIGN",
+      "name": "Flame Design",
+      "project": "ACME",
+      "safety_area": [],
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Ethylene and propane on a spherical porous burner, normal and inverse (oxygen from the burner) flames",
+      "hardware": [
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": 19.8,
+      "o2_max_pct": 85,
+      "pressure_kpa_min": 43,
+      "pressure_kpa_max": 306.9,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [
+        "Cameras",
+        "Radiometers",
+        "Photomultiplier tubes",
+        "Thermocouples"
+      ],
+      "objective": "Soot-inception and extinction limits of normal and inverse spherical flames",
+      "variables": "Flow rate, fuel dilution with nitrogen, oxygen, pressure, normal or inverse flame",
+      "habitats": [],
+      "earth_application": "More efficient, cleaner combustors on Earth (PSI)",
+      "relevance_note": "Not named in the challenge; added from PSI. Oxygen up to 85% is the burner flow in inverse flames",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-10",
+        "https://doi.org/10.60555/w4zy-bt45"
+      ],
+      "data_status": "verified"
+    },
+    {
+      "id": "ACME-CLD",
+      "name": "Coflow Laminar Diffusion Flame",
+      "project": "ACME",
+      "safety_area": [],
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Methane and ethylene, diluted with nitrogen",
+      "hardware": [
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": null,
+      "o2_max_pct": null,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [
+        "OH* and CH* emission imaging",
+        "Soot luminosity",
+        "Laser extinction",
+        "Thin-filament pyrometry"
+      ],
+      "objective": "Weak coflow flames and soot at extreme fuel dilution, to test computer models",
+      "variables": "Fuel, fuel dilution, flow velocity",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Not named in the challenge; added from PSI",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-21",
+        "https://doi.org/10.60555/23e1-9950"
+      ],
+      "data_status": "verified"
+    },
+    {
+      "id": "ACME-S-FLAME",
+      "name": "Structure and Response of Spherical Diffusion Flames",
+      "project": "ACME",
+      "safety_area": [],
+      "fuel_type": [
+        "gas"
+      ],
+      "fuel_detail": "Hydrogen, methane and ethylene mixtures diluted with nitrogen or helium, on a spherical porous burner",
+      "hardware": [
+        "Combustion Integrated Rack (CIR)"
+      ],
+      "o2_min_pct": 21,
+      "o2_max_pct": 30,
+      "pressure_kpa_min": null,
+      "pressure_kpa_max": null,
+      "flow_min_cm_s": null,
+      "flow_max_cm_s": null,
+      "sensors": [
+        "Spectrally resolved images",
+        "Flame and burner temperatures",
+        "Radiative flux"
+      ],
+      "objective": "Structure, extinction limits and pulsating instabilities of spherical flames",
+      "variables": "Fuel mixture, diluent (nitrogen or helium), oxygen (about 21 or 30%), flow rate",
+      "habitats": [],
+      "earth_application": "",
+      "relevance_note": "Not named in the challenge; added from PSI. Oxygen values are approximate (~) in the PSI table",
+      "source_url": [
+        "https://psi.nasa.gov/physci/repo/data/investigations/PSI-23",
+        "https://doi.org/10.60555/k57n-p030"
+      ],
+      "data_status": "verified"
     }
   ]
 }
