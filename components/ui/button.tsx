@@ -1,12 +1,11 @@
-"use client";
-
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, type HTMLMotionProps } from "motion/react";
+import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-// shadcn-style button, restyled with the design tokens. Soft lift on hover, soft press on tap (Motion).
+// shadcn-style button, restyled with the design tokens. Soft lift on hover, soft press on tap: CSS transforms,
+// so buttons respond before any JavaScript has loaded.
 export const buttonVariants = cva(
-  "glow inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-45",
+  "glow inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold hover:-translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-0 active:scale-[0.97] disabled:pointer-events-none disabled:opacity-45",
   {
     variants: {
       variant: {
@@ -27,16 +26,8 @@ export const buttonVariants = cva(
   },
 );
 
-export type ButtonProps = HTMLMotionProps<"button"> & VariantProps<typeof buttonVariants>;
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
 export function Button({ className, variant, size, ...props }: ButtonProps) {
-  return (
-    <motion.button
-      whileHover={{ y: -1 }}
-      whileTap={{ scale: 0.97, y: 0 }}
-      transition={{ duration: 0.15 }}
-      className={cn(buttonVariants({ variant, size }), className)}
-      {...props}
-    />
-  );
+  return <button className={cn(buttonVariants({ variant, size }), className)} {...props} />;
 }

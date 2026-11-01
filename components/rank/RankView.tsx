@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useCallback, useDeferredValue, useState } from "react";
-import { CompareTable } from "@/components/compare/CompareTable";
-import { DetailDrawer } from "@/components/detail/DetailDrawer";
+import * as m from "motion/react-m";
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react";
+import { CompareTable, DetailDrawer, preloadDetail } from "@/components/detail/LazyDetail";
 import { Reveal, reveal } from "@/components/motion/Reveal";
 import { HowItWorks } from "@/components/rank/HowItWorks";
 import { RankCard } from "@/components/rank/RankCard";
@@ -22,9 +21,29 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   const [comparing, setComparing] = useState(false);
   // The slider and controls update at once; the card list follows at lower priority, so dragging stays smooth.
   const [dHabitat, dOxygen, dArea] = [useDeferredValue(habitat), useDeferredValue(oxygen), useDeferredValue(area)];
-  const ranked = rank(investigations, { habitat: dHabitat, oxygen: dOxygen, area: dArea });
-  const pickedInvs = picked.map((id) => investigations.find((i) => i.id === id)!);
+  const ranked = useMemo(
+    () => rank(investigations, { habitat: dHabitat, oxygen: dOxygen, area: dArea }),
+    [investigations, dHabitat, dOxygen, dArea],
+  );
   const toggle = useCallback((id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id])), []);
+  useEffect(preloadDetail, []);
+  // The card list is rebuilt only when the ranking or the picks change, not on every slider tick; each card
+  // (RankCard, memoized) then redraws only if what it shows changed.
+  const cards = useMemo(
+    () =>
+      ranked.map((item, i) => (
+        <RankCard
+          key={item.inv.id}
+          item={item}
+          place={i + 1}
+          picked={picked.includes(item.inv.id)}
+          pickDisabled={!picked.includes(item.inv.id) && picked.length >= 3}
+          onDetails={setDetail}
+          onTogglePick={toggle}
+        />
+      )),
+    [ranked, picked, toggle],
+  );
 
   return (
     <section id="rank" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
@@ -40,7 +59,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
       </Reveal>
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[17rem_1fr]">
-        <motion.div {...reveal(1)} className="glow space-y-7 rounded-2xl bg-charcoal p-6 text-charcoal-foreground lg:sticky lg:top-20">
+        <m.div {...reveal(1)} className="glow space-y-7 rounded-2xl bg-charcoal p-6 text-charcoal-foreground lg:sticky lg:top-20">
           <label className="block">
             <span className={label}>Habitat</span>
             <select
@@ -96,21 +115,9 @@ export function RankView({ investigations }: { investigations: Investigation[] }
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
-        <ol className="grid gap-4 md:grid-cols-2">
-          {ranked.map((item, i) => (
-            <RankCard
-              key={item.inv.id}
-              item={item}
-              place={i + 1}
-              picked={picked.includes(item.inv.id)}
-              pickDisabled={!picked.includes(item.inv.id) && picked.length >= 3}
-              onDetails={setDetail}
-              onTogglePick={toggle}
-            />
-          ))}
-        </ol>
+        <ol className="grid gap-4 md:grid-cols-2">{cards}</ol>
       </div>
 
       {picked.length > 0 && (
@@ -131,8 +138,10 @@ export function RankView({ investigations }: { investigations: Investigation[] }
         </div>
       )}
 
-      <DetailDrawer inv={detail} onClose={() => setDetail(null)} />
-      <CompareTable invs={pickedInvs} open={comparing && picked.length >= 2} onClose={() => setComparing(false)} />
+      {detail && <DetailDrawer inv={detail} onClose={() => setDetail(null)} />}
+      {comparing && picked.length >= 2 && (
+        <CompareTable invs={picked.map((id) => investigations.find((i) => i.id === id)!)} onClose={() => setComparing(false)} />
+      )}
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import * as m from "motion/react-m";
 import { memo } from "react";
 import { reveal } from "@/components/motion/Reveal";
 import { ScoreGauge } from "@/components/rank/ScoreGauge";
@@ -22,8 +22,11 @@ function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDe
   const muted = top ? "text-sun-muted" : "text-muted-foreground";
   const r = reveal((place - 1) % 2);
   return (
-    <motion.li
+    <m.li
+      // Glide to a new place only when the place changes. Without layoutDependency, Motion measures the layout of
+      // every card on every slider tick, which is what made dragging the slider stutter.
       layout="position"
+      layoutDependency={place}
       {...r}
       transition={{ ...r.transition, layout: { duration: 0.22 } }}
       id={`inv-${inv.id}`}
@@ -72,7 +75,7 @@ function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDe
           Compare
         </label>
       </div>
-    </motion.li>
+    </m.li>
   );
 }
 

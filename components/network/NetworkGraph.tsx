@@ -15,6 +15,15 @@ const radius = (n: NetNode) => 4 + Math.sqrt(n.degree) * 1.8;
 const GAP = 14; // room between two dots for the id label
 const noLabel = () => "";
 
+// The graph library sizes its canvas by window.devicePixelRatio. A 3x phone screen would make it paint 9 canvas
+// pixels per CSS pixel on every frame; capped at 2 it paints 4 and still looks sharp. Only scripts read this
+// value: the browser keeps drawing the rest of the page at the screen's full density.
+const dpr = Object.getOwnPropertyDescriptor(window, "devicePixelRatio");
+if (dpr?.get && dpr.configurable) {
+  const real = dpr.get;
+  Object.defineProperty(window, "devicePixelRatio", { ...dpr, get: () => Math.min(2, real.call(window)) });
+}
+
 // Canvas cannot read CSS variables, so read the tokens from globals.css once.
 function readTokens() {
   const css = getComputedStyle(document.documentElement);
@@ -82,7 +91,6 @@ export function NetworkGraph({
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [hover, setHover] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(false);
   const fitted = useRef(false); // fit once after each layout, so later drags never rescale the view
   const frame = useRef<Frame | null>(null);
   // The library finds the dot under the pointer on a hidden "hit map" that it repaints at most every 800 ms, so
@@ -105,20 +113,28 @@ export function NetworkGraph({
     return set;
   }, [hover, data]);
 
+  // The box has a fixed height in CSS (560px on phones, 520px from sm), so the page never jumps around the graph.
   useEffect(() => {
     const el = wrap.current!;
-    const ro = new ResizeObserver(() => setSize({ w: el.clientWidth, h: el.clientWidth < 640 ? 560 : 520 }));
+    const ro = new ResizeObserver(() => setSize({ w: el.clientWidth, h: el.clientHeight }));
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
 
   // While the graph is on screen, the library keeps redrawing (and keeps its hit map catching up with the dots).
-  // Off screen, it pauses redrawing once the layout is still.
+  // Off screen, its animation loop stops completely, so scrolling elsewhere costs nothing. The first layout is
+  // allowed to settle and fit off screen first (onEngineStop pauses it then), so it is ready before it is seen.
+  const onScreen = useRef(false);
   useEffect(() => {
-    const io = new IntersectionObserver(([e]) => setVisible(e.isIntersecting));
+    if (!ready) return;
+    const io = new IntersectionObserver(([e]) => {
+      onScreen.current = e.isIntersecting;
+      if (e.isIntersecting) fg.current?.resumeAnimation();
+      else if (fitted.current) fg.current?.pauseAnimation();
+    });
     io.observe(wrap.current!);
     return () => io.disconnect();
-  }, []);
+  }, [ready]);
 
   useEffect(() => {
     const g = fg.current;
@@ -158,6 +174,8 @@ export function NetworkGraph({
     g.zoomToFit(0, 48);
     const a = g.screen2GraphCoords(0, 0), b = g.screen2GraphCoords(size.w, size.h);
     frame.current = { x0: a.x, y0: a.y, x1: b.x, y1: b.y, k: g.zoom() };
+    // The library schedules its next frame right after this callback returns, so pause just after that.
+    queueMicrotask(() => onScreen.current || g.pauseAnimation());
   }, [ready, size]);
 
   const onNodeHover = useCallback(
@@ -222,7 +240,7 @@ export function NetworkGraph({
   );
 
   return (
-    <div ref={wrap} className="w-full" onPointerDownCapture={() => refreshHitMap()} aria-hidden>
+    <div ref={wrap} className="h-[560px] w-full sm:h-[520px]" onPointerDownCapture={() => refreshHitMap()} aria-hidden>
       {size.w > 0 && (
         <ForceGraph2D<NetNode, NetLink>
           ref={fg}
@@ -235,7 +253,7 @@ export function NetworkGraph({
           warmupTicks={300}
           cooldownTicks={reduced ? 0 : 60}
           d3VelocityDecay={0.55}
-          autoPauseRedraw={!visible}
+          autoPauseRedraw={false}
           onEngineStop={onEngineStop}
           enableZoomInteraction={false}
           enablePanInteraction={false}

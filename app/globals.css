@@ -128,7 +128,7 @@ select,
 summary,
 a,
 label:has(> input[type="checkbox"]) {
-  transition-property: color, background-color, border-color, text-decoration-color, box-shadow, text-shadow, filter;
+  transition-property: color, background-color, border-color, text-decoration-color, box-shadow, text-shadow, filter, translate, scale;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
@@ -157,6 +157,78 @@ button:focus-visible,
 select:focus-visible,
 a.glow:focus-visible {
   box-shadow: 0 0 0 1px var(--glow-ring), -10px 0 28px -6px var(--glow);
+}
+
+/* First-screen motion in pure CSS, so it starts with the first paint instead of waiting for JavaScript.
+   Transform and opacity only (translate and scale are transforms). --i staggers siblings by 25ms; the whole hero
+   is in place within 300ms. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+@utility rise-in {
+  animation: rise-in 220ms cubic-bezier(0.2, 0, 0, 1) calc(var(--i, 0) * 25ms) both;
+}
+@keyframes grow-y {
+  from {
+    scale: 1 0;
+  }
+}
+@utility grow-y {
+  animation: grow-y 400ms cubic-bezier(0.2, 0, 0, 1) calc(200ms + var(--i, 0) * 60ms) both;
+}
+
+/* Count-up: a whole number animates from 0 to --count and is printed with a CSS counter. Browsers that cannot
+   animate it show the final number. */
+@property --count {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes count-up {
+  from {
+    --count: 0;
+  }
+}
+@utility count-up {
+  counter-reset: count var(--count);
+  animation: count-up 450ms cubic-bezier(0.2, 0, 0, 1) both;
+  &::after {
+    content: counter(count);
+  }
+}
+
+/* Scroll progress bar and hero parallax follow the scroll on the browser's compositor, with no JavaScript while
+   scrolling. Browsers without scroll-driven animations get the same effect from ScrollEffects.tsx. */
+@keyframes scroll-progress {
+  from {
+    scale: 0 1;
+  }
+}
+@keyframes drift {
+  to {
+    translate: 0 calc(var(--drift) * -1px);
+  }
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .drift {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 600px;
+    }
+  }
+}
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress {
+    scale: 0 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
