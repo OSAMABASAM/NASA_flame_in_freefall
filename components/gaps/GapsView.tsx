@@ -4,7 +4,7 @@ import { coverage, GRAVITY, OXYGEN, PRESSURE, type Cell } from "@/lib/gaps";
 import { cn } from "@/lib/utils";
 
 const CHALLENGE = "https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/";
-const card = "h-full rounded-2xl bg-card p-6 shadow-card sm:p-7";
+const card = "glow h-full rounded-2xl bg-card p-6 shadow-card sm:p-7";
 const eyebrow = "text-xs font-medium text-muted-foreground";
 
 // Moon gravity + Moon base oxygen + low pressure: the real conditions of a Moon base.
@@ -143,7 +143,7 @@ function GravityGrid({ label, cells }: { label: string; cells: Cell[] }) {
                     title={c.ids.length ? c.ids.join(", ") : c.line}
                     className={cn(
                       "h-full rounded-xl p-2 align-top",
-                      c.ids.length ? "bg-accent" : "bg-fire-soft",
+                      c.ids.length ? "glow bg-accent" : "glow-fire bg-fire-soft",
                       isMoonBase(c) && "ring-2 ring-fire",
                     )}
                   >

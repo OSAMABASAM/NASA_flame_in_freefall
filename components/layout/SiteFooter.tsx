@@ -10,7 +10,7 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
   return (
     <footer className="mt-24 border-t">
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-14 sm:px-6 items-start md:grid-cols-[3fr_2fr]">
-        <section aria-labelledby="earth" className="rounded-2xl bg-card p-7 shadow-card">
+        <section aria-labelledby="earth" className="glow rounded-2xl bg-card p-7 shadow-card">
           <h2 id="earth" className="text-lg font-semibold">Back on Earth</h2>
           <p className="mt-1 text-sm text-muted-foreground">What these space experiments help with on the ground, as NASA states it.</p>
           <ul className="mt-5 divide-y text-sm">
@@ -24,7 +24,7 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
             ))}
           </ul>
         </section>
-        <section aria-labelledby="next" className="rounded-2xl border border-dashed border-input p-7">
+        <section aria-labelledby="next" className="glow rounded-2xl border border-dashed border-input p-7">
           <p className="text-xs font-medium text-accent-foreground">Coming next</p>
           <h2 id="next" className="mt-1 text-lg font-semibold">LUCI and FM2 partial-gravity data</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

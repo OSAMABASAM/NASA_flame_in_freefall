@@ -32,6 +32,11 @@
   --fire: oklch(0.68 0.18 45);
   --fire-soft: oklch(0.68 0.18 45 / 0.12);
   --fire-foreground: oklch(0.5 0.16 40);
+  /* Hover glow: a soft light from the left side plus a thin ring. Blue everywhere, orange on untested cells. */
+  --glow: oklch(0.56 0.2 257 / 0.38);
+  --glow-ring: oklch(0.56 0.2 257 / 0.22);
+  --glow-fire: oklch(0.68 0.18 45 / 0.5);
+  --glow-fire-ring: oklch(0.68 0.18 45 / 0.35);
   --elev-card:0 1px 2px oklch(0 0 0 / 0.04), 0 4px 16px oklch(0 0 0 / 0.05);
   --elev-lift: 0 2px 6px oklch(0 0 0 / 0.05), 0 16px 40px oklch(0 0 0 / 0.1);
 }
@@ -86,6 +91,29 @@
 /* Hero fades from white into the page background. */
 .hero-wash {
   background: linear-gradient(to bottom, var(--card), var(--background));
+}
+
+/* Hover glow. Kept outside Tailwind's layers so it wins over shadow utilities on the same element.
+   Only on devices that really hover (no stuck glow after a tap); keyboard focus gets it too. */
+.glow,
+.glow-fire {
+  transition-property: box-shadow, color, background-color, border-color, text-decoration-color;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+.glow-fire {
+  --glow: var(--glow-fire);
+  --glow-ring: var(--glow-fire-ring);
+}
+@media (hover: hover) {
+  .glow:hover,
+  .glow-fire:hover {
+    box-shadow: 0 0 0 1px var(--glow-ring), -10px 0 28px -6px var(--glow), var(--elev-lift);
+  }
+}
+.glow:focus-visible,
+.glow-fire:focus-visible {
+  box-shadow: 0 0 0 1px var(--glow-ring), -10px 0 28px -6px var(--glow);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -19,7 +19,7 @@ function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDe
       layout="position"
       transition={{ duration: 0.22 }}
       id={`inv-${inv.id}`}
-      className="flex scroll-mt-20 flex-col rounded-2xl bg-card p-6 shadow-card transition-shadow hover:shadow-lift target:ring-2 target:ring-primary/50 has-checked:ring-2 has-checked:ring-primary/40"
+      className="flex scroll-mt-20 flex-col rounded-2xl bg-card p-6 shadow-card glow target:ring-2 target:ring-primary/50 has-checked:ring-2 has-checked:ring-primary/40"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">

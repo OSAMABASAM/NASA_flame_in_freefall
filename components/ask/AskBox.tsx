@@ -16,7 +16,7 @@ function AnswerText({ text }: { text: string }) {
           <a
             key={i}
             href={`#inv-${id}`}
-            className="mx-0.5 inline-block rounded-md bg-accent px-1.5 py-px font-mono text-xs text-accent-foreground hover:bg-primary hover:text-primary-foreground"
+            className="glow mx-0.5 inline-block rounded-md bg-accent px-1.5 py-px font-mono text-xs text-accent-foreground hover:bg-primary hover:text-primary-foreground"
           >
             {id}
           </a>

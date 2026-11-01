@@ -42,7 +42,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
         share more. Bigger dots have more links. Hover to see neighbors, click to open the details.
       </p>
 
-      <div ref={box} className="mt-6 overflow-hidden rounded-2xl bg-card shadow-card">
+      <div ref={box} className="glow mt-6 overflow-hidden rounded-2xl bg-card shadow-card">
         <ul className="flex flex-wrap gap-x-5 gap-y-2 border-b px-5 py-3 text-xs text-secondary-foreground">
           {LEGEND.map((l) => (
             <li key={l.label} className="flex items-center gap-2">
