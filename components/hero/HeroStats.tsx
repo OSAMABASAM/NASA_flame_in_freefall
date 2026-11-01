@@ -42,7 +42,7 @@ export function HeroStats({ total, withOxygen, sourced, byArea }: HeroNumbers) {
         <p className="mt-auto pt-6 text-6xl leading-none font-bold tracking-tighter tabular-nums">
           <CountUp value={total} />
         </p>
-        <p className="mt-2 text-xs text-muted-foreground">Microgravity fire experiments</p>
+        <p className="mt-2 text-xs text-muted-foreground">Microgravity combustion and fire safety studies</p>
       </Tile>
 
       <Tile drift={12} index={1} surface="bg-fire text-fire-foreground">

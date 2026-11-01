@@ -38,7 +38,7 @@ export function HowItWorks() {
         <p className="mt-4 rounded-xl bg-accent p-4 text-secondary-foreground">
           <span className="font-medium text-foreground">Moon Base:</span> no NASA record names the Moon, so its 35 points
           go to conditions instead: 17.5 if tested at {MOON_O2_PCT}% oxygen or more, 17.5 if tested at {MOON_PSIA} psia
-          (70.3 kPa) or less. These are NASA&apos;s planned exploration atmospheres as listed in the{" "}
+          (70.3 kPa) or less. These are the atmospheres NASA considered for human missions, as listed in the{" "}
           <a href="https://psi.nasa.gov/physci/repo/data/investigations/PSI-20" className="underline underline-offset-2" target="_blank" rel="noreferrer">
             ACME-BRE record
           </a>

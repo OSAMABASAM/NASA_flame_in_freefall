@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T15:45:41.782Z",
+  "generated_at": "2026-11-01T18:09:27.675Z",
   "count": 20,
   "items": [
     {
@@ -52,7 +52,7 @@
       "fuel_type": [
         "solid"
       ],
-      "fuel_detail": "PMMA films, slabs and rods (0.1 to 5 mm thick), Nomex III fabric, SIBAL fabric, Japan wax candle",
+      "fuel_detail": "PMMA films and slabs (0.1 to 5 mm thick), PMMA rods (1/4 to 1/2 inch), a 4 cm spherical section, Nomex III fabric, SIBAL fabric, Japan wax candle",
       "hardware": [
         "Microgravity Science Glovebox (MSG)",
         "Small wind tunnel (flow up to 40 cm/s)"
@@ -268,7 +268,6 @@
       ],
       "fuel_detail": "Overheated (not burning) materials: Kapton, silicone, lampwick, Teflon, Pyrell fire retardant foam",
       "hardware": [
-        "Microgravity Science Glovebox (MSG)",
         "Comparative Soot Diagnostic hardware"
       ],
       "o2_min_pct": null,
@@ -396,7 +395,7 @@
       ],
       "o2_min_pct": 12,
       "o2_max_pct": 34,
-      "pressure_kpa_min": 70.4,
+      "pressure_kpa_min": 70.2,
       "pressure_kpa_max": 309.3,
       "flow_min_cm_s": null,
       "flow_max_cm_s": null,
@@ -503,7 +502,7 @@
       "fuel_type": [
         "gas"
       ],
-      "fuel_detail": "Ethylene or methane (pure or 50% in nitrogen) through 25 or 50 mm porous burners, emulating burning solids",
+      "fuel_detail": "Ethylene (pure or 50% in nitrogen) or pure methane through 25 or 50 mm porous burners, emulating burning solids",
       "hardware": [
         "Combustion Integrated Rack (CIR)"
       ],
@@ -518,7 +517,7 @@
         "Burner surface temperature"
       ],
       "objective": "Burning conditions of materials in still microgravity air, as a function of material properties",
-      "variables": "Fuel, burner size, oxygen (21 to 40%) and pressure; planned crew atmospheres: 21% O2 at 14.7 psia, 26.5% at 10.2 psia, 34% at 8.2 psia",
+      "variables": "Fuel, burner size, oxygen (21 to 40%) and pressure; atmospheres NASA considered for human missions, listed as test targets: 21% O2 at 14.7 psia, 26.5% at 10.2 psia, 34% at 8.2 psia",
       "habitats": [
         "spacecraft"
       ],
@@ -671,7 +670,7 @@
         "Flow and temperature sensors"
       ],
       "objective": "Structure and stability (liftoff) of laminar diffusion flames in microgravity",
-      "variables": "Fuel and nitrogen dilution, burner diameter, coflow velocity; 13 test days",
+      "variables": "Fuel and nitrogen dilution, burner diameter, coflow velocity; more than 4,000 images over 13 tests",
       "habitats": [],
       "earth_application": "Better models for more efficient combustion on Earth (PSI)",
       "relevance_note": "Hardware is from the challenge text; PSI leaves it blank",

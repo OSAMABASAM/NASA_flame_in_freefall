@@ -18,7 +18,7 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
               <span className="pill bg-charcoal text-charcoal-foreground">{earth.length} of {investigations.length}</span>
             </div>
             <h2 id="earth" className="mt-2 text-xl font-bold tracking-tight">What these experiments help with on the ground</h2>
-            <p className="mt-1 text-sm text-muted-foreground">As NASA states it.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Summarized from each NASA PSI record.</p>
             <ul className="mt-5 divide-y text-sm">
               {earth.map((i) => (
                 <li key={i.id} className="flex gap-3 py-2.5">
