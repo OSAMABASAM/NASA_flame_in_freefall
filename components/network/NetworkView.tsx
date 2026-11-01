@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DetailDrawer } from "@/components/detail/DetailDrawer";
 import type { Investigation } from "@/lib/data";
 import { buildNetwork, type NetLink, type NetNode } from "@/lib/network";
@@ -25,6 +25,14 @@ export function NetworkView({ investigations }: { investigations: Investigation[
   const [detail, setDetail] = useState<Investigation | null>(null);
   const [hover, setHover] = useState<{ node: NetNode; links: NetLink[] } | null>(null);
   const list = buildNetwork(investigations);
+  // Load and start the graph only when the section comes near the screen.
+  const box = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "400px" });
+    io.observe(box.current!);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section id="network" className="mx-auto max-w-6xl scroll-mt-14 px-4 pt-20 sm:px-6">
@@ -34,7 +42,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
         share more. Bigger dots have more links. Hover to see neighbors, click to open the details.
       </p>
 
-      <div className="mt-6 overflow-hidden rounded-2xl bg-card shadow-card">
+      <div ref={box} className="mt-6 overflow-hidden rounded-2xl bg-card shadow-card">
         <ul className="flex flex-wrap gap-x-5 gap-y-2 border-b px-5 py-3 text-xs text-secondary-foreground">
           {LEGEND.map((l) => (
             <li key={l.label} className="flex items-center gap-2">
@@ -44,11 +52,15 @@ export function NetworkView({ investigations }: { investigations: Investigation[
           ))}
           <li className="text-muted-foreground">Half and half = two safety areas</li>
         </ul>
-        <NetworkGraph
-          investigations={investigations}
-          onOpen={setDetail}
-          onHover={(node, links) => setHover(node ? { node, links } : null)}
-        />
+        {near ? (
+          <NetworkGraph
+            investigations={investigations}
+            onOpen={setDetail}
+            onHover={(node, links) => setHover(node ? { node, links } : null)}
+          />
+        ) : (
+          <div className="h-[560px] sm:h-[520px]" />
+        )}
         <p className="min-h-12 border-t px-5 py-3 text-sm text-secondary-foreground" aria-live="polite">
           {hover ? (
             <>

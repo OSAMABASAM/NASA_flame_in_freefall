@@ -21,7 +21,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <section className="hero-wash">
-          <div className="mx-auto max-w-6xl px-4 pt-16 pb-14 duration-500 animate-in fade-in slide-in-from-bottom-2 sm:px-6 sm:pt-24">
+          <div className="mx-auto max-w-6xl px-4 pt-16 pb-14 duration-500 animate-in slide-in-from-bottom-2 sm:px-6 sm:pt-24">
             <p className="text-sm font-medium text-accent-foreground">Microgravity combustion · crew fire safety</p>
             <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
               Which space fire experiments matter for your habitat?

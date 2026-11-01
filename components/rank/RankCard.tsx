@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { memo } from "react";
 import { Button } from "@/components/ui/button";
 import type { Scored } from "@/lib/score";
 
@@ -7,11 +8,11 @@ type Props = {
   place: number;
   picked: boolean;
   pickDisabled: boolean;
-  onDetails: () => void;
-  onTogglePick: () => void;
+  onDetails: (inv: Scored["inv"]) => void;
+  onTogglePick: (id: string) => void;
 };
 
-export function RankCard({ item: { inv, score, reasons }, place, picked, pickDisabled, onDetails, onTogglePick }: Props) {
+function Card({ item: { inv, score, reasons }, place, picked, pickDisabled, onDetails, onTogglePick }: Props) {
   const tags = [...inv.fuel_type.map((f) => `${f} fuel`), ...inv.hardware];
   return (
     <motion.li
@@ -50,14 +51,28 @@ export function RankCard({ item: { inv, score, reasons }, place, picked, pickDis
         )}
       </ul>
       <div className="mt-auto flex items-center justify-between gap-3 border-t pt-3 text-sm">
-        <Button variant="outline" size="sm" onClick={onDetails}>
+        <Button variant="outline" size="sm" onClick={() => onDetails(inv)}>
           Details
         </Button>
         <label className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-muted-foreground hover:text-foreground has-checked:text-accent-foreground has-disabled:cursor-not-allowed has-disabled:opacity-45">
-          <input type="checkbox" checked={picked} disabled={pickDisabled} onChange={onTogglePick} className="size-4 accent-primary" />
+          <input type="checkbox" checked={picked} disabled={pickDisabled} onChange={() => onTogglePick(inv.id)} className="size-4 accent-primary" />
           Compare
         </label>
       </div>
     </motion.li>
   );
 }
+
+// Re-render a card only when what it shows changes, so moving the slider does not redraw all of them.
+export const RankCard = memo(
+  Card,
+  (a, b) =>
+    a.item.inv === b.item.inv &&
+    a.item.score === b.item.score &&
+    a.item.reasons.join() === b.item.reasons.join() &&
+    a.place === b.place &&
+    a.picked === b.picked &&
+    a.pickDisabled === b.pickDisabled &&
+    a.onDetails === b.onDetails &&
+    a.onTogglePick === b.onTogglePick,
+);
