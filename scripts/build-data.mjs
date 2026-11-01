@@ -10,15 +10,16 @@ export const COLUMNS = [
   "id", "name", "project", "safety_area", "fuel_type", "fuel_detail", "hardware",
   "o2_min_pct", "o2_max_pct", "pressure_kpa_min", "pressure_kpa_max",
   "flow_min_cm_s", "flow_max_cm_s", "sensors", "objective", "variables",
-  "habitats", "earth_application", "relevance_note", "source_url", "data_status",
+  "habitats", "earth_application", "relevance_note", "source_url", "data_status", "gravity",
 ];
-const LISTS = ["safety_area", "fuel_type", "hardware", "sensors", "habitats", "source_url"];
+const LISTS = ["safety_area", "fuel_type", "hardware", "sensors", "habitats", "source_url", "gravity"];
 const NUMBERS = ["o2_min_pct", "o2_max_pct", "pressure_kpa_min", "pressure_kpa_max", "flow_min_cm_s", "flow_max_cm_s"];
 const ALLOWED = {
   safety_area: ["prevention", "detection", "suppression"],
   fuel_type: ["solid", "liquid", "gas"],
   habitats: ["spacecraft", "station", "moon_base", "mars_base", "rover"],
   data_status: ["challenge_text", "verified", "resources"],
+  gravity: ["microgravity", "moon", "mars"],
 };
 
 function parseCsv(text) {
