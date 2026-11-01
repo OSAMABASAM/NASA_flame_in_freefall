@@ -102,8 +102,8 @@ All 20 investigations come from [NASA Physical Science Informatics (PSI)](https:
 Needs Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/OSAMABASAM/flame_in_freefall.git
-cd flame_in_freefall
+git clone https://github.com/OSAMABASAM/NASA_flame_in_freefall.git
+cd NASA_flame_in_freefall
 npm install
 cp .env.example .env
 npm run dev
