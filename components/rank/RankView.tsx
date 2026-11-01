@@ -23,7 +23,7 @@ export function RankView({ investigations }: { investigations: Investigation[] }
   const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
 
   return (
-    <section id="rank" className="mx-auto max-w-6xl scroll-mt-14 px-4 pt-20 sm:px-6">
+    <section id="rank" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Rank for your habitat</h2>

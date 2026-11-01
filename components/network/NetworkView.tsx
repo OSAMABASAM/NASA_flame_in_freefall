@@ -27,7 +27,7 @@ export function NetworkView({ investigations }: { investigations: Investigation[
   const list = buildNetwork(investigations);
 
   return (
-    <section id="network" className="mx-auto max-w-6xl scroll-mt-14 px-4 pt-20 sm:px-6">
+    <section id="network" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-20 sm:px-6">
       <h2 className="text-2xl font-semibold tracking-tight">How the experiments connect</h2>
       <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
         Each dot is an investigation. A line means two share a fuel type, a piece of hardware or a project; thicker lines
