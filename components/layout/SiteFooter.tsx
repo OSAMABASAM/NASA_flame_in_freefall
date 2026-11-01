@@ -42,7 +42,7 @@ export function SiteFooter({ investigations }: { investigations: Investigation[]
           <SpaceAppsLogo height={40} />
         </a>
         <p className="leading-relaxed">
-          Data from NASA&apos;s{" "}
+          Built for the NASA Space Apps Challenge 2026. Data from NASA&apos;s{" "}
           <a href={PSI} target="_blank" rel="noreferrer" className="underline decoration-border underline-offset-4 hover:text-foreground">
             Physical Sciences Informatics (PSI)
           </a>{" "}
