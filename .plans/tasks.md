@@ -53,3 +53,9 @@ Plan B (Osama records): he records screen + voice in one take with OBS Studio, f
 - **Accept:** Osama did the whole data day alone in the browser in under 30 minutes.
 
 No stretch tasks. Simple and working beats bigger and broken.
+
+## Progress
+- Done: Task 0 code (Next.js 15 + TypeScript + Tailwind 4, shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; home page lists the 17 investigations; `npm run data` runs before dev and build). Verified with `npm run build`, `npm run lint`, and Playwright screenshots at desktop and phone size.
+- Waiting on Osama: merge the PR on github.com, import the repo on vercel.com, add `GROQ_API_KEY` and `GEMINI_API_KEY`, send the live link.
+- Next: Task 1 (enrich the data).
+- Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. System fonts for now; Task 5 brings the design fonts.
