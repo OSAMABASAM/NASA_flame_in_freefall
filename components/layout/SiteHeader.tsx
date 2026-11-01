@@ -23,6 +23,9 @@ export function SiteHeader() {
           <a href="#rank" className="hidden rounded-md px-3 py-1.5 hover:bg-raised hover:text-foreground sm:block">
             Rank
           </a>
+          <a href="#network" className="hidden rounded-md px-3 py-1.5 hover:bg-raised hover:text-foreground sm:block">
+            Network
+          </a>
           <a href={PSI} target="_blank" rel="noreferrer" className="rounded-md px-3 py-1.5 hover:bg-raised hover:text-foreground">
             Data: NASA PSI ↗
           </a>

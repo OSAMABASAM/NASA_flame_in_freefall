@@ -45,6 +45,13 @@ Run `/hack-build`. One task per session where possible. The whole build fits in 
 - Screens: sticky header; hero with headline, Apollo 1 / Artemis line with source link, ask box, chips, answer card, 3 stats computed from the data; rank with a left controls panel (sticky on desktop) and a 2-column card grid (place, id, score with meter, why line, tags); detail drawer as a label/value list; compare table with tinted differing rows; footer with "Back on Earth" (from `earth_application`) and "Coming next: LUCI and FM2".
 - **Accept:** desktop (1440 wide) and phone (390 wide) screenshots of hero, rank, drawer, compare and footer look clean; no horizontal page scroll on phone; text contrast AA on the light background; no console errors; tests, tsc, lint and build pass.
 
+## Task 6b: network view (stretch, added by Osama on 1 Nov) — owns `lib/network.ts`, `components/network/`
+- Its own section under Rank ("How the experiments connect"), plus a "Network" link in the header. Nothing in Ask, Rank, Detail or Compare changes.
+- Nodes = investigations, colored by `safety_area` (two areas = a half-and-half dot, none = gray), sized by number of links. Links = shared `fuel_type`, shared `hardware` item or same `project`; thicker = more shared.
+- Hover dims everything except the node and its neighbors and names what they share; click (tap on a phone) opens the existing detail drawer. "Show the links as a list" gives the same info as text, for keyboards and screen readers.
+- `react-force-graph-2d` (latest stable, 1.29.2), loaded only in the browser. Light theme colors are tokens in `globals.css` (validated colorblind-safe). Zoom and pan are off so the page still scrolls on a phone. With reduced motion, the layout is computed before the first paint and never moves.
+- **Accept:** Playwright at 1440 and 390 wide, normal and reduced motion: graph shows, hover names the neighbors, click opens the drawer, no horizontal scroll, no console errors; with reduced motion the canvas does not change after load; Rank drawer and Compare still work; tests, tsc, lint and build pass.
+
 ## Task 7: demo-check + video (Day 2 = 2 Nov, afternoon)
 Plan A (Claude records, try this first):
 - Run the app inside this cloud session (`npm run build && npm start`, or `npm run dev`) and use Playwright against localhost, so no outside network is needed. The example questions answer from the cache, so no AI call is needed during recording.
@@ -64,7 +71,7 @@ Plan B (Osama records): he records screen + voice in one take with OBS Studio, f
 - Fix anything that needed Claude, and update `docs/DATA_DAY.md`.
 - **Accept:** Osama did the whole data day alone in the browser in under 30 minutes.
 
-No stretch tasks. Simple and working beats bigger and broken.
+Only stretch task: 6b (network view), added by Osama. Simple and working beats bigger and broken.
 
 ## Progress
 - Done: Task 0 (Next.js 16 + React 19.3 + Tailwind 4; shadcn set up by hand because ui.shadcn.com is blocked in the cloud session; `npm run data` runs before dev and build). Live link: https://flame-in-freefall-five.vercel.app (in CLAUDE.md).
@@ -85,5 +92,6 @@ No stretch tasks. Simple and working beats bigger and broken.
 - Done: Task 6 (design, no Claude Design handoff; Claude designed it from the brief, acceptance rewritten to match). Light Apple-style tokens in `app/globals.css` (colors, radius, `shadow-card` and `shadow-lift`), system font + Inter fallback, `components/ui/button.tsx`, new `components/layout/` (header, footer with Back on Earth + Coming next), rank split into `RankCard.tsx` and `HowItWorks.tsx`. Verified: tests, tsc, lint, build, Playwright desktop 1440 and phone 390 screenshots of hero, rank, drawer, compare, footer, popover; no horizontal scroll; no console errors.
 - Done: Task 5 (Motion 14.9.0). Cards glide with `layout="position"` (220 ms); Button lifts 1 px on hover and presses to 97% (150 ms); `MotionConfig reducedMotion="user"` in `components/motion/MotionProvider.tsx`. Drawer slide, compare fade and hero fade use `tw-animate-css` classes on the native `<dialog>` and the server-rendered hero (no wait for JavaScript), with a CSS reduced-motion fallback in `globals.css`. Verified with Playwright: Moon Base 21 → 30% reorders to the same order `lib/score.ts` gives, DOM updates in about 20 ms, cards settle in about 256 ms; with reduced motion no card moves; no console errors.
 - Demo blocker found on 1 Nov (not fixed here): on the live site the cached answer for "Which experiments matter most for a Moon Base at 30% oxygen?" is "That is not in the data yet." (Gemini). Demo step 2 needs this fixed before Task 7: likely the prompt or the question wording, since no PSI row names the Moon.
+- Done: Task 6b (network view, react-force-graph-2d 1.29.2). `lib/network.ts` builds nodes and links (1 new test, 10 total). `components/network/NetworkView.tsx` (section, legend, hover line, list view, its own copy of the existing DetailDrawer) and `NetworkGraph.tsx` (canvas, client only). On a phone the layout is pulled into a tall shape. Verified: Playwright at 1440 and 390, with and without reduced motion: hover, click → drawer, static under reduced motion, no horizontal scroll, no console errors; Rank drawer and Compare unchanged; tests, tsc, lint, build pass. Known: a click in the first half second after load can be missed while the graph library starts.
 - Next: fix the Moon Base cached answer, then Task 7 (demo-check + video).
 - Notes: shadcn components must be added by hand (or from npm packages) in this cloud session. Fonts: system stack first, Inter via `next/font/google` as fallback (downloads at build time).

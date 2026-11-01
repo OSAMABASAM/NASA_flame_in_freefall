@@ -1,6 +1,7 @@
 import { AskBox } from "@/components/ask/AskBox";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { NetworkView } from "@/components/network/NetworkView";
 import { RankView } from "@/components/rank/RankView";
 import cache from "@/data/demo-answers.json";
 import type { Answer } from "@/lib/ask";
@@ -44,6 +45,7 @@ export default function Home() {
           </div>
         </section>
         <RankView investigations={investigations} />
+        <NetworkView investigations={investigations} />
       </main>
       <SiteFooter investigations={investigations} />
     </>
