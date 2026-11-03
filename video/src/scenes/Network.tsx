@@ -40,7 +40,7 @@ export function Network() {
           <>
             <Pulse x={p1.x} y={p1.y} from={hover1 + 8} to={hover2 + 4} />
             <Pulse x={p2.x} y={p2.y} from={hover2 + 24} to={sc.dur} />
-            <Callout icon={Share2} color={C.blue} title="See how they connect" x={1530} y={330} from={connect} to={sc.dur - 10} />
+            <Callout icon={Share2} color={C.blue} title="See how they connect" x={1660} y={330} from={connect} to={sc.dur - 10} />
           </>
         );
       }}

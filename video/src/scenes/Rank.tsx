@@ -81,11 +81,11 @@ export function Rank() {
             ]}
           >
             {(v) => {
-              const a = toScreen(v, { x: w.x + w.w / 2, y: w.y + w.h });
+              const a = toScreen(v, { x: w.x + w.w + 6, y: w.y + w.h / 2 });
               return (
                 <>
                   <Callout icon={TrendingUp} color={C.green} title="Re-ranks live" x={560} y={820} from={live} to={why - 6} />
-                  <Callout icon={Info} color={C.blue} title="Each one shows why" x={560} y={820} from={why} to={end - 8} anchor={a} />
+                  <Callout icon={Info} color={C.blue} title="Each one shows why" x={1690} y={250} from={why} to={end - 8} anchor={a} />
                 </>
               );
             }}

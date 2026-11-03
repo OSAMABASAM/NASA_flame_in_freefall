@@ -80,7 +80,7 @@ export const SFX_GAIN: Record<string, number> = {
   click: 0.28,
   pop: 0.32,
   riser: 1,
-  boom: 0.5,
+  boom: 0.16,
   spark: 0.5,
   shimmer: 0.6,
 };
