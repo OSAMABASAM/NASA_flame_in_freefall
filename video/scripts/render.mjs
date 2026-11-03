@@ -2,7 +2,7 @@
 // 1. Main composition without captions (H.264) plus its mixed audio as WAV.
 // 2. Captions alone on transparent ProRes 4444.
 // 3. ffmpeg: loudness to -14 LUFS with true peak under -1 dBTP (two-pass loudnorm), then
-//    final-no-captions.mp4 (video copied) and final.mp4 (captions overlaid), AAC 48 kHz, faststart.
+//    final.mp4 (captions overlaid), AAC 48 kHz, faststart.
 // 4. thumbnail-frame.png from the title moment.
 // Usage: npm run render   (after npm run audio; the clips are in public/clips)
 import { bundle } from "@remotion/bundler";
@@ -56,8 +56,6 @@ if (step("mux")) {
   ff("-i", join(out, "mix.wav"), "-af", `${second},aresample=192000,alimiter=limit=0.7:attack=1:release=60:level=false,aresample=48000`, "-c:a", "pcm_s16le", join(out, "mix-norm.wav"));
   const audio = ["-c:a", "aac", "-b:a", "192k", "-ar", "48000"];
   const x264 = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-r", "30", "-pix_fmt", "yuv420p", "-color_range", "tv"];
-  ff("-i", join(out, "main.mp4"), "-i", join(out, "mix-norm.wav"), "-map", "0:v", "-map", "1:a", ...x264, ...audio, "-movflags", "+faststart", "-shortest",
-    join(docs, "final-no-captions.mp4"));
   ff("-i", join(out, "main.mp4"), "-i", join(out, "captions.mov"), "-i", join(out, "mix-norm.wav"), "-filter_complex", "[0:v][1:v]overlay=format=auto,format=yuv420p[v]",
     "-map", "[v]", "-map", "2:a", ...x264, ...audio, "-movflags", "+faststart", "-shortest", join(docs, "final.mp4"));
 }
