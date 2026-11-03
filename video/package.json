@@ -1,0 +1,25 @@
+{
+  "name": "flame-in-freefall-video",
+  "private": true,
+  "description": "Demo video for Flame in Freefall, made with Remotion. Separate from the website's dependencies.",
+  "scripts": {
+    "audio": "node scripts/audio.mjs",
+    "record": "node scripts/record.mjs",
+    "studio": "remotion studio src/index.ts",
+    "render": "node scripts/render.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.540",
+    "@remotion/cli": "^4.0.540",
+    "@remotion/media": "^4.0.540",
+    "@remotion/renderer": "^4.0.540",
+    "lucide-react": "^1.67.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.540"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}

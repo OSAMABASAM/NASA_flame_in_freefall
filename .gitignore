@@ -10,3 +10,8 @@ __pycache__/
 .venv/
 docs/demo/*.webm
 *.tsbuildinfo
+video/node_modules/
+video/.raw/
+video/out/
+video/public/clips/*.mp4
+video/public/audio/

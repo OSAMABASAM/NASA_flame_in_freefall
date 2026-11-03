@@ -1,0 +1,828 @@
+[
+ {
+  "line": 1,
+  "from": 0.0,
+  "to": 2.37,
+  "duration": 2.37,
+  "text": "What happens to a flame when there's no gravity?",
+  "words": [
+   {
+    "w": "What",
+    "start": 0,
+    "end": 0.22
+   },
+   {
+    "w": "happens",
+    "start": 0.23,
+    "end": 0.6
+   },
+   {
+    "w": "to",
+    "start": 0.61,
+    "end": 0.73
+   },
+   {
+    "w": "a",
+    "start": 0.74,
+    "end": 0.76
+   },
+   {
+    "w": "flame",
+    "start": 0.77,
+    "end": 1.27
+   },
+   {
+    "w": "when",
+    "start": 1.28,
+    "end": 1.38
+   },
+   {
+    "w": "there's",
+    "start": 1.39,
+    "end": 1.55
+   },
+   {
+    "w": "no",
+    "start": 1.56,
+    "end": 1.68
+   },
+   {
+    "w": "gravity?",
+    "start": 1.69,
+    "end": 2.37
+   }
+  ]
+ },
+ {
+  "line": 2,
+  "from": 2.74,
+  "to": 6.18,
+  "duration": 3.44,
+  "text": "On Earth, fire rises. In space, it doesn't.",
+  "words": [
+   {
+    "w": "On",
+    "start": 0.05,
+    "end": 0.2
+   },
+   {
+    "w": "Earth,",
+    "start": 0.21,
+    "end": 0.66
+   },
+   {
+    "w": "fire",
+    "start": 0.67,
+    "end": 1.07
+   },
+   {
+    "w": "rises.",
+    "start": 1.08,
+    "end": 1.75
+   },
+   {
+    "w": "In",
+    "start": 1.89,
+    "end": 2.0
+   },
+   {
+    "w": "space,",
+    "start": 2.01,
+    "end": 2.6
+   },
+   {
+    "w": "it",
+    "start": 2.61,
+    "end": 2.67
+   },
+   {
+    "w": "doesn't.",
+    "start": 2.68,
+    "end": 3.44
+   }
+  ]
+ },
+ {
+  "line": 3,
+  "from": 6.39,
+  "to": 13.39,
+  "duration": 7.0,
+  "text": "NASA has run years of combustion experiments in microgravity, but most of that data sits in long reports that are hard to read.",
+  "words": [
+   {
+    "w": "NASA",
+    "start": 0.04,
+    "end": 0.4
+   },
+   {
+    "w": "has",
+    "start": 0.41,
+    "end": 0.6
+   },
+   {
+    "w": "run",
+    "start": 0.61,
+    "end": 0.85
+   },
+   {
+    "w": "years",
+    "start": 0.86,
+    "end": 1.32
+   },
+   {
+    "w": "of",
+    "start": 1.33,
+    "end": 1.42
+   },
+   {
+    "w": "combustion",
+    "start": 1.43,
+    "end": 1.94
+   },
+   {
+    "w": "experiments",
+    "start": 1.95,
+    "end": 2.53
+   },
+   {
+    "w": "in",
+    "start": 2.54,
+    "end": 2.61
+   },
+   {
+    "w": "microgravity,",
+    "start": 2.62,
+    "end": 3.59
+   },
+   {
+    "w": "but",
+    "start": 3.6,
+    "end": 3.79
+   },
+   {
+    "w": "most",
+    "start": 3.8,
+    "end": 4.11
+   },
+   {
+    "w": "of",
+    "start": 4.12,
+    "end": 4.18
+   },
+   {
+    "w": "that",
+    "start": 4.19,
+    "end": 4.34
+   },
+   {
+    "w": "data",
+    "start": 4.35,
+    "end": 4.62
+   },
+   {
+    "w": "sits",
+    "start": 4.63,
+    "end": 4.96
+   },
+   {
+    "w": "in",
+    "start": 4.97,
+    "end": 5.06
+   },
+   {
+    "w": "long",
+    "start": 5.07,
+    "end": 5.42
+   },
+   {
+    "w": "reports",
+    "start": 5.43,
+    "end": 5.95
+   },
+   {
+    "w": "that",
+    "start": 5.96,
+    "end": 6.05
+   },
+   {
+    "w": "are",
+    "start": 6.06,
+    "end": 6.12
+   },
+   {
+    "w": "hard",
+    "start": 6.13,
+    "end": 6.36
+   },
+   {
+    "w": "to",
+    "start": 6.37,
+    "end": 6.43
+   },
+   {
+    "w": "read.",
+    "start": 6.44,
+    "end": 7.0
+   }
+  ]
+ },
+ {
+  "line": 4,
+  "from": 13.61,
+  "to": 22.26,
+  "duration": 8.65,
+  "text": "So I built Flame in Freefall, an AI dashboard that turns NASA's microgravity combustion data into answers anyone can understand.",
+  "words": [
+   {
+    "w": "So",
+    "start": 0.58,
+    "end": 1.0
+   },
+   {
+    "w": "I",
+    "start": 1.19,
+    "end": 1.32
+   },
+   {
+    "w": "built",
+    "start": 1.33,
+    "end": 1.56
+   },
+   {
+    "w": "Flame",
+    "start": 1.57,
+    "end": 1.94
+   },
+   {
+    "w": "in",
+    "start": 1.95,
+    "end": 2.03
+   },
+   {
+    "w": "Freefall,",
+    "start": 2.04,
+    "end": 2.64
+   },
+   {
+    "w": "an",
+    "start": 2.9,
+    "end": 3.02
+   },
+   {
+    "w": "AI",
+    "start": 3.03,
+    "end": 3.37
+   },
+   {
+    "w": "dashboard",
+    "start": 3.38,
+    "end": 3.95
+   },
+   {
+    "w": "that",
+    "start": 3.96,
+    "end": 4.09
+   },
+   {
+    "w": "turns",
+    "start": 4.1,
+    "end": 4.4
+   },
+   {
+    "w": "NASA's",
+    "start": 4.41,
+    "end": 4.84
+   },
+   {
+    "w": "microgravity",
+    "start": 4.85,
+    "end": 5.57
+   },
+   {
+    "w": "combustion",
+    "start": 5.58,
+    "end": 6.15
+   },
+   {
+    "w": "data",
+    "start": 6.16,
+    "end": 6.39
+   },
+   {
+    "w": "into",
+    "start": 6.4,
+    "end": 6.71
+   },
+   {
+    "w": "answers",
+    "start": 6.72,
+    "end": 7.28
+   },
+   {
+    "w": "anyone",
+    "start": 7.29,
+    "end": 7.76
+   },
+   {
+    "w": "can",
+    "start": 7.77,
+    "end": 7.92
+   },
+   {
+    "w": "understand.",
+    "start": 7.93,
+    "end": 8.65
+   }
+  ]
+ },
+ {
+  "line": 5,
+  "from": 22.51,
+  "to": 29.51,
+  "duration": 7.0,
+  "text": "First, experiment summaries. Every experiment explained in plain language, with its key results at a glance.",
+  "words": [
+   {
+    "w": "First,",
+    "start": 0.01,
+    "end": 0.54
+   },
+   {
+    "w": "experiment",
+    "start": 0.71,
+    "end": 1.31
+   },
+   {
+    "w": "summaries.",
+    "start": 1.32,
+    "end": 1.87
+   },
+   {
+    "w": "Every",
+    "start": 2.19,
+    "end": 2.48
+   },
+   {
+    "w": "experiment",
+    "start": 2.49,
+    "end": 3.22
+   },
+   {
+    "w": "explained",
+    "start": 3.34,
+    "end": 3.87
+   },
+   {
+    "w": "in",
+    "start": 3.88,
+    "end": 4.01
+   },
+   {
+    "w": "plain",
+    "start": 4.02,
+    "end": 4.37
+   },
+   {
+    "w": "language,",
+    "start": 4.38,
+    "end": 5.0
+   },
+   {
+    "w": "with",
+    "start": 5.01,
+    "end": 5.19
+   },
+   {
+    "w": "its",
+    "start": 5.2,
+    "end": 5.35
+   },
+   {
+    "w": "key",
+    "start": 5.36,
+    "end": 5.6
+   },
+   {
+    "w": "results",
+    "start": 5.61,
+    "end": 6.07
+   },
+   {
+    "w": "at",
+    "start": 6.08,
+    "end": 6.26
+   },
+   {
+    "w": "a",
+    "start": 6.27,
+    "end": 6.3
+   },
+   {
+    "w": "glance.",
+    "start": 6.31,
+    "end": 6.9
+   }
+  ]
+ },
+ {
+  "line": 6,
+  "from": 29.68,
+  "to": 37.19,
+  "duration": 7.51,
+  "text": "Second, the data graph. Experiments, materials and findings, all connected. See, you can see how one result leads to another.",
+  "words": [
+   {
+    "w": "Second,",
+    "start": 0.04,
+    "end": 0.58
+   },
+   {
+    "w": "the",
+    "start": 0.76,
+    "end": 0.83
+   },
+   {
+    "w": "data",
+    "start": 0.84,
+    "end": 1.12
+   },
+   {
+    "w": "graph.",
+    "start": 1.13,
+    "end": 1.59
+   },
+   {
+    "w": "Experiments,",
+    "start": 1.84,
+    "end": 2.6
+   },
+   {
+    "w": "materials",
+    "start": 2.61,
+    "end": 3.31
+   },
+   {
+    "w": "and",
+    "start": 3.32,
+    "end": 3.43
+   },
+   {
+    "w": "findings,",
+    "start": 3.44,
+    "end": 4.16
+   },
+   {
+    "w": "all",
+    "start": 4.17,
+    "end": 4.44
+   },
+   {
+    "w": "connected.",
+    "start": 4.45,
+    "end": 5.13
+   },
+   {
+    "w": "See,",
+    "start": 5.14,
+    "end": 5.28
+   },
+   {
+    "w": "you",
+    "start": 5.29,
+    "end": 5.38
+   },
+   {
+    "w": "can",
+    "start": 5.39,
+    "end": 5.52
+   },
+   {
+    "w": "see",
+    "start": 5.53,
+    "end": 5.72
+   },
+   {
+    "w": "how",
+    "start": 5.73,
+    "end": 5.89
+   },
+   {
+    "w": "one",
+    "start": 5.9,
+    "end": 6.19
+   },
+   {
+    "w": "result",
+    "start": 6.2,
+    "end": 6.59
+   },
+   {
+    "w": "leads",
+    "start": 6.6,
+    "end": 6.84
+   },
+   {
+    "w": "to",
+    "start": 6.85,
+    "end": 6.99
+   },
+   {
+    "w": "another.",
+    "start": 7.0,
+    "end": 7.51
+   }
+  ]
+ },
+ {
+  "line": 7,
+  "from": 37.34,
+  "to": 44.25,
+  "duration": 6.91,
+  "text": "And third, ask the data. Type any question, and the answer comes straight from NASA's data, not from guesses.",
+  "words": [
+   {
+    "w": "And",
+    "start": 0.03,
+    "end": 0.19
+   },
+   {
+    "w": "third,",
+    "start": 0.2,
+    "end": 0.69
+   },
+   {
+    "w": "ask",
+    "start": 0.94,
+    "end": 1.23
+   },
+   {
+    "w": "the",
+    "start": 1.24,
+    "end": 1.32
+   },
+   {
+    "w": "data.",
+    "start": 1.33,
+    "end": 1.7
+   },
+   {
+    "w": "Type",
+    "start": 2.03,
+    "end": 2.28
+   },
+   {
+    "w": "any",
+    "start": 2.29,
+    "end": 2.68
+   },
+   {
+    "w": "question,",
+    "start": 2.69,
+    "end": 3.34
+   },
+   {
+    "w": "and",
+    "start": 3.35,
+    "end": 3.49
+   },
+   {
+    "w": "the",
+    "start": 3.5,
+    "end": 3.62
+   },
+   {
+    "w": "answer",
+    "start": 3.63,
+    "end": 3.92
+   },
+   {
+    "w": "comes",
+    "start": 3.93,
+    "end": 4.18
+   },
+   {
+    "w": "straight",
+    "start": 4.19,
+    "end": 4.65
+   },
+   {
+    "w": "from",
+    "start": 4.66,
+    "end": 4.84
+   },
+   {
+    "w": "NASA's",
+    "start": 4.85,
+    "end": 5.23
+   },
+   {
+    "w": "data,",
+    "start": 5.24,
+    "end": 5.58
+   },
+   {
+    "w": "not",
+    "start": 5.81,
+    "end": 6.01
+   },
+   {
+    "w": "from",
+    "start": 6.02,
+    "end": 6.21
+   },
+   {
+    "w": "guesses.",
+    "start": 6.22,
+    "end": 6.9
+   }
+  ]
+ },
+ {
+  "line": 8,
+  "from": 44.32,
+  "to": 49.4,
+  "duration": 5.08,
+  "text": "Space research shouldn't be locked inside reports. It should be open to every curious mind.",
+  "words": [
+   {
+    "w": "Space",
+    "start": 0.04,
+    "end": 0.43
+   },
+   {
+    "w": "research",
+    "start": 0.44,
+    "end": 0.83
+   },
+   {
+    "w": "shouldn't",
+    "start": 0.84,
+    "end": 1.23
+   },
+   {
+    "w": "be",
+    "start": 1.24,
+    "end": 1.33
+   },
+   {
+    "w": "locked",
+    "start": 1.34,
+    "end": 1.65
+   },
+   {
+    "w": "inside",
+    "start": 1.66,
+    "end": 1.97
+   },
+   {
+    "w": "reports.",
+    "start": 1.98,
+    "end": 2.6
+   },
+   {
+    "w": "It",
+    "start": 2.78,
+    "end": 2.86
+   },
+   {
+    "w": "should",
+    "start": 2.87,
+    "end": 3.01
+   },
+   {
+    "w": "be",
+    "start": 3.02,
+    "end": 3.17
+   },
+   {
+    "w": "open",
+    "start": 3.18,
+    "end": 3.5
+   },
+   {
+    "w": "to",
+    "start": 3.51,
+    "end": 3.59
+   },
+   {
+    "w": "every",
+    "start": 3.6,
+    "end": 4.06
+   },
+   {
+    "w": "curious",
+    "start": 4.07,
+    "end": 4.54
+   },
+   {
+    "w": "mind.",
+    "start": 4.55,
+    "end": 5.08
+   }
+  ]
+ },
+ {
+  "line": 9,
+  "from": 49.59,
+  "to": 57.16,
+  "duration": 7.57,
+  "text": "I'm Osama Saleh, a computer science student. This is Flame in Freefall, my project for NASA Space Apps 2026.",
+  "words": [
+   {
+    "w": "I'm",
+    "start": 0.04,
+    "end": 0.21
+   },
+   {
+    "w": "Osama",
+    "start": 0.22,
+    "end": 0.59
+   },
+   {
+    "w": "Saleh,",
+    "start": 0.6,
+    "end": 1.07
+   },
+   {
+    "w": "a",
+    "start": 1.23,
+    "end": 1.28
+   },
+   {
+    "w": "computer",
+    "start": 1.29,
+    "end": 1.72
+   },
+   {
+    "w": "science",
+    "start": 1.73,
+    "end": 2.12
+   },
+   {
+    "w": "student.",
+    "start": 2.13,
+    "end": 2.57
+   },
+   {
+    "w": "This",
+    "start": 2.74,
+    "end": 3.08
+   },
+   {
+    "w": "is",
+    "start": 3.09,
+    "end": 3.33
+   },
+   {
+    "w": "Flame",
+    "start": 3.34,
+    "end": 3.73
+   },
+   {
+    "w": "in",
+    "start": 3.74,
+    "end": 3.83
+   },
+   {
+    "w": "Freefall,",
+    "start": 3.84,
+    "end": 4.52
+   },
+   {
+    "w": "my",
+    "start": 4.63,
+    "end": 4.76
+   },
+   {
+    "w": "project",
+    "start": 4.77,
+    "end": 5.25
+   },
+   {
+    "w": "for",
+    "start": 5.26,
+    "end": 5.38
+   },
+   {
+    "w": "NASA",
+    "start": 5.39,
+    "end": 5.76
+   },
+   {
+    "w": "Space",
+    "start": 5.77,
+    "end": 6.12
+   },
+   {
+    "w": "Apps",
+    "start": 6.13,
+    "end": 6.39
+   },
+   {
+    "w": "2026.",
+    "start": 6.4,
+    "end": 7.56
+   }
+  ]
+ }
+]
