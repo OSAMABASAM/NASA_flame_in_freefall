@@ -13,5 +13,4 @@ docs/demo/*.webm
 video/node_modules/
 video/.raw/
 video/out/
-video/public/clips/*.mp4
 video/public/audio/
