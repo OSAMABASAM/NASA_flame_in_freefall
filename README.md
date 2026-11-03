@@ -10,6 +10,10 @@ Find out in seconds which NASA microgravity fire experiments matter for a crew h
 
 [![Flame in Freefall home page](docs/screenshots/hero.png)](https://flame-in-freefall-five.vercel.app)
 
+## Demo video
+
+▶️ [Watch the 1 minute demo on YouTube](https://youtu.be/cmeFXMCAnpM)
+
 ## The problem
 
 NASA has studied fire in microgravity for decades, and the results are public in its Physical Science Informatics (PSI) database. But the amount of data "can be overwhelming. It can be hard to find, harder to compare, and harder yet to interpret" ([challenge brief](https://www.spaceappschallenge.org/2026/challenges/flame-in-freefall/)).

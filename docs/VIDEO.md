@@ -1,5 +1,7 @@
 # Demo video plan
 
+Published: https://youtu.be/cmeFXMCAnpM (unlisted, 64 s, file `docs/demo/final.mp4`).
+
 Target: about 60 seconds. If Space Apps publishes a shorter limit, cut scenes 5 and 6 first.
 No music. Sound = Osama's voice, a low fire crackle and space rumble in the background, and short sound effects on transitions and clicks (whoosh, click, pop, soft boom).
 The voice never says a number that the 13 November data could change.
