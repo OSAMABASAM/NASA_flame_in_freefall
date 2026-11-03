@@ -28,7 +28,7 @@ for (const l of lines) {
 }
 
 // Fire bed and rumble (levels and ducking are set in the edit).
-ff("-ss", "20", "-t", "75", "-i", join(repo, "docs/demo/fire.mp3"), "-af", "aresample=48000,afade=t=in:d=1", "-ac", "2", join(out, "fire.wav"));
+ff("-ss", "20", "-t", "75", "-i", join(repo, "docs/demo/fire.mp3"), "-af", "aresample=48000,volume=8dB,alimiter=limit=0.89:level=false,afade=t=in:d=1", "-ac", "2", join(out, "fire.wav"));
 ff("-f", "lavfi", "-i", "anoisesrc=d=75:c=brown:a=0.9:seed=7", "-af", "lowpass=f=120,lowpass=f=120,volume=6dB,aresample=48000", "-ac", "2", join(out, "rumble.wav"));
 
 // A noise band whose centre moves through the given frequencies over time (asendcmd steps the bandpass).
