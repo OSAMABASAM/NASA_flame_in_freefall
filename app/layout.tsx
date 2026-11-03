@@ -9,6 +9,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap", adjustFontFallback: true });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://flame-in-freefall-five.vercel.app"),
   title: "Flame in Freefall",
   description: "Which NASA microgravity fire experiments matter for a crew habitat, and why.",
 };
