@@ -96,7 +96,8 @@ for (let i = 0; i < SCENES.length; i++) {
     seen.add(s.clip);
     for (const c of CLIPS[s.clip].clicks) {
       const at = clipToScene(SCENES[i].id, c.t);
-      if (at !== null && at < SCENES[i].dur - 4) sfx("click", START[i] + at);
+      // +1 frame: the ring shows 1-2 frames after the logged press (screencast latency), measured on the clips.
+      if (at !== null && at < SCENES[i].dur - 4) sfx("click", START[i] + at + 1);
     }
   }
 }
